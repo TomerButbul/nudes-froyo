@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<title>nudes — Our Story</title>
+<meta name="description" content="nüdes reimagines frozen yogurt through a Mediterranean, fashion-forward lens — at the intersection of food, lifestyle, and identity. Rooted in wellness, driven by indulgence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nudes.css">
+<style>
+/* ---------- about ---------- */
+.p-about .head{padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(3rem,9vh,7rem));
+  padding-bottom:clamp(2rem,5vh,4rem);text-align:center;position:relative;overflow:hidden}
+.p-about .head h1{font-size:clamp(3rem,12vw,10rem);line-height:.84;color:var(--espresso)}
+.p-about .head .lede{max-width:52ch;margin:1.8rem auto 0}
+.p-about .head .b{position:absolute;width:40vmax;height:40vmax;left:50%;top:-16vmax;translate:-50% 0;z-index:-1;
+  background:radial-gradient(closest-side,rgba(204,173,160,.5),rgba(204,173,160,0))}
+
+.p-about .manifesto{font-family:var(--display);font-weight:300;text-transform:uppercase;
+  font-size:clamp(1.6rem,3.6vw,3rem);line-height:1.16;letter-spacing:-.005em;
+  max-width:20ch;color:var(--espresso)}
+.p-about .manifesto em{color:var(--taupe)}
+.p-about .mani-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+@media (max-width:860px){.p-about .mani-grid{grid-template-columns:1fr}}
+
+.p-about .alt{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;
+  margin-block:clamp(4rem,9vh,8rem)}
+.p-about .alt:first-of-type{margin-top:0}
+.p-about .alt--rev .alt__media{order:2}
+.p-about .alt .media{aspect-ratio:5/6;border-radius:20px}
+.p-about .alt h2{margin-top:.6rem}
+.p-about .alt .lede{margin-top:1.2rem;max-width:46ch}
+@media (max-width:860px){.p-about .alt{grid-template-columns:1fr}.p-about .alt--rev .alt__media{order:0}}
+
+.p-about .dots-philo{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+@media (max-width:860px){.p-about .dots-philo{grid-template-columns:1fr}}
+.p-about .twodots{display:flex;gap:2.4rem;justify-content:center}
+.p-about .twodots i{width:clamp(70px,12vw,130px);height:clamp(70px,12vw,130px);border-radius:50%;
+  background:var(--oat);display:block;animation:float 6s var(--ease) infinite}
+.p-about .twodots i:nth-child(2){animation-delay:-3s;background:var(--blush)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media (prefers-reduced-motion:reduce){.p-about .twodots i{animation:none}}
+
+.p-about .values{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:760px){.p-about .values{grid-template-columns:1fr 1fr}}
+.p-about .value{background:var(--paper);padding:clamp(1.8rem,3vw,2.8rem);min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
+.p-about .value .n{font-family:var(--display);font-size:.74rem;letter-spacing:.2em;color:var(--taupe)}
+.p-about .value h3{font-size:clamp(1.5rem,2.4vw,2rem);text-transform:uppercase;letter-spacing:0;color:var(--espresso)}
+.p-about .value p{font-size:.92rem;color:color-mix(in srgb,var(--ink) 62%,var(--paper));margin-top:.6rem}
+
+.p-about .pull{text-align:center;max-width:24ch;margin-inline:auto}
+.p-about .pull p{font-family:var(--display);font-weight:300;text-transform:uppercase;
+  font-size:clamp(2rem,5vw,4.2rem);line-height:1.04;color:var(--espresso)}
+.p-about .pull p em{color:var(--taupe)}
+.p-about .pull .by{margin-top:1.6rem;font-family:var(--display);font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--taupe)}
+</style>
+</head>
+<body class="p-about">
+
+<div class="topbar"><div class="ticker">
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+</div></div>
+
+<header class="nav"><div class="nav__inner">
+  <a class="wordmark nav__logo" href="index.html">nudes</a>
+  <nav class="nav__links">
+    <a href="menu.html">Flavors</a>
+    <a href="about.html" aria-current="page">Story</a>
+    <a href="visit.html">Visit</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a href="events.html" class="nav__events">Events</a>
+  </nav>
+  <div class="nav__cta">
+    <span class="nav__bag">Bag (0)</span>
+    <a class="btn" href="menu.html">Order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+  </div>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</div></header>
+
+<div class="menu" id="menu">
+  <button class="menu__close">Close ✕</button>
+  <a href="menu.html"><span>Flavors</span><small>01</small></a>
+  <a href="about.html"><span>Story</span><small>02</small></a>
+  <a href="visit.html"><span>Visit</span><small>03</small></a>
+  <a href="lookbook.html"><span>Lookbook</span><small>04</small></a>
+  <a href="events.html"><span>Events</span><small>05</small></a>
+  <div class="menu__foot"><span>Mare Nostrum</span><span>@nudes</span></div>
+</div>
+
+<!-- ===== head ===== -->
+<header class="head wrap">
+  <div class="b blob"></div>
+  <span class="eyebrow reveal"><span class="dots"></span> Who we are</span>
+  <h1 class="reveal" style="--d:80ms">the story</h1>
+  <p class="lede reveal" style="--d:160ms">froyo, but make it fashion. mediterranean, lowkey a personality. iykyk.</p>
+</header>
+
+<!-- ===== manifesto ===== -->
+<section class="section wrap">
+  <div class="mani-grid">
+    <p class="manifesto reveal">Rooted in wellness, <em>driven by indulgence.</em></p>
+    <div class="reveal" style="--d:140ms">
+      <p class="lede">not a dessert. a whole lifestyle. european café energy, fashion-girl coded — the kind of place you post before you taste.</p>
+      <p style="margin-top:1.2rem;color:color-mix(in srgb,var(--ink) 66%,var(--paper))">clean ingredients, matte everything, very photogenic. obsessed (with ourselves, a little).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== alternating ===== -->
+<section class="section--tight wrap">
+  <div class="alt">
+    <div class="alt__media reveal-clip"><div class="media"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1100&q=80" alt="Mediterranean coast"></div></div>
+    <div>
+      <span class="eyebrow reveal"><span class="dots"></span> 01 — The lens</span>
+      <h2 class="h-1 reveal" style="--d:80ms">a mediterranean<br>state of mind</h2>
+      <p class="lede reveal" style="--d:160ms">sun, stone, sea, skin. sicilian pistachio, aegean fig, amalfi lemon. the riviera in a cup, basically.</p>
+    </div>
+  </div>
+  <div class="alt alt--rev">
+    <div class="alt__media reveal-clip"><div class="media"><img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1100&q=80" alt="Clean ingredients"></div></div>
+    <div>
+      <span class="eyebrow reveal"><span class="dots"></span> 02 — The ingredients</span>
+      <h2 class="h-1 reveal" style="--d:80ms">nothing<br>to hide</h2>
+      <p class="lede reveal" style="--d:160ms">oat milk, real fruit, no refined sugar. we list everything. transparency is the new flex.</p>
+    </div>
+  </div>
+  <div class="alt">
+    <div class="alt__media reveal-clip"><div class="media"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=80" alt="Editorial culture"></div></div>
+    <div>
+      <span class="eyebrow reveal"><span class="dots"></span> 03 — The culture</span>
+      <h2 class="h-1 reveal" style="--d:80ms">made to<br>be shared</h2>
+      <p class="lede reveal" style="--d:160ms">if it's not on your story, did you even go. every corner's a photo op. you're welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== two dots philosophy ===== -->
+<section class="section band-espresso grain" style="position:relative;overflow:hidden">
+  <div class="wrap"><div class="dots-philo">
+    <div class="twodots reveal"><i></i><i></i></div>
+    <div>
+      <span class="eyebrow eyebrow--light reveal"><span class="dots"></span> The two dots</span>
+      <h2 class="h-1 reveal" style="--d:100ms;color:var(--oat)">harmony.<br>serenity.<br>equilibrium.</h2>
+      <p class="lede reveal" style="--d:200ms;margin-top:1.4rem;max-width:40ch;color:rgba(220,204,187,.82)">two dots. perfectly balanced. like us (allegedly).</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ===== values ===== -->
+<section class="section wrap">
+  <div style="margin-bottom:clamp(2rem,4vw,3rem)" class="reveal">
+    <span class="eyebrow"><span class="dots"></span> What we believe</span>
+    <h2 class="h-1" style="margin-top:.5rem">four words</h2>
+  </div>
+  <div class="values reveal">
+    <div class="value"><span class="n">01</span><div><h3>Clean</h3><p>stuff you can pronounce.</p></div></div>
+    <div class="value"><span class="n">02</span><div><h3>Cinematic</h3><p>always the right angle.</p></div></div>
+    <div class="value"><span class="n">03</span><div><h3>Sensual</h3><p>soft, warm, a little addictive.</p></div></div>
+    <div class="value"><span class="n">04</span><div><h3>Shareable</h3><p>made for the feed (and the table).</p></div></div>
+  </div>
+</section>
+
+<!-- ===== pull quote ===== -->
+<section class="section band-oat">
+  <div class="wrap pull reveal">
+    <p>“we do the most,<br><em>with less.”</em></p>
+    <span class="by">— the nüdes ethos</span>
+  </div>
+</section>
+
+<!-- ===== cta ===== -->
+<section class="section--tight wrap center">
+  <h2 class="h-1 reveal">ok now<br>come get one</h2>
+  <div class="row reveal" style="--d:120ms;justify-content:center;margin-top:2rem">
+    <a class="btn" href="menu.html">the flavors
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    <a class="btn btn--ghost" href="visit.html">find us</a>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer class="footer">
+  <div class="nu-mark footer__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__news">
+        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
+        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
+      </div>
+      <div class="footer__col"><h4>Explore</h4>
+        <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a><a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a></div>
+      <div class="footer__col"><h4>nüdes</h4>
+        <a href="about.html">Our story</a><a href="about.html">Ingredients</a><a href="visit.html">Careers</a><a href="lookbook.html">Press</a></div>
+    </div>
+    <div class="footer__bar">
+      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>Still doing the most, with less.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nudes.js"></script>
+</body>
+</html>

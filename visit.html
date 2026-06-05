@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<title>nudes — Visit a Boutique</title>
+<meta name="description" content="Step inside nüdes. Boutique frozen-yogurt counters from the Riviera to New York — warm, matte, and art-directed. Find your nearest, book a private moment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nudes.css">
+<style>
+/* ---------- visit ---------- */
+.p-visit .hero-vis{position:relative;min-height:90svh;display:flex;align-items:flex-end;overflow:hidden}
+.p-visit .hero-vis>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.8) contrast(1.04) brightness(.92) sepia(.2)}
+.p-visit .hero-vis::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(51,30,19,.34) 0%,rgba(51,30,19,0) 32%,rgba(51,30,19,.78) 100%)}
+.p-visit .hero-vis .wrap{position:relative;z-index:3;padding-bottom:clamp(2.5rem,7vh,5rem);
+  padding-top:calc(var(--topbar-h) + var(--nav-h));color:var(--oat);width:100%}
+.p-visit .hero-vis h1{font-size:clamp(3.4rem,15vw,12rem);line-height:.82;color:var(--oat)}
+.p-visit .hero-vis .lede{max-width:42ch;margin-top:1.2rem;color:rgba(220,204,187,.9)}
+.p-visit .hero-vis .meta{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:1.8rem;
+  font-family:var(--display);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blush)}
+
+.p-visit .locs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,3.5vw,3.2rem)}
+@media (max-width:760px){.p-visit .locs{grid-template-columns:1fr}}
+.p-visit .loc .media,.p-visit .loc__block{aspect-ratio:3/2;border-radius:16px}
+.p-visit .loc__block{padding:1.4rem;display:flex;flex-direction:column;justify-content:space-between}
+.p-visit .loc__block span{font-family:var(--display);font-weight:500;font-size:.92rem;text-transform:lowercase;opacity:.72}
+.p-visit .loc__block b{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:.9;text-transform:lowercase}
+.p-visit .loc__row{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:1.2rem}
+.p-visit .loc h3{font-size:1.7rem;text-transform:none;letter-spacing:0}
+.p-visit .loc .num{color:var(--taupe)}
+.p-visit .loc address{font-style:normal;color:color-mix(in srgb,var(--ink) 64%,var(--paper));margin-top:.4rem;line-height:1.5}
+.p-visit .loc .hrs{font-family:var(--display);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);margin-top:.8rem}
+.p-visit .loc .textlink{margin-top:1.1rem;font-size:.72rem}
+
+/* the space gallery */
+.p-visit .space{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:1fr;gap:.8rem}
+.p-visit .space .media{border-radius:14px}
+.p-visit .space .g1{grid-column:span 4;aspect-ratio:16/10}
+.p-visit .space .g2{grid-column:span 2;aspect-ratio:3/4}
+.p-visit .space .g3{grid-column:span 2;aspect-ratio:3/4}
+.p-visit .space .g4{grid-column:span 4;aspect-ratio:16/10}
+@media (max-width:760px){.p-visit .space{grid-template-columns:1fr 1fr}
+  .p-visit .space .g1,.p-visit .space .g2,.p-visit .space .g3,.p-visit .space .g4{grid-column:span 1;aspect-ratio:3/4}}
+
+/* hours / details */
+.p-visit .details{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(220,204,187,.22);border:1px solid rgba(220,204,187,.22)}
+@media (max-width:680px){.p-visit .details{grid-template-columns:1fr}}
+.p-visit .detail{background:var(--espresso);padding:clamp(1.8rem,3vw,2.6rem)}
+.p-visit .detail h4{font-family:var(--display);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blush)}
+.p-visit .detail p{color:var(--oat);margin-top:.8rem;font-size:1.05rem}
+</style>
+</head>
+<body class="p-visit">
+
+<!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
+  <ellipse cx="120" cy="198" rx="58" ry="12" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M66 196 L86 298 Q88 305 97 305 H143 Q152 305 154 298 L174 196 Z" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M68 206 H172 L170 218 H70 Z" style="fill:rgba(42,24,16,.08)"/>
+  <g style="fill:var(--swirl,#caa089)">
+    <ellipse cx="120" cy="194" rx="60" ry="24"/><ellipse cx="112" cy="165" rx="52" ry="22"/>
+    <ellipse cx="126" cy="139" rx="43" ry="20"/><ellipse cx="114" cy="115" rx="34" ry="17"/>
+    <ellipse cx="124" cy="96" rx="25" ry="14"/><path d="M106 86 Q110 52 120 46 Q130 52 132 86 Z"/>
+  </g>
+  <g style="fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.32">
+    <path d="M78 194 Q120 212 162 194"/><path d="M86 165 Q118 181 156 165"/>
+    <path d="M94 139 Q124 153 152 139"/><path d="M92 115 Q116 127 142 115"/>
+  </g>
+  <circle cx="120" cy="50" r="7" style="fill:var(--topping,#5b3a26)"/>
+</symbol></svg>
+
+<div class="topbar"><div class="ticker">
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+</div></div>
+
+<header class="nav"><div class="nav__inner">
+  <a class="wordmark nav__logo" href="index.html">nudes</a>
+  <nav class="nav__links">
+    <a href="menu.html">Flavors</a>
+    <a href="about.html">Story</a>
+    <a href="visit.html" aria-current="page">Visit</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a href="events.html" class="nav__events">Events</a>
+  </nav>
+  <div class="nav__cta">
+    <span class="nav__bag">Bag (0)</span>
+    <a class="btn" href="menu.html">Order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+  </div>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</div></header>
+
+<div class="menu" id="menu">
+  <button class="menu__close">Close ✕</button>
+  <a href="menu.html"><span>Flavors</span><small>01</small></a>
+  <a href="about.html"><span>Story</span><small>02</small></a>
+  <a href="visit.html"><span>Visit</span><small>03</small></a>
+  <a href="lookbook.html"><span>Lookbook</span><small>04</small></a>
+  <a href="events.html"><span>Events</span><small>05</small></a>
+  <div class="menu__foot"><span>Mare Nostrum</span><span>@nudes</span></div>
+</div>
+
+<!-- ===== hero ===== -->
+<section class="hero-vis">
+  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1700&q=80" alt="Inside a nüdes boutique">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--light reveal"><span class="dots"></span> Boutique hospitality</span>
+    <h1 class="reveal" style="--d:80ms">visit</h1>
+    <p class="lede reveal" style="--d:160ms">warm light, good angles, very postable. come hang.</p>
+    <div class="meta reveal" style="--d:240ms"><span>4 LA spots</span><span>open all day</span><span>los angeles</span></div>
+  </div>
+</section>
+
+<!-- ===== locations ===== -->
+<section class="section wrap">
+  <div style="margin-bottom:clamp(2rem,4vw,3rem)" class="reveal">
+    <span class="eyebrow"><span class="dots"></span> Where to find us</span>
+    <h2 class="h-1" style="margin-top:.5rem">the boutiques</h2>
+  </div>
+  <div class="locs">
+    <article class="loc reveal">
+      <div class="loc__block" style="background:var(--espresso);color:var(--oat)"><span>nü · 01</span><b>venice</b></div>
+      <div class="loc__row"><div><span class="num">01</span><h3>Abbot Kinney</h3>
+        <address>1218 Abbot Kinney Blvd<br>Venice, CA</address></div></div>
+      <p class="hrs">Daily · 10—22</p>
+      <a class="textlink" href="#">Directions
+        <svg class="arr" width="18" height="9" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </article>
+    <article class="loc reveal" style="--d:100ms">
+      <div class="loc__block" style="background:var(--taupe);color:var(--cream)"><span>nü · 02</span><b>weho</b></div>
+      <div class="loc__row"><div><span class="num">02</span><h3>Melrose Place</h3>
+        <address>8420 Melrose Place<br>West Hollywood, CA</address></div></div>
+      <p class="hrs">Daily · 11—23</p>
+      <a class="textlink" href="#">Directions
+        <svg class="arr" width="18" height="9" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </article>
+    <article class="loc reveal">
+      <div class="loc__block" style="background:var(--blush);color:var(--espresso)"><span>nü · 03</span><b>malibu</b></div>
+      <div class="loc__row"><div><span class="num">03</span><h3>Cross Creek</h3>
+        <address>3835 Cross Creek Rd<br>Malibu, CA</address></div></div>
+      <p class="hrs">Daily · 9—sunset</p>
+      <a class="textlink" href="#">Directions
+        <svg class="arr" width="18" height="9" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </article>
+    <article class="loc reveal" style="--d:100ms">
+      <div class="loc__block" style="background:var(--oat);color:var(--espresso)"><span>nü · 04</span><b>los feliz</b></div>
+      <div class="loc__row"><div><span class="num">04</span><h3>Hillhurst</h3>
+        <address>1802 Hillhurst Ave<br>Los Feliz, CA</address></div></div>
+      <p class="hrs">Daily · 10—22</p>
+      <a class="textlink" href="#">Directions
+        <svg class="arr" width="18" height="9" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<!-- ===== the space ===== -->
+<section class="section--tight wrap">
+  <div style="margin-bottom:2rem" class="reveal">
+    <span class="eyebrow"><span class="dots"></span> The space</span>
+    <h2 class="h-2" style="margin-top:.5rem">a still life you can sit in</h2>
+  </div>
+  <div class="space reveal">
+    <div class="media g1"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Inside a nüdes boutique"></div>
+    <div class="media g2"><img src="https://images.unsplash.com/photo-1556909211-36987daf7b4d?auto=format&fit=crop&w=700&q=80" alt=""></div>
+    <div class="froyo-wrap g3" style="--bg:#E4D4CE;--swirl:#9C7E86;--topping:#5b3a26;border-radius:14px"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+    <div class="media g4"><img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+  </div>
+</section>
+
+<!-- ===== details band ===== -->
+<section class="section band-espresso">
+  <div class="wrap">
+    <div class="details reveal">
+      <div class="detail"><h4>Hours</h4><p>Daily, 11am — 11pm<br>Riviera &amp; Marina until midnight</p></div>
+      <div class="detail"><h4>Private moments</h4><p>book it out for shoots, launches, whatever.</p></div>
+      <div class="detail"><h4>Say hello</h4><p>hello@nudes.co<br>@nudes</p></div>
+    </div>
+    <div class="row reveal" style="--d:120ms;margin-top:2.6rem">
+      <a class="btn btn--light" href="#">book it out</a>
+      <a class="btn btn--on-dark btn--ghost" href="lookbook.html">See the space</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer class="footer">
+  <div class="nu-mark footer__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__news">
+        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
+        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
+      </div>
+      <div class="footer__col"><h4>Explore</h4>
+        <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a><a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a></div>
+      <div class="footer__col"><h4>nüdes</h4>
+        <a href="about.html">Our story</a><a href="about.html">Ingredients</a><a href="visit.html">Careers</a><a href="lookbook.html">Press</a></div>
+    </div>
+    <div class="footer__bar">
+      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>Still doing the most, with less.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nudes.js"></script>
+</body>
+</html>

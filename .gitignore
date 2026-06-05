@@ -1,0 +1,7 @@
+# local tooling / QA artifacts — not part of the site
+.claude/
+.playwright-mcp/
+home-full.jpeg
+*.zip
+.DS_Store
+node_modules/

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<title>nudes — The Lookbook</title>
+<meta name="description" content="The nüdes feed. Creator moments, press, and the #nüdesmoment campaign — a frozen yogurt that photographs as beautifully as it tastes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nudes.css">
+<style>
+/* ---------- lookbook ---------- */
+.p-look .head{padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(3rem,8vh,6rem));
+  padding-bottom:clamp(1.5rem,4vh,3rem);position:relative;overflow:hidden}
+.p-look .head__row{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.p-look .head h1{font-size:clamp(3.2rem,13vw,11rem);line-height:.82;color:var(--espresso)}
+.p-look .head .lede{max-width:38ch}
+.p-look .headblob{position:absolute;left:-12vmax;top:-10vmax;width:44vmax;height:44vmax;z-index:-1;
+  background:radial-gradient(closest-side,rgba(204,173,160,.55),rgba(204,173,160,0))}
+
+.p-look .masonry{column-count:4;column-gap:.8rem}
+@media (max-width:1100px){.p-look .masonry{column-count:3}}
+@media (max-width:760px){.p-look .masonry{column-count:2}}
+@media (max-width:460px){.p-look .masonry{column-count:2;column-gap:.5rem}}
+.p-look .masonry .media{break-inside:avoid;margin-bottom:.8rem;border-radius:14px;display:block}
+.p-look .masonry .froyo-wrap{break-inside:avoid;margin-bottom:.8rem;border-radius:16px;aspect-ratio:4/5}
+.p-look .masonry .cap{font-size:.66rem}
+
+.p-look .press{display:flex;flex-wrap:wrap;gap:clamp(1.4rem,4vw,3.4rem);align-items:center;justify-content:center}
+.p-look .press span{font-family:var(--display);font-weight:300;text-transform:uppercase;
+  font-size:clamp(1.1rem,2.4vw,1.9rem);letter-spacing:.06em;color:var(--taupe);opacity:.85;
+  transition:opacity .4s,color .4s}
+.p-look .press span:hover{opacity:1;color:var(--espresso)}
+
+.p-look .creators{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.2vw,2rem)}
+@media (max-width:980px){.p-look .creators{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){
+  .p-look .masonry .media{margin-bottom:.5rem}
+  .p-look .creators{grid-template-columns:1fr 1fr;gap:.9rem}
+  .p-look .creator h3{font-size:1.05rem}
+  .p-look .creator p{font-size:.82rem}
+  .p-look .head h1{font-size:clamp(2.8rem,14vw,3.6rem)}
+  .p-look .hashtag h2{font-size:clamp(2.2rem,11vw,3.2rem)}
+}
+.p-look .creator .media{aspect-ratio:4/5;border-radius:16px}
+.p-look .creator h3{font-size:1.25rem;text-transform:none;letter-spacing:0;margin-top:1rem}
+.p-look .creator .handle{font-family:var(--display);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);margin-top:.2rem}
+.p-look .creator p{font-size:.94rem;color:color-mix(in srgb,var(--ink) 64%,var(--paper));margin-top:.7rem;font-style:italic}
+
+.p-look .hashtag{text-align:center}
+.p-look .hashtag h2{font-size:clamp(3rem,13vw,11rem);line-height:.86;color:var(--oat)}
+.p-look .hashtag .lede{max-width:40ch;margin:1.4rem auto 0;color:rgba(220,204,187,.82)}
+
+/* lightbox + cursor live in nudes.css (shared) */
+</style>
+</head>
+<body class="p-look" data-cursor>
+
+<!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
+  <ellipse cx="120" cy="198" rx="58" ry="12" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M66 196 L86 298 Q88 305 97 305 H143 Q152 305 154 298 L174 196 Z" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M68 206 H172 L170 218 H70 Z" style="fill:rgba(42,24,16,.08)"/>
+  <g style="fill:var(--swirl,#caa089)">
+    <ellipse cx="120" cy="194" rx="60" ry="24"/><ellipse cx="112" cy="165" rx="52" ry="22"/>
+    <ellipse cx="126" cy="139" rx="43" ry="20"/><ellipse cx="114" cy="115" rx="34" ry="17"/>
+    <ellipse cx="124" cy="96" rx="25" ry="14"/><path d="M106 86 Q110 52 120 46 Q130 52 132 86 Z"/>
+  </g>
+  <g style="fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.32">
+    <path d="M78 194 Q120 212 162 194"/><path d="M86 165 Q118 181 156 165"/>
+    <path d="M94 139 Q124 153 152 139"/><path d="M92 115 Q116 127 142 115"/>
+  </g>
+  <circle cx="120" cy="50" r="7" style="fill:var(--topping,#5b3a26)"/>
+</symbol></svg>
+
+<div class="topbar"><div class="ticker">
+  <span>tag us #nüdesmoment ·· new faces monthly ·· as seen in vogue &amp; monocle ·· we don't gatekeep ··</span>
+  <span>tag us #nüdesmoment ·· new faces monthly ·· as seen in vogue &amp; monocle ·· we don't gatekeep ··</span>
+</div></div>
+
+<header class="nav"><div class="nav__inner">
+  <a class="wordmark nav__logo" href="index.html">nudes</a>
+  <nav class="nav__links">
+    <a href="menu.html">Flavors</a>
+    <a href="about.html">Story</a>
+    <a href="visit.html">Visit</a>
+    <a href="lookbook.html" aria-current="page">Lookbook</a>
+    <a href="events.html" class="nav__events">Events</a>
+  </nav>
+  <div class="nav__cta">
+    <span class="nav__bag">Bag (0)</span>
+    <a class="btn" href="menu.html">Order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+  </div>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</div></header>
+
+<div class="menu" id="menu">
+  <button class="menu__close">Close ✕</button>
+  <a href="menu.html"><span>Flavors</span><small>01</small></a>
+  <a href="about.html"><span>Story</span><small>02</small></a>
+  <a href="visit.html"><span>Visit</span><small>03</small></a>
+  <a href="lookbook.html"><span>Lookbook</span><small>04</small></a>
+  <a href="events.html"><span>Events</span><small>05</small></a>
+  <div class="menu__foot"><span>Mare Nostrum</span><span>@nudes</span></div>
+</div>
+
+<!-- ===== head ===== -->
+<header class="head wrap">
+  <div class="headblob blob"></div>
+  <div class="head__row">
+    <div>
+      <span class="eyebrow reveal"><span class="dots"></span> The feed · @nudes</span>
+      <h1 class="reveal" style="--d:80ms">lookbook</h1>
+    </div>
+    <p class="lede reveal" style="--d:160ms">the feed but make it a moodboard. tap in — all real, all us.</p>
+  </div>
+</header>
+
+<!-- ===== masonry feed ===== -->
+<section class="section--tight wrap">
+  <div class="masonry reveal">
+    <div class="media ratio-4-5" data-lightbox="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=640&q=80" alt="Creator moment"><span class="cap">@leamoreau</span></div>
+    <div class="media ratio-3-4" data-lightbox="https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=640&q=80" alt="Pistachio cup"><span class="cap">no.02 — pistachio</span></div>
+    <div class="media ratio-1-1" data-lightbox="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=640&q=80" alt="Dessert flatlay"><span class="cap">the table</span></div>
+    <div class="media ratio-3-4" data-lightbox="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=640&q=80" alt="Portrait"><span class="cap">@sofiaeats</span></div>
+    <div class="media ratio-1-1" data-lightbox="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=640&q=80" alt="Berries"><span class="cap">in season</span></div>
+    <div class="media ratio-4-5" data-lightbox="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=640&q=80" alt="Matcha"><span class="cap">no.06 — matcha</span></div>
+    <div class="froyo-wrap" style="--bg:#E9DFBE;--swirl:#D6BF79;--topping:#7a6a2e"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg><span class="cap">no.08 · lemon</span></div>
+    <div class="media ratio-1-1" data-lightbox="https://images.unsplash.com/photo-1516559828984-fb3b99548b21?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1516559828984-fb3b99548b21?auto=format&fit=crop&w=640&q=80" alt="Cacao"><span class="cap">no.04 — cacao</span></div>
+    <div class="froyo-wrap" style="--bg:#EBD8D2;--swirl:#CE9A93;--topping:#8a4b46"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg><span class="cap">no.05 · strawberry</span></div>
+    <div class="media ratio-3-4" data-lightbox="https://images.unsplash.com/photo-1524351199678-941a58a3df50?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1524351199678-941a58a3df50?auto=format&fit=crop&w=640&q=80" alt="Fig"><span class="cap">no.03 — fig</span></div>
+    <div class="froyo-wrap" style="--bg:#DBE0CA;--swirl:#9DAE80;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg><span class="cap">no.06 · matcha</span></div>
+    <div class="media ratio-4-5" data-lightbox="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=1300&q=85"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=640&q=80" alt="Swirl"><span class="cap">@noor</span></div>
+  </div>
+</section>
+
+<!-- ===== press ===== -->
+<section class="section--tight band-oat">
+  <div class="wrap center">
+    <span class="eyebrow reveal" style="margin-bottom:2rem;display:inline-flex"><span class="dots"></span> As seen in</span>
+    <div class="press reveal">
+      <span>VOGUE</span><span>ELLE</span><span>MONOCLE</span><span>KINFOLK</span><span>CEREAL</span><span>HYPEBAE</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== creators ===== -->
+<section class="section wrap">
+  <div class="row between" style="align-items:flex-end;margin-bottom:clamp(2rem,4vw,3rem)">
+    <div class="reveal"><span class="eyebrow"><span class="dots"></span> The collabs</span>
+      <h2 class="h-1" style="margin-top:.5rem">creators<br>in residence</h2></div>
+    <p class="reveal muted" style="--d:120ms;max-width:28ch">the girls that get it. new faces monthly.</p>
+  </div>
+  <div class="creators">
+    <article class="creator reveal">
+      <div class="media" data-lightbox="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Léa Moreau"></div>
+      <h3>Léa Moreau</h3><div class="handle">@leamoreau · 412k</div>
+      <p>“the only froyo in my camera roll.”</p>
+    </article>
+    <article class="creator reveal" style="--d:100ms">
+      <div class="media" data-lightbox="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Sofia Marin"></div>
+      <h3>Sofia Marín</h3><div class="handle">@sofiaeats · 268k</div>
+      <p>“wellness that actually tastes like dessert.”</p>
+    </article>
+    <article class="creator reveal" style="--d:200ms">
+      <div class="media" data-lightbox="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80" alt="Noor Al-Rashid"></div>
+      <h3>Noor Al-Rashid</h3><div class="handle">@noor · 1.1m</div>
+      <p>“the matte cup is my whole aesthetic.”</p>
+    </article>
+    <article class="creator reveal" style="--d:300ms">
+      <div class="media" data-lightbox="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=700&q=80" alt="Júlia Costa"></div>
+      <h3>Júlia Costa</h3><div class="handle">@juliacosta · 530k</div>
+      <p>“mediterranean summer in a single scoop.”</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== hashtag ===== -->
+<section class="section band-espresso grain" style="position:relative;overflow:hidden">
+  <div class="wrap hashtag">
+    <span class="eyebrow eyebrow--light reveal" style="display:inline-flex"><span class="dots"></span> Show us yours</span>
+    <h2 class="reveal" style="--d:100ms;margin-top:1rem">#nüdesmoment</h2>
+    <p class="lede reveal" style="--d:200ms">tag <b>@nudes</b> + <b>#nüdesmoment</b>. you might make the wall. no pressure x</p>
+    <div class="row reveal" style="--d:300ms;justify-content:center;margin-top:2.2rem">
+      <a class="btn btn--light" href="#">follow @nudes</a>
+      <a class="btn btn--on-dark btn--ghost" href="menu.html">get a cup</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer class="footer">
+  <div class="nu-mark footer__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__news">
+        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
+        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
+      </div>
+      <div class="footer__col"><h4>Explore</h4>
+        <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a><a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a></div>
+      <div class="footer__col"><h4>nüdes</h4>
+        <a href="about.html">Our story</a><a href="about.html">Ingredients</a><a href="visit.html">Careers</a><a href="lookbook.html">Press</a></div>
+    </div>
+    <div class="footer__bar">
+      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>Still doing the most, with less.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nudes.js"></script>
+</body>
+</html>

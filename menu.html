@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<title>nudes — The Flavors</title>
+<meta name="description" content="A small, perfect menu. Mediterranean frozen yogurt in eight signature flavors — clean ingredients, full nutrition transparency, an elevated toppings bar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nudes.css">
+<style>
+/* ---------- menu ---------- */
+.p-menu .head{padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(3rem,8vh,6rem));
+  padding-bottom:clamp(2.5rem,5vh,4rem);position:relative;overflow:hidden}
+.p-menu .head h1{font-size:clamp(3.4rem,15vw,12rem);line-height:.82;color:var(--espresso);margin-top:.2em}
+.p-menu .head .lede{max-width:42ch;margin-top:1.6rem}
+.p-menu .filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2.4rem}
+.p-menu .filters .tag{cursor:pointer;transition:background .3s,color .3s}
+.p-menu .filters .tag:hover,.p-menu .filters .tag[aria-pressed="true"]{background:var(--espresso);color:var(--oat);border-color:var(--espresso)}
+.p-menu .headblob{position:absolute;right:-10vmax;top:-6vmax;width:42vmax;height:42vmax;z-index:-1;
+  background:radial-gradient(closest-side,rgba(181,147,127,.55),rgba(181,147,127,0))}
+
+.p-menu .grid-flavors{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,1.8rem)}
+@media (max-width:980px){.p-menu .grid-flavors{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){
+  .p-menu .grid-flavors{grid-template-columns:1fr 1fr;gap:.9rem}
+  .p-menu .fcard h3{font-size:1.05rem}
+  .p-menu .fcard p{font-size:.78rem;margin-top:.2em}
+  .p-menu .fcard .meta{gap:.5rem;margin-top:.55rem;flex-wrap:wrap}
+  .p-menu .fcard .meta span{font-size:.6rem}
+  .p-menu .add{width:30px;height:30px}
+}
+.p-menu .fcard .media{aspect-ratio:4/5;border-radius:18px}
+.p-menu .fcard .top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:1rem;gap:.8rem}
+.p-menu .fcard .num{color:var(--taupe)}
+.p-menu .fcard h3{font-size:1.3rem;text-transform:none;letter-spacing:0;line-height:1.1}
+.p-menu .fcard p{font-size:.92rem;color:color-mix(in srgb,var(--ink) 60%,var(--paper));margin-top:.3em}
+.p-menu .fcard .meta{display:flex;gap:1rem;margin-top:.9rem;align-items:center}
+.p-menu .fcard .meta span{font-family:var(--display);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe)}
+.p-menu .add{margin-left:auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--espresso);
+  display:grid;place-items:center;color:var(--espresso);transition:.4s var(--ease);flex:none}
+.p-menu .add:hover{background:var(--espresso);color:var(--oat);transform:rotate(90deg)}
+
+/* toppings */
+.p-menu .toppings{display:grid;grid-template-columns:1fr 1fr;gap:.2rem clamp(2.5rem,6vw,6rem)}
+@media (max-width:680px){.p-menu .toppings{grid-template-columns:1fr}}
+.p-menu .topp{display:flex;align-items:baseline;gap:.6rem;padding:.95rem 0;border-bottom:1px solid var(--line-soft)}
+.p-menu .topp__name{font-family:var(--body);font-size:1.05rem;color:var(--oat)}
+.p-menu .topp .dot{flex:1;border-bottom:1px dotted rgba(220,204,187,.4);transform:translateY(-.25em)}
+.p-menu .topp__price{font-family:var(--display);font-size:.82rem;letter-spacing:.12em;color:var(--blush)}
+
+/* build your cup */
+.p-menu .build{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem)}
+@media (max-width:780px){.p-menu .build{grid-template-columns:1fr}}
+.p-menu .step{position:relative;padding-top:2.4rem;border-top:1px solid var(--line)}
+.p-menu .step .n{position:absolute;top:1.4rem;right:0;font-family:var(--display);font-weight:300;
+  font-size:clamp(2.6rem,5vw,4rem);color:var(--blush);line-height:1}
+.p-menu .step h3{font-size:1.5rem;text-transform:none;letter-spacing:0}
+.p-menu .step ul{margin-top:1rem}
+.p-menu .step li{padding:.5rem 0;color:color-mix(in srgb,var(--ink) 70%,var(--paper));font-size:1rem;
+  display:flex;align-items:center;gap:.7rem}
+.p-menu .step li::before{content:"";width:.4em;height:.4em;border-radius:50%;background:var(--taupe)}
+</style>
+</head>
+<body class="p-menu">
+
+<!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
+  <ellipse cx="120" cy="198" rx="58" ry="12" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M66 196 L86 298 Q88 305 97 305 H143 Q152 305 154 298 L174 196 Z" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M68 206 H172 L170 218 H70 Z" style="fill:rgba(42,24,16,.08)"/>
+  <g style="fill:var(--swirl,#caa089)">
+    <ellipse cx="120" cy="194" rx="60" ry="24"/><ellipse cx="112" cy="165" rx="52" ry="22"/>
+    <ellipse cx="126" cy="139" rx="43" ry="20"/><ellipse cx="114" cy="115" rx="34" ry="17"/>
+    <ellipse cx="124" cy="96" rx="25" ry="14"/><path d="M106 86 Q110 52 120 46 Q130 52 132 86 Z"/>
+  </g>
+  <g style="fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.32">
+    <path d="M78 194 Q120 212 162 194"/><path d="M86 165 Q118 181 156 165"/>
+    <path d="M94 139 Q124 153 152 139"/><path d="M92 115 Q116 127 142 115"/>
+  </g>
+  <circle cx="120" cy="50" r="7" style="fill:var(--topping,#5b3a26)"/>
+</symbol></svg>
+
+<div class="topbar"><div class="ticker">
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+  <span>we don't gatekeep ·· oat milk obviously ·· a little treat ·· small batch, churned daily ·· iykyk ··</span>
+</div></div>
+
+<header class="nav"><div class="nav__inner">
+  <a class="wordmark nav__logo" href="index.html">nudes</a>
+  <nav class="nav__links">
+    <a href="menu.html" aria-current="page">Flavors</a>
+    <a href="about.html">Story</a>
+    <a href="visit.html">Visit</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a href="events.html" class="nav__events">Events</a>
+  </nav>
+  <div class="nav__cta">
+    <span class="nav__bag">Bag (0)</span>
+    <a class="btn" href="#build">Order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+  </div>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</div></header>
+
+<div class="menu" id="menu">
+  <button class="menu__close">Close ✕</button>
+  <a href="menu.html"><span>Flavors</span><small>01</small></a>
+  <a href="about.html"><span>Story</span><small>02</small></a>
+  <a href="visit.html"><span>Visit</span><small>03</small></a>
+  <a href="lookbook.html"><span>Lookbook</span><small>04</small></a>
+  <a href="events.html"><span>Events</span><small>05</small></a>
+  <div class="menu__foot"><span>Mare Nostrum</span><span>@nudes</span></div>
+</div>
+
+<!-- ===== head ===== -->
+<header class="head wrap">
+  <div class="headblob blob"></div>
+  <span class="eyebrow reveal"><span class="dots"></span> the lineup · 8 flavors</span>
+  <h1 class="reveal" style="--d:80ms">flavors</h1>
+  <p class="lede reveal" style="--d:160ms">8 flavors. no misses. oat milk, real stuff, zero notes. pick one (or three, no judgment).</p>
+  <div class="filters reveal" style="--d:240ms">
+    <span class="tag" aria-pressed="true">All</span><span class="tag">Fruit</span>
+    <span class="tag">Cacao</span><span class="tag">Nut</span><span class="tag">Citrus</span>
+  </div>
+</header>
+
+<!-- ===== flavors grid ===== -->
+<section class="section--tight wrap">
+  <div class="grid-flavors">
+    <article class="fcard reveal">
+      <div class="froyo-wrap" style="--bg:#E7DAC0;--swirl:#E6D2A4;--topping:#A9885A"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">01</span><h3>Vanilla Oat</h3><p>Madagascar vanilla, oat-milk base</p></div></div>
+      <div class="meta"><span>130 kcal</span><span>11g protein</span>
+        <button class="add" aria-label="Add Vanilla Oat"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:80ms">
+      <div class="froyo-wrap" style="--bg:#DDE0CE;--swirl:#9CA87E;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">02</span><h3>Pistachio &amp; Sea Salt</h3><p>Sicilian pistachio, flaked salt</p></div></div>
+      <div class="meta"><span>140 kcal</span><span>12g protein</span>
+        <button class="add" aria-label="Add Pistachio"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:160ms">
+      <div class="froyo-wrap" style="--bg:#E4D4CE;--swirl:#9C7E86;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">03</span><h3>Wild Fig &amp; Honey</h3><p>Aegean fig, raw mountain honey</p></div></div>
+      <div class="meta"><span>150 kcal</span><span>10g protein</span>
+        <button class="add" aria-label="Add Wild Fig"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:240ms">
+      <div class="froyo-wrap" style="--bg:#E1D3C2;--swirl:#6E4A33;--topping:#3a2415"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">04</span><h3>Single-Origin Cacao</h3><p>72% cacao, no refined sugar</p></div></div>
+      <div class="meta"><span>145 kcal</span><span>12g protein</span>
+        <button class="add" aria-label="Add Cacao"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal">
+      <div class="froyo-wrap" style="--bg:#EBD8D2;--swirl:#CE9A93;--topping:#8a4b46"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">05</span><h3>Strawberry &amp; Rose</h3><p>Sun-ripened strawberry, rosewater</p></div></div>
+      <div class="meta"><span>135 kcal</span><span>10g protein</span>
+        <button class="add" aria-label="Add Strawberry"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:80ms">
+      <div class="froyo-wrap" style="--bg:#DBE0CA;--swirl:#9DAE80;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">06</span><h3>Ceremonial Matcha</h3><p>Uji matcha, oat-milk base</p></div></div>
+      <div class="meta"><span>128 kcal</span><span>11g protein</span>
+        <button class="add" aria-label="Add Matcha"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:160ms">
+      <div class="froyo-wrap" style="--bg:#E6D6C1;--swirl:#BE9168;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">07</span><h3>Salted Date Caramel</h3><p>Medjool date, sea salt</p></div></div>
+      <div class="meta"><span>158 kcal</span><span>9g protein</span>
+        <button class="add" aria-label="Add Date Caramel"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+    <article class="fcard reveal" style="--d:240ms">
+      <div class="froyo-wrap" style="--bg:#E9DFBE;--swirl:#D6BF79;--topping:#7a6a2e"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="top"><div><span class="num">08</span><h3>Lemon &amp; Olive Oil</h3><p>Amalfi lemon, cold-pressed EVOO</p></div></div>
+      <div class="meta"><span>142 kcal</span><span>9g protein</span>
+        <button class="add" aria-label="Add Lemon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== toppings bar ===== -->
+<section class="section band-espresso grain" style="position:relative;overflow:hidden">
+  <div class="wrap">
+    <div class="row between" style="align-items:flex-end;margin-bottom:2.6rem">
+      <div class="reveal"><span class="eyebrow eyebrow--light"><span class="dots"></span> Finish it</span>
+        <h2 class="h-1" style="margin-top:.5rem">the toppings bar</h2></div>
+      <p class="reveal muted" style="--d:120ms;max-width:30ch">pile it on. first two are free, obviously.</p>
+    </div>
+    <div class="toppings reveal">
+      <div class="topp"><span class="topp__name">Sicilian pistachio crumble</span><span class="dot"></span><span class="topp__price">+1</span></div>
+      <div class="topp"><span class="topp__name">Raw cacao nibs</span><span class="dot"></span><span class="topp__price">+1</span></div>
+      <div class="topp"><span class="topp__name">Toasted oat granola</span><span class="dot"></span><span class="topp__price">free</span></div>
+      <div class="topp"><span class="topp__name">Aegean fig &amp; Medjool date</span><span class="dot"></span><span class="topp__price">+2</span></div>
+      <div class="topp"><span class="topp__name">Raw mountain honey drizzle</span><span class="dot"></span><span class="topp__price">free</span></div>
+      <div class="topp"><span class="topp__name">Cold-pressed olive oil &amp; Maldon salt</span><span class="dot"></span><span class="topp__price">+1</span></div>
+      <div class="topp"><span class="topp__name">Fresh seasonal berries</span><span class="dot"></span><span class="topp__price">+2</span></div>
+      <div class="topp"><span class="topp__name">Bee pollen &amp; cacao dust</span><span class="dot"></span><span class="topp__price">+1</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== build your cup ===== -->
+<section class="section wrap" id="build">
+  <div style="max-width:54ch;margin-bottom:clamp(2.5rem,5vw,4rem)" class="reveal">
+    <span class="eyebrow"><span class="dots"></span> Make it yours</span>
+    <h2 class="h-1" style="margin-top:.5rem">build<br>your cup</h2>
+    <p class="lede" style="margin-top:1.2rem">3 decisions. we got the rest.</p>
+  </div>
+  <div class="build">
+    <div class="step reveal"><span class="n">01</span><h3>Choose a base</h3>
+      <ul><li>Oat-milk (signature)</li><li>Greek-style</li><li>Coconut</li></ul></div>
+    <div class="step reveal" style="--d:120ms"><span class="n">02</span><h3>Choose a flavor</h3>
+      <ul><li>Any of the eight signatures</li><li>Two-flavor swirl</li><li>Seasonal special</li></ul></div>
+    <div class="step reveal" style="--d:240ms"><span class="n">03</span><h3>Choose a finish</h3>
+      <ul><li>A drizzle</li><li>A crunch</li><li>Something fresh</li></ul></div>
+  </div>
+  <div class="row" style="margin-top:3rem">
+    <a class="btn" href="#">Start an order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    <a class="btn btn--ghost" href="visit.html">find us</a>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer class="footer">
+  <div class="nu-mark footer__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__news">
+        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
+        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
+      </div>
+      <div class="footer__col"><h4>Explore</h4>
+        <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a><a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a></div>
+      <div class="footer__col"><h4>nüdes</h4>
+        <a href="about.html">Our story</a><a href="about.html">Ingredients</a><a href="visit.html">Careers</a><a href="lookbook.html">Press</a></div>
+    </div>
+    <div class="footer__bar">
+      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>Still doing the most, with less.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nudes.js"></script>
+</body>
+</html>

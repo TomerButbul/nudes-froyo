@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<title>nudes — Mediterranean Frozen Yogurt, Reimagined</title>
+<meta name="description" content="nüdes reimagines frozen yogurt through a Mediterranean, fashion-forward lens. Clean ingredients, elevated design, deeply craveable. Wellness, indulged.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nudes.css">
+<style>
+/* ---------- home ---------- */
+.p-home .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(1.5rem,5vh,4rem));
+  padding-bottom:clamp(2.5rem,7vh,5rem)}
+.p-home .hero__grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.5rem,4vw,4.5rem);
+  align-items:center;width:100%}
+.p-home .hero__copy{position:relative;z-index:3}
+.p-home .hero h1{font-size:clamp(3.3rem,12.5vw,11rem);line-height:.84;margin:.16em 0 .02em;color:var(--espresso)}
+.p-home .hero h1 em{color:var(--taupe)}
+.p-home .hero .lede{max-width:40ch;margin-top:1.6rem;color:color-mix(in srgb,var(--ink) 78%,var(--paper))}
+.p-home .hero__cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
+.p-home .hero__media{position:relative;z-index:2}
+.p-home .hero__media .media{aspect-ratio:3/4;border-radius:230px 230px 26px 26px}
+.p-home .chip{position:absolute;z-index:4;background:var(--cream);color:var(--espresso);
+  border-radius:var(--pill);padding:.7em 1.1em;display:flex;align-items:center;gap:.6em;
+  box-shadow:0 24px 60px -34px rgba(42,24,16,.7);
+  font-family:var(--display);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+.p-home .chip b{font-weight:600;font-size:1rem}
+.p-home .chip--protein{top:4%;right:-5%}
+.p-home .hero__froyo{position:relative;max-width:430px;margin-inline:auto}
+.p-home .hero__media .froyo{width:90%}
+.p-home .badge-spin{position:absolute;bottom:-5%;left:-7%;z-index:5;width:clamp(106px,13vw,152px);aspect-ratio:1;
+  background:var(--oat);border-radius:50%;box-shadow:0 18px 40px -24px rgba(42,24,16,.55)}
+.p-home .badge-spin>svg{width:100%;height:100%;animation:spin 18s linear infinite}
+.p-home .badge-text{font-family:var(--display);font-weight:600;font-size:16px;fill:var(--espresso)}
+.p-home .badge-center{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:1.4rem;color:var(--espresso)}
+@media (prefers-reduced-motion:reduce){.p-home .badge-spin>svg{animation:none}}
+.p-home .scrollcue{position:absolute;left:var(--gut);bottom:1.8rem;z-index:3;display:flex;align-items:center;gap:.7em;
+  font-family:var(--display);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--taupe)}
+.p-home .scrollcue i{width:34px;height:1px;background:var(--taupe);display:block;animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%,100%{transform:scaleX(.4);transform-origin:left;opacity:.5}50%{transform:scaleX(1);opacity:1}}
+.p-home .vlabel-hero{position:absolute;right:calc(var(--gut) - .4rem);top:38%;z-index:3}
+.p-home .b1{width:50vmax;height:50vmax;left:-18vmax;top:-14vmax;
+  background:radial-gradient(closest-side,rgba(204,173,160,.85),rgba(204,173,160,0))}
+.p-home .b2{width:38vmax;height:38vmax;right:-6vmax;bottom:-12vmax;
+  background:radial-gradient(closest-side,rgba(181,147,127,.7),rgba(181,147,127,0));animation-delay:-6s}
+.p-home .b3{width:26vmax;height:26vmax;right:24%;top:6%;
+  background:radial-gradient(closest-side,rgba(220,204,187,.9),rgba(220,204,187,0));animation-delay:-3s}
+
+/* flavors preview */
+.p-home .flavors{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.5vw,2.4rem)}
+.p-home .flavor .media{aspect-ratio:4/5;border-radius:20px}
+.p-home .flavor__row{display:flex;justify-content:space-between;align-items:baseline;margin-top:1.1rem;gap:1rem}
+.p-home .flavor h3{font-size:1.45rem;text-transform:none;letter-spacing:0}
+.p-home .flavor p{font-size:.96rem;color:color-mix(in srgb,var(--ink) 62%,var(--paper));margin-top:.2em}
+.p-home .flavor .kcal{font-family:var(--display);font-size:.74rem;letter-spacing:.16em;color:var(--taupe);white-space:nowrap}
+@media (max-width:760px){.p-home .flavors{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.p-home .flavors{grid-template-columns:1fr}}
+
+/* philosophy band */
+.p-home .philo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.p-home .philo .mark{width:min(34vw,360px)}
+.p-home .quote{font-family:var(--display);font-weight:300;text-transform:uppercase;
+  font-size:clamp(2rem,4.6vw,3.8rem);line-height:1.02;color:var(--oat)}
+.p-home .quote em{color:var(--blush)}
+
+/* stats */
+.p-home .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.p-home .stat{background:var(--paper);padding:clamp(1.6rem,3vw,2.6rem)}
+.p-home .stat b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,4vw,3.2rem);
+  color:var(--espresso);line-height:1}
+.p-home .stat span{display:block;margin-top:.6em;font-family:var(--display);font-size:.72rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--taupe)}
+@media (max-width:760px){.p-home .stats{grid-template-columns:1fr 1fr}}
+
+/* editorial split */
+.p-home .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.p-home .split .media{aspect-ratio:4/5;border-radius:20px}
+
+/* insta */
+.p-home .feed{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}
+.p-home .feed .media{aspect-ratio:1/1;border-radius:14px}
+.p-home .feed .media .cap{font-size:.62rem}
+@media (max-width:880px){.p-home .feed{grid-template-columns:repeat(3,1fr)}.p-home .feed .media:nth-child(4),.p-home .feed .media:nth-child(5){display:none}}
+@media (max-width:980px){.p-home .philo,.p-home .split{grid-template-columns:1fr}.p-home .philo .mark{display:none}}
+@media (max-width:780px){
+  .p-home .hero{min-height:auto;padding-bottom:clamp(2rem,6vh,3.5rem)}
+  .p-home .hero__grid{grid-template-columns:1fr;gap:1.6rem}
+  .p-home .hero__media{width:100%;max-width:none;margin:0}
+  .p-home .hero__froyo{width:fit-content;max-width:none;margin-inline:auto}
+  .p-home .hero__media .froyo-wrap{width:min(60vw,225px);height:min(75vw,281px);aspect-ratio:auto}
+  .p-home .hero__media .froyo{width:86%}
+  .p-home .vlabel-hero{display:none}
+  .p-home .chip--protein{top:auto;bottom:3%;right:-2%}
+  .p-home .badge-spin{display:none}
+  .p-home .scrollcue{display:none}
+}
+@media (max-width:560px){
+  .p-home .flavors{grid-template-columns:1fr 1fr;gap:1rem}
+  .p-home .flavor h3{font-size:1.12rem}
+  .p-home .flavor p{font-size:.82rem;margin-top:.1em}
+  .p-home .flavor__row{margin-top:.7rem;gap:.5rem}
+  .p-home .flavor .kcal{font-size:.66rem}
+}
+</style>
+</head>
+<body class="p-home">
+
+<!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
+  <ellipse cx="120" cy="198" rx="58" ry="12" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M66 196 L86 298 Q88 305 97 305 H143 Q152 305 154 298 L174 196 Z" style="fill:var(--cup,#efe7d6)"/>
+  <path d="M68 206 H172 L170 218 H70 Z" style="fill:rgba(42,24,16,.08)"/>
+  <g style="fill:var(--swirl,#caa089)">
+    <ellipse cx="120" cy="194" rx="60" ry="24"/><ellipse cx="112" cy="165" rx="52" ry="22"/>
+    <ellipse cx="126" cy="139" rx="43" ry="20"/><ellipse cx="114" cy="115" rx="34" ry="17"/>
+    <ellipse cx="124" cy="96" rx="25" ry="14"/><path d="M106 86 Q110 52 120 46 Q130 52 132 86 Z"/>
+  </g>
+  <g style="fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.32">
+    <path d="M78 194 Q120 212 162 194"/><path d="M86 165 Q118 181 156 165"/>
+    <path d="M94 139 Q124 153 152 139"/><path d="M92 115 Q116 127 142 115"/>
+  </g>
+  <circle cx="120" cy="50" r="7" style="fill:var(--topping,#5b3a26)"/>
+</symbol></svg>
+
+<!-- ===== topbar ===== -->
+<div class="topbar"><div class="ticker">
+  <span>we don't gatekeep ·· golden hour daily ·· oat milk obviously ·· the list is open ·· iykyk ··</span>
+  <span>we don't gatekeep ·· golden hour daily ·· oat milk obviously ·· the list is open ·· iykyk ··</span>
+</div></div>
+
+<!-- ===== nav ===== -->
+<header class="nav"><div class="nav__inner">
+  <a class="wordmark nav__logo" href="index.html">nudes</a>
+  <nav class="nav__links">
+    <a href="menu.html">Flavors</a>
+    <a href="about.html">Story</a>
+    <a href="visit.html">Visit</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a href="events.html" class="nav__events">Events</a>
+  </nav>
+  <div class="nav__cta">
+    <span class="nav__bag">Bag (0)</span>
+    <a class="btn" href="menu.html">Order
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg>
+    </a>
+  </div>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</div></header>
+
+<!-- ===== mobile menu ===== -->
+<div class="menu" id="menu">
+  <button class="menu__close">Close ✕</button>
+  <a href="menu.html"><span>Flavors</span><small>01</small></a>
+  <a href="about.html"><span>Story</span><small>02</small></a>
+  <a href="visit.html"><span>Visit</span><small>03</small></a>
+  <a href="lookbook.html"><span>Lookbook</span><small>04</small></a>
+  <a href="events.html"><span>Events</span><small>05</small></a>
+  <div class="menu__foot"><span>Mare Nostrum</span><span>@nudes</span></div>
+</div>
+
+<!-- ===== hero ===== -->
+<section class="hero grain">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="wrap"><div class="hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow reveal"><span class="dots"></span> a little treat · est. nü</span>
+      <h1 class="reveal" style="--d:80ms">a little<br><em>treat.</em></h1>
+      <p class="lede reveal" style="--d:180ms">froyo that actually eats. oat milk, no refined sugar, zero notes. you're welcome.</p>
+      <div class="hero__cta reveal" style="--d:280ms">
+        <a class="btn" href="menu.html">the flavors
+          <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+        <a class="btn btn--ghost" href="visit.html">find us</a>
+      </div>
+    </div>
+    <div class="hero__media reveal" style="--d:200ms">
+      <div class="hero__froyo">
+        <div class="froyo-wrap organic" style="--bg:#DCE0CC;--swirl:#9CA87E;--topping:#5b3a26;aspect-ratio:4/5">
+          <svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg>
+          <span class="cap">the signature swirl</span>
+        </div>
+        <div class="chip chip--protein"><b>12g</b> protein</div>
+        <div class="badge-spin">
+          <svg viewBox="0 0 200 200"><defs><path id="badgePath" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
+            <text class="badge-text"><textPath href="#badgePath">still doing the most · with less · </textPath></text></svg>
+          <span class="badge-center">nü</span>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <span class="vlabel vlabel-hero">frozen yogurt — reimagined</span>
+  <div class="scrollcue"><i></i> scroll</div>
+</section>
+
+<!-- ===== marquee ===== -->
+<div class="marquee"><div class="marquee__row">
+  <span>froyo that eats</span><span>iykyk</span><span>a little treat</span><span>oat milk obviously</span><span>we don't gatekeep</span>
+  <span>froyo that eats</span><span>iykyk</span><span>a little treat</span><span>oat milk obviously</span><span>we don't gatekeep</span>
+</div></div>
+
+<!-- ===== signature flavors ===== -->
+<section class="section wrap">
+  <div class="row between" style="align-items:flex-end;margin-bottom:clamp(2rem,4vw,3.4rem)">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dots"></span> the lineup</span>
+      <h2 class="h-1" style="margin-top:.5rem">8 flavors,<br>zero misses</h2>
+    </div>
+    <a class="textlink reveal" href="menu.html" style="--d:120ms">all of them
+      <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+  </div>
+  <div class="flavors">
+    <article class="flavor reveal">
+      <div class="froyo-wrap" style="--bg:#DDE0CE;--swirl:#9CA87E;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="flavor__row"><div><h3>Pistachio &amp; Sea Salt</h3><p>Sicilian pistachio, flaked salt</p></div><span class="kcal">140 kcal</span></div>
+    </article>
+    <article class="flavor reveal" style="--d:120ms">
+      <div class="froyo-wrap" style="--bg:#E4D4CE;--swirl:#9C7E86;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="flavor__row"><div><h3>Wild Fig &amp; Honey</h3><p>Aegean fig, raw mountain honey</p></div><span class="kcal">150 kcal</span></div>
+    </article>
+    <article class="flavor reveal" style="--d:240ms">
+      <div class="froyo-wrap" style="--bg:#E1D3C2;--swirl:#6E4A33;--topping:#3a2415"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="flavor__row"><div><h3>Single-Origin Cacao</h3><p>72% cacao, no refined sugar</p></div><span class="kcal">145 kcal</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== philosophy band ===== -->
+<section class="section band-espresso grain" style="position:relative;overflow:hidden">
+  <div class="wrap"><div class="philo">
+    <div class="nu-mark mark reveal" style="color:rgba(220,204,187,.16)">
+      <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round">
+        <path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+    </div>
+    <div>
+      <span class="eyebrow eyebrow--light reveal"><span class="dots"></span> The philosophy</span>
+      <p class="quote reveal" style="--d:120ms;margin-top:1.2rem">Still doing<br>the most, <em>with less.</em></p>
+      <p class="lede reveal" style="--d:220ms;margin-top:1.6rem;max-width:40ch;color:rgba(220,204,187,.82)">wellness-coded, snack-driven. the two dots? that's just us staying balanced. allegedly.</p>
+      <a class="textlink reveal" style="--d:320ms;margin-top:2rem;color:var(--oat)" href="about.html">the story
+        <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- ===== editorial split ===== -->
+<section class="section wrap">
+  <div class="split">
+    <div class="reveal-clip"><div class="media"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1100&q=80" alt="Mediterranean coastline"></div></div>
+    <div>
+      <span class="eyebrow reveal"><span class="dots"></span> Ingredient transparency</span>
+      <h2 class="h-1 reveal" style="--d:80ms;margin-top:.6rem">the<br>mediterranean,<br>in a cup</h2>
+      <p class="lede reveal" style="--d:160ms;margin-top:1.4rem;max-width:42ch">oat milk. real fruit. no refined sugar. we read the label so you don't have to.</p>
+      <div class="row reveal" style="--d:240ms;margin-top:2rem;gap:.6rem">
+        <span class="tag">Oat-milk base</span><span class="tag">Live cultures</span>
+        <span class="tag">No refined sugar</span><span class="tag">Small batch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== claims ===== -->
+<section class="section--tight wrap center">
+  <div class="claims reveal" style="justify-content:center">
+    <span class="claim">no refined sugar</span>
+    <span class="claim claim--solid">12g protein</span>
+    <span class="claim">gut-bestie cultures</span>
+    <span class="claim">oat milk obviously</span>
+  </div>
+</section>
+
+<!-- ===== insta feed ===== -->
+<section class="section band-oat">
+  <div class="wrap">
+    <div class="row between" style="align-items:flex-end;margin-bottom:2.4rem">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dots"></span> The feed</span>
+        <h2 class="h-1" style="margin-top:.5rem">@nudes</h2>
+      </div>
+      <a class="textlink reveal" href="lookbook.html" style="--d:120ms">follow along
+        <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+    </div>
+    <div class="feed reveal">
+      <div class="media"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt=""><span class="cap">riviera</span></div>
+      <div class="media"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt=""><span class="cap">the cup</span></div>
+      <div class="media"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80" alt=""><span class="cap">berries</span></div>
+      <div class="media"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt=""><span class="cap">muse</span></div>
+      <div class="media"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt=""><span class="cap">the table</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== the day club ===== -->
+<section class="section band-blush" style="position:relative;overflow:hidden">
+  <div class="wrap">
+    <div class="row between" style="align-items:flex-end;gap:2.5rem;flex-wrap:wrap">
+      <div class="reveal" style="max-width:36ch">
+        <span class="eyebrow" style="color:var(--espresso)"><span class="dots"></span> the day club</span>
+        <h2 class="h-1" style="margin-top:.5rem">a beach club,<br>that serves froyo</h2>
+        <p class="lede" style="margin-top:1.2rem;color:color-mix(in srgb,var(--espresso) 80%,var(--blush))">djs, brunch, golden hour. not a dessert run, a whole reservation. malibu meets mykonos x</p>
+        <a class="btn" style="margin-top:1.8rem" href="events.html">see what's on
+          <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
+      </div>
+      <div class="claims reveal" style="--d:140ms;max-width:30ch">
+        <span class="claim claim--solid">golden-hour sets</span>
+        <span class="claim" style="border-color:var(--espresso)">members' brunch</span>
+        <span class="claim" style="border-color:var(--espresso)">open all day</span>
+        <span class="claim" style="border-color:var(--espresso)">the list</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer class="footer">
+  <div class="nu-mark footer__mark">
+    <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__news">
+        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
+        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a>
+        <a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a>
+      </div>
+      <div class="footer__col">
+        <h4>nüdes</h4>
+        <a href="about.html">Our story</a><a href="about.html">Ingredients</a>
+        <a href="visit.html">Careers</a><a href="lookbook.html">Press</a>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>Still doing the most, with less.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nudes.js"></script>
+</body>
+</html>
