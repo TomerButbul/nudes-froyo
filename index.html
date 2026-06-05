@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nudes.css">
+<link rel="stylesheet" href="nudes.css?v=22">
 <style>
 /* ---------- home ---------- */
 .p-home .hero{position:relative;min-height:100svh;overflow:hidden}
@@ -91,7 +91,7 @@
 }
 </style>
 </head>
-<body class="p-home">
+<body class="p-home" data-intro>
 
 <!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
@@ -186,15 +186,15 @@
       <svg class="arr" width="20" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 5h19M15 1l5 4-5 4"/></svg></a>
   </div>
   <div class="flavors">
-    <article class="flavor reveal">
+    <article class="flavor reveal" data-tilt="7">
       <div class="froyo-wrap" style="--bg:#DDE0CE;--swirl:#9CA87E;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="flavor__row"><div><h3>Pistachio &amp; Sea Salt</h3><p>Sicilian pistachio, flaked salt</p></div><span class="kcal">140 kcal</span></div>
     </article>
-    <article class="flavor reveal" style="--d:120ms">
+    <article class="flavor reveal" style="--d:120ms" data-tilt="7">
       <div class="froyo-wrap" style="--bg:#E4D4CE;--swirl:#9C7E86;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="flavor__row"><div><h3>Wild Fig &amp; Honey</h3><p>Aegean fig, raw mountain honey</p></div><span class="kcal">150 kcal</span></div>
     </article>
-    <article class="flavor reveal" style="--d:240ms">
+    <article class="flavor reveal" style="--d:240ms" data-tilt="7">
       <div class="froyo-wrap" style="--bg:#E1D3C2;--swirl:#6E4A33;--topping:#3a2415"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="flavor__row"><div><h3>Single-Origin Cacao</h3><p>72% cacao, no refined sugar</p></div><span class="kcal">145 kcal</span></div>
     </article>
@@ -204,7 +204,7 @@
 <!-- ===== this week's drop (SKIMS-coded scarcity) ===== -->
 <section class="section drop ingredient-bg">
   <div class="wrap drop__in">
-    <div class="drop__art reveal">
+    <div class="drop__art reveal" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#EAD7D2;--swirl:#CE9A93;--topping:#8a4b46"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="sticker sticker--blob sticker--drop drop__badge"><span><b>limited</b>drop</span></div>
     </div>
@@ -362,6 +362,6 @@
   </div>
 </footer>
 
-<script src="nudes.js"></script>
+<script src="nudes.js?v=22"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nudes.css">
+<link rel="stylesheet" href="nudes.css?v=22">
 <style>
 /* ---------- menu ---------- */
 .p-menu .head{padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(3rem,8vh,6rem));
@@ -67,7 +67,7 @@
 .p-menu .step li::before{content:"";width:.4em;height:.4em;border-radius:50%;background:var(--taupe)}
 </style>
 </head>
-<body class="p-menu">
+<body class="p-menu" data-intro>
 
 <!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
@@ -133,49 +133,49 @@
 <!-- ===== flavors grid ===== -->
 <section class="section--tight wrap">
   <div class="grid-flavors">
-    <article class="fcard reveal">
+    <article class="fcard reveal" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#E7DAC0;--swirl:#E6D2A4;--topping:#A9885A"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">01</span><h3>Vanilla Oat</h3><p>Madagascar vanilla, oat-milk base</p></div></div>
       <div class="meta"><span>130 kcal</span><span>11g protein</span>
         <button class="add" aria-label="Add Vanilla Oat"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:80ms">
+    <article class="fcard reveal" style="--d:80ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#DDE0CE;--swirl:#9CA87E;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">02</span><h3>Pistachio &amp; Sea Salt</h3><p>Sicilian pistachio, flaked salt</p></div></div>
       <div class="meta"><span>140 kcal</span><span>12g protein</span>
         <button class="add" aria-label="Add Pistachio"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:160ms">
+    <article class="fcard reveal" style="--d:160ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#E4D4CE;--swirl:#9C7E86;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">03</span><h3>Wild Fig &amp; Honey</h3><p>Aegean fig, raw mountain honey</p></div></div>
       <div class="meta"><span>150 kcal</span><span>10g protein</span>
         <button class="add" aria-label="Add Wild Fig"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:240ms">
+    <article class="fcard reveal" style="--d:240ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#E1D3C2;--swirl:#6E4A33;--topping:#3a2415"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">04</span><h3>Single-Origin Cacao</h3><p>72% cacao, no refined sugar</p></div></div>
       <div class="meta"><span>145 kcal</span><span>12g protein</span>
         <button class="add" aria-label="Add Cacao"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal">
+    <article class="fcard reveal" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#EBD8D2;--swirl:#CE9A93;--topping:#8a4b46"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">05</span><h3>Strawberry &amp; Rose</h3><p>Sun-ripened strawberry, rosewater</p></div></div>
       <div class="meta"><span>135 kcal</span><span>10g protein</span>
         <button class="add" aria-label="Add Strawberry"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:80ms">
+    <article class="fcard reveal" style="--d:80ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#DBE0CA;--swirl:#9DAE80;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">06</span><h3>Ceremonial Matcha</h3><p>Uji matcha, oat-milk base</p></div></div>
       <div class="meta"><span>128 kcal</span><span>11g protein</span>
         <button class="add" aria-label="Add Matcha"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:160ms">
+    <article class="fcard reveal" style="--d:160ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#E6D6C1;--swirl:#BE9168;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">07</span><h3>Salted Date Caramel</h3><p>Medjool date, sea salt</p></div></div>
       <div class="meta"><span>158 kcal</span><span>9g protein</span>
         <button class="add" aria-label="Add Date Caramel"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
-    <article class="fcard reveal" style="--d:240ms">
+    <article class="fcard reveal" style="--d:240ms" data-tilt="6">
       <div class="froyo-wrap" style="--bg:#E9DFBE;--swirl:#D6BF79;--topping:#7a6a2e"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
       <div class="top"><div><span class="num">08</span><h3>Lemon &amp; Olive Oil</h3><p>Amalfi lemon, cold-pressed EVOO</p></div></div>
       <div class="meta"><span>142 kcal</span><span>9g protein</span>
@@ -250,6 +250,6 @@
   </div>
 </footer>
 
-<script src="nudes.js"></script>
+<script src="nudes.js?v=22"></script>
 </body>
 </html>

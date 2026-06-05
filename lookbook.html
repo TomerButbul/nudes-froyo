@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nudes.css">
+<link rel="stylesheet" href="nudes.css?v=22">
 <style>
 /* ---------- lookbook ---------- */
 .p-look .head{padding-top:calc(var(--topbar-h) + var(--nav-h) + clamp(3rem,8vh,6rem));
@@ -59,7 +59,7 @@
 /* lightbox + cursor live in nudes.css (shared) */
 </style>
 </head>
-<body class="p-look" data-cursor>
+<body class="p-look" data-intro>
 
 <!-- froyo illustration — defined once, recolored per flavor via CSS vars -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="froyo" viewBox="0 0 240 320">
@@ -158,22 +158,22 @@
     <p class="reveal muted" style="--d:120ms;max-width:28ch">the girls that get it. new faces monthly.</p>
   </div>
   <div class="creators">
-    <article class="creator reveal">
+    <article class="creator reveal" data-tilt="7">
       <div class="media" data-lightbox="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Léa Moreau"></div>
       <h3>Léa Moreau</h3><div class="handle">@leamoreau · 412k</div>
       <p>“the only froyo in my camera roll.”</p>
     </article>
-    <article class="creator reveal" style="--d:100ms">
+    <article class="creator reveal" style="--d:100ms" data-tilt="7">
       <div class="media" data-lightbox="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Sofia Marin"></div>
       <h3>Sofia Marín</h3><div class="handle">@sofiaeats · 268k</div>
       <p>“wellness that actually tastes like dessert.”</p>
     </article>
-    <article class="creator reveal" style="--d:200ms">
+    <article class="creator reveal" style="--d:200ms" data-tilt="7">
       <div class="media" data-lightbox="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80" alt="Noor Al-Rashid"></div>
       <h3>Noor Al-Rashid</h3><div class="handle">@noor · 1.1m</div>
       <p>“the matte cup is my whole aesthetic.”</p>
     </article>
-    <article class="creator reveal" style="--d:300ms">
+    <article class="creator reveal" style="--d:300ms" data-tilt="7">
       <div class="media" data-lightbox="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1100&q=85"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=700&q=80" alt="Júlia Costa"></div>
       <h3>Júlia Costa</h3><div class="handle">@juliacosta · 530k</div>
       <p>“mediterranean summer in a single scoop.”</p>
@@ -217,6 +217,6 @@
   </div>
 </footer>
 
-<script src="nudes.js"></script>
+<script src="nudes.js?v=22"></script>
 </body>
 </html>
