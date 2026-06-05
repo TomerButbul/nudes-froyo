@@ -59,7 +59,7 @@
   --body:'Switzer','Fredoka',system-ui,sans-serif;
   --serif:'Fraunces','Georgia',serif;            /* editorial accent (à la Mimi's) */
 
-  --topbar-h:40px;
+  --topbar-h:0px;   /* top announcement bar removed (felt techy) */
   --nav-h:70px;
   --wrap:1300px;
   --gut:clamp(1.25rem,5vw,4.5rem);
@@ -206,7 +206,7 @@ ul{list-style:none}
 
 /* ---- Topbar (announcement) -------------------------------- */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--topbar-h);
-  background:var(--espresso-800);color:var(--oat);display:flex;align-items:center;overflow:hidden;
+  background:var(--espresso-800);color:var(--oat);display:none;align-items:center;overflow:hidden;
   font-family:var(--display);font-weight:500;font-size:.78rem;letter-spacing:.02em;text-transform:lowercase}
 .ticker{display:flex;white-space:nowrap;will-change:transform;animation:ticker 34s linear infinite}
 .ticker span{padding-inline:1.4rem;display:inline-flex;align-items:center;gap:1.4rem}
@@ -384,7 +384,7 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on [data-light
   .footer__bar{flex-direction:column;gap:.5rem;text-align:left}
   .topbar{height:34px;font-size:.72rem}
   .nav{height:60px}
-  :root{--nav-h:60px;--topbar-h:34px}
+  :root{--nav-h:60px;--topbar-h:0px}
 }
 
 /* ---- Sticky mobile action bar (thumb zone) ----------------- */
