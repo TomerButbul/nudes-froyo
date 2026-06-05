@@ -104,4 +104,21 @@
       el.addEventListener('mouseleave', function () { dot.classList.remove('cursor-dot--lg'); });
     });
   }
+
+  /* ---- Sticky mobile action bar (mobile only) -------------- */
+  if (matchMedia('(max-width:600px)').matches) {
+    var mbar = document.createElement('div');
+    mbar.className = 'mbar';
+    var mb1 = document.createElement('a'); mb1.href = 'menu.html'; mb1.className = 'btn'; mb1.textContent = 'order';
+    var mb2 = document.createElement('a'); mb2.href = 'visit.html'; mb2.className = 'btn btn--ghost'; mb2.textContent = 'find us';
+    mbar.appendChild(mb1); mbar.appendChild(mb2);
+    document.body.appendChild(mbar);
+    var mde = document.documentElement;
+    var toggleBar = function () {
+      var nearBottom = window.scrollY + window.innerHeight > mde.scrollHeight - 150;
+      mbar.classList.toggle('mbar--show', window.scrollY > 480 && !nearBottom);
+    };
+    toggleBar();
+    window.addEventListener('scroll', toggleBar, { passive: true });
+  }
 })();
