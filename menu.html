@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Ccircle cx='12' cy='14' r='3' fill='%23DCCCBB'/%3E%3Ccircle cx='20' cy='14' r='3' fill='%23DCCCBB'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Cpath d='M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14' fill='none' stroke='%23DCCCBB' stroke-width='21' stroke-linecap='round' stroke-linejoin='round' transform='translate(0 5.25) scale(0.25)'/%3E%3C/svg%3E">
 <title>nudes — The Flavors</title>
 <meta name="description" content="A small, perfect menu. Mediterranean frozen yogurt in eight signature flavors — clean ingredients, full nutrition transparency, an elevated toppings bar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +36,9 @@
   .p-menu .add{width:30px;height:30px}
 }
 .p-menu .fcard .media{aspect-ratio:4/5;border-radius:18px}
+.p-menu .fcard-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.94) contrast(1.02) brightness(1.01) sepia(.1);transition:transform .5s var(--ease)}
+.p-menu .fcard:hover .fcard-photo{transform:scale(1.04)}
 .p-menu .fcard .top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:1rem;gap:.8rem}
 .p-menu .fcard .num{color:var(--taupe)}
 .p-menu .fcard h3{font-size:1.3rem;text-transform:none;letter-spacing:0;line-height:1.1}
@@ -121,7 +124,7 @@
 <!-- ===== head ===== -->
 <header class="head wrap">
   <div class="headblob blob"></div>
-  <span class="eyebrow reveal"><span class="dots"></span> the lineup · 8 flavors</span>
+  <span class="eyebrow reveal">the lineup · 8 flavors</span>
   <h1 class="reveal" style="--d:80ms">flavors</h1>
   <p class="lede reveal" style="--d:160ms">8 flavors. no misses. oat milk, real stuff, zero notes. pick one (or three, no judgment).</p>
   <div class="filters reveal" style="--d:240ms">
@@ -140,7 +143,7 @@
         <button class="add" aria-label="Add Vanilla Oat"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
     <article class="fcard reveal" style="--d:80ms" data-tilt="6">
-      <div class="froyo-wrap" style="--bg:#DDE0CE;--swirl:#9CA87E;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="froyo-wrap"><img class="fcard-photo" src="images/flavor-pistachio.jpg" alt="Pistachio &amp; sea salt frozen yogurt"></div>
       <div class="top"><div><span class="num">02</span><h3>Pistachio &amp; Sea Salt</h3><p>Sicilian pistachio, flaked salt</p></div></div>
       <div class="meta"><span>140 kcal</span><span>12g protein</span>
         <button class="add" aria-label="Add Pistachio"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
@@ -152,19 +155,19 @@
         <button class="add" aria-label="Add Wild Fig"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
     <article class="fcard reveal" style="--d:240ms" data-tilt="6">
-      <div class="froyo-wrap" style="--bg:#E1D3C2;--swirl:#6E4A33;--topping:#3a2415"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="froyo-wrap"><img class="fcard-photo" src="images/flavor-cookies-cream.jpg" alt="Single-origin cacao frozen yogurt"></div>
       <div class="top"><div><span class="num">04</span><h3>Single-Origin Cacao</h3><p>72% cacao, no refined sugar</p></div></div>
       <div class="meta"><span>145 kcal</span><span>12g protein</span>
         <button class="add" aria-label="Add Cacao"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
     <article class="fcard reveal" data-tilt="6">
-      <div class="froyo-wrap" style="--bg:#EBD8D2;--swirl:#CE9A93;--topping:#8a4b46"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="froyo-wrap"><img class="fcard-photo" src="images/flavor-strawberry.jpg" alt="Strawberry &amp; rose frozen yogurt"></div>
       <div class="top"><div><span class="num">05</span><h3>Strawberry &amp; Rose</h3><p>Sun-ripened strawberry, rosewater</p></div></div>
       <div class="meta"><span>135 kcal</span><span>10g protein</span>
         <button class="add" aria-label="Add Strawberry"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
     <article class="fcard reveal" style="--d:80ms" data-tilt="6">
-      <div class="froyo-wrap" style="--bg:#DBE0CA;--swirl:#9DAE80;--topping:#5b3a26"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="froyo-wrap"><img class="fcard-photo" src="images/flavor-matcha.jpg" alt="Ceremonial matcha frozen yogurt"></div>
       <div class="top"><div><span class="num">06</span><h3>Ceremonial Matcha</h3><p>Uji matcha, oat-milk base</p></div></div>
       <div class="meta"><span>128 kcal</span><span>11g protein</span>
         <button class="add" aria-label="Add Matcha"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
@@ -176,7 +179,7 @@
         <button class="add" aria-label="Add Date Caramel"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
     </article>
     <article class="fcard reveal" style="--d:240ms" data-tilt="6">
-      <div class="froyo-wrap" style="--bg:#E9DFBE;--swirl:#D6BF79;--topping:#7a6a2e"><svg class="froyo" viewBox="0 0 240 320"><use href="#froyo"/></svg></div>
+      <div class="froyo-wrap"><img class="fcard-photo" src="images/flavor-mango.jpg" alt="Lemon &amp; olive oil frozen yogurt"></div>
       <div class="top"><div><span class="num">08</span><h3>Lemon &amp; Olive Oil</h3><p>Amalfi lemon, cold-pressed EVOO</p></div></div>
       <div class="meta"><span>142 kcal</span><span>9g protein</span>
         <button class="add" aria-label="Add Lemon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v12M1 7h12"/></svg></button></div>
@@ -188,7 +191,7 @@
 <section class="section band-espresso grain" style="position:relative;overflow:hidden">
   <div class="wrap">
     <div class="row between" style="align-items:flex-end;margin-bottom:2.6rem">
-      <div class="reveal"><span class="eyebrow eyebrow--light"><span class="dots"></span> Finish it</span>
+      <div class="reveal"><span class="eyebrow eyebrow--light">Finish it</span>
         <h2 class="h-1" style="margin-top:.5rem">the toppings bar</h2></div>
       <p class="reveal muted" style="--d:120ms;max-width:30ch">pile it on. first two are free, obviously.</p>
     </div>
@@ -208,7 +211,7 @@
 <!-- ===== build your cup ===== -->
 <section class="section wrap" id="build">
   <div style="max-width:54ch;margin-bottom:clamp(2.5rem,5vw,4rem)" class="reveal">
-    <span class="eyebrow"><span class="dots"></span> Make it yours</span>
+    <span class="eyebrow">Make it yours</span>
     <h2 class="h-1" style="margin-top:.5rem">build<br>your cup</h2>
     <p class="lede" style="margin-top:1.2rem">3 decisions. we got the rest.</p>
   </div>
@@ -233,17 +236,17 @@
   <div class="wrap">
     <div class="footer__top">
       <div class="footer__news">
-        <span class="eyebrow eyebrow--light"><span class="dots"></span> The inner circle</span>
+        <span class="eyebrow eyebrow--light">The inner circle</span>
         <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
         <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>Join</button></div>
       </div>
       <div class="footer__col"><h4>Explore</h4>
         <a href="menu.html">Flavors</a><a href="menu.html">Toppings bar</a><a href="visit.html">Boutiques</a><a href="lookbook.html">Lookbook</a></div>
-      <div class="footer__col"><h4>nüdes</h4>
+      <div class="footer__col"><h4>nudes</h4>
         <a href="about.html">Our story</a><a href="about.html">Ingredients</a><a href="visit.html">Careers</a><a href="lookbook.html">Press</a></div>
     </div>
     <div class="footer__bar">
-      <span>© <span data-year></span> nüdes — los angeles</span>
+      <span>© <span data-year></span> nudes — los angeles</span>
       <span>Still doing the most, with less.</span>
       <span>Instagram · TikTok · Pinterest</span>
     </div>

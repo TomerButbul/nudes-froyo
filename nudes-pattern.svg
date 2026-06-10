@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
-  <!-- nüdes ingredient pattern — hand-drawn texture. Edit colour/opacity freely. -->
+  <!-- nudes ingredient pattern — hand-drawn texture. Edit colour/opacity freely. -->
   <g fill="none" stroke="#B5937F" stroke-opacity="0.45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
     <!-- lemon (top-left) -->
     <ellipse cx="48" cy="46" rx="16" ry="11" transform="rotate(-18 48 46)"/>
@@ -16,13 +16,11 @@
     <ellipse cx="62" cy="162" rx="5" ry="7"/>
     <path d="M33 159 c-7 -5 -13 -4 -16 0"/>
     <path d="M74 156 c7 -5 13 -4 16 -1"/>
-    <!-- nü mark (bottom-right) -->
+    <!-- nu mark (bottom-right) -->
     <path d="M150 177 v-13 a9 9 0 0 1 18 0 a9 9 0 0 0 18 0 v-13" stroke-width="5"/>
   </g>
   <g fill="#B5937F" fill-opacity="0.45">
-    <!-- the two dots + scattered seeds -->
-    <circle cx="103" cy="113" r="3"/>
-    <circle cx="115" cy="113" r="3"/>
+    <!-- scattered seeds -->
     <circle cx="124" cy="192" r="2.4"/>
     <circle cx="28" cy="104" r="2.4"/>
     <circle cx="190" cy="92" r="2.4"/>

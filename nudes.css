@@ -1,5 +1,5 @@
 /* ============================================================
-   nüdes — brand design system  ·  v2 "trendy"
+   nudes — brand design system  ·  v2 "trendy"
    Bold, rounded, warm. Frozen yogurt as a fashion brand.
    Voice: chunky lowercase (like the logo), organic shapes,
    sticker energy, nude color-blocking. Tokens from the guide.
@@ -112,9 +112,6 @@ ul{list-style:none}
   color:var(--taupe);
 }
 .eyebrow--light{color:var(--blush)}
-.dots{display:inline-flex;gap:.28em;align-items:center}
-.dots::before,.dots::after{content:"";width:.4em;height:.4em;border-radius:50%;
-  background:currentColor;display:block}
 
 /* Wordmark */
 .wordmark{font-family:var(--display);font-weight:600;text-transform:lowercase;
@@ -462,7 +459,7 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on [data-light
   background:rgba(220,204,187,.18);opacity:0;transition:opacity .5s ease}
 .intro__core{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;gap:1.4rem;
   will-change:transform,opacity;transition:opacity .55s ease,transform .8s var(--introT)}
-/* the nü mark draws on via stroke-dashoffset */
+/* the nu mark draws on via stroke-dashoffset */
 .intro__mark{width:clamp(86px,15vw,140px);color:var(--oat)}
 .intro__mark svg{display:block;width:100%;height:auto;overflow:visible}
 .intro__mark path{stroke-dasharray:var(--len,360);stroke-dashoffset:var(--len,360);

@@ -1,8 +1,8 @@
-# nüdes — website designs
+# nudes — website designs
 
-Five luxury, editorial, Instagram-native pages for **nüdes** — Mediterranean frozen
+Five luxury, editorial, Instagram-native pages for **nudes** — Mediterranean frozen
 yogurt. Built straight from your brand guidelines: warm espresso + oat palette,
-geometric display type, the `nü` motif, and the two-dot "umlaut" as a recurring accent.
+geometric display type and the `nu` monogram mark.
 
 > *Wellness, indulged. Still doing the most, with less.*
 
@@ -16,7 +16,7 @@ geometric display type, the `nü` motif, and the two-dot "umlaut" as a recurring
 | `menu.html` | **Flavors** | Numbered flavor index, nutrition transparency, the toppings bar, "build your cup" |
 | `about.html` | **Story** | Manifesto, alternating editorial blocks, the two-dots philosophy, brand values |
 | `visit.html` | **Visit** | Full-bleed boutique hero, locations, "the space" gallery, hours |
-| `lookbook.html` | **Lookbook** | Masonry feed + lightbox, press, creator collabs, `#nüdesmoment` |
+| `lookbook.html` | **Lookbook** | Masonry feed + lightbox, press, creator collabs, `#nudesmoment` |
 | `events.html` | **Events** | "The day club" — sun-soaked LA/Malibu/Greek vibe, event calendar, the guest list, VIP bookings |
 | `nudes.css` | — | Shared design system: **every brand decision lives here as a token** |
 | `nudes.js` | — | Shared interactions: scroll reveals, mobile menu, lightbox, cursor |
@@ -70,8 +70,7 @@ Open `nudes.css` and you'll find your guidelines translated to tokens at the top
 - **Flavors are illustrated, not stock:** every froyo cup is ONE hand-built SVG, recolored
   per flavor with CSS variables (`--swirl`, `--topping`, `--bg`) — see the 8 menu cards.
   Edit a colour to retint, or drop in real product photos when your shoot is ready.
-- **Motifs:** the `nü` monogram is hand-drawn as an SVG (footer + philosophy bands); the
-  two dots (`··`) recur as eyebrows, dividers, sticker badges, and the favicon.
+- **Motifs:** the `nu` monogram is hand-drawn as an SVG and now anchors the favicon.
 - **Photography:** the remaining lifestyle/editorial photos get a warm "wash"
   (`sepia + espresso veil`) so any imagery unifies to the palette — the trick that
   makes a shoot feel *yours*.
@@ -118,7 +117,7 @@ for fast exploration and one-off pages.
 4. Swap in real photography last — it's the single biggest upgrade.
 
 **Prompts to try next:**
-- "Design a cup/packaging mockup page using the nü mark."
+- "Design a cup/packaging mockup page using the nu mark."
 - "Create an email signup popup and an Instagram story template set."
 - "Build a one-page version for a pop-up launch on the Riviera."
 

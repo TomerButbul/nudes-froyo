@@ -1,4 +1,4 @@
-/* nüdes — shared interactions
+/* nudes — shared interactions
    Lightweight, dependency-free. Each page opts in via markup.
    v2.1 — adds cinematic intro, scroll-driven hero, magnetic + tilt,
    refined cursor, elevated reveals, mobile flavor strip + progress.   */
@@ -31,7 +31,7 @@
     if (seen) return;
     try { sessionStorage.setItem('nudes-intro', '1'); } catch (e) {}
 
-    var word = 'nüdes';
+    var word = 'nudes';
     var letters = word.split('').map(function (c) { return '<span>' + c + '</span>'; }).join('');
     var el = document.createElement('div');
     el.className = 'intro';
