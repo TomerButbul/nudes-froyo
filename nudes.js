@@ -44,7 +44,7 @@
         '<span class="intro__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" ' +
           'stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></span>' +
         '<span class="intro__word">' + letters + '</span>' +
-        '<span class="intro__tag">a little treat</span>' +
+        '<span class="intro__tag">nothing to hide</span>' +
       '</div>' +
       '<button class="intro__skip" type="button">skip</button>';
     document.body.appendChild(el);
