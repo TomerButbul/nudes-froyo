@@ -1,9 +1,0 @@
-# Static site — no build step. Netlify serves these files from the repo root.
-[build]
-  publish = "."
-
-# Nice-to-have: clean URLs + a default cache for static assets
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
