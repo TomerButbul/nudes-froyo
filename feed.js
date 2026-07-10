@@ -73,6 +73,41 @@
     return a;
   }
 
+  function chevron(dir) {
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '2.2'); svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round'); svg.setAttribute('aria-hidden', 'true');
+    var p = document.createElementNS(SVGNS, 'path'); p.setAttribute('d', dir === 'prev' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6');
+    svg.appendChild(p); return svg;
+  }
+
+  function setupNav(track) {
+    // vertical wheel -> horizontal scroll while hovering the strip
+    track.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { track.scrollLeft += e.deltaY; e.preventDefault(); }
+    }, { passive: false });
+
+    var feed = track.closest('.feed');
+    if (!feed) return;
+    var nav = document.createElement('div'); nav.className = 'feed__nav';
+    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'feed__arrow feed__arrow--prev'; prev.setAttribute('aria-label', 'previous posts'); prev.appendChild(chevron('prev'));
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'feed__arrow feed__arrow--next'; next.setAttribute('aria-label', 'more posts'); next.appendChild(chevron('next'));
+    nav.appendChild(prev); nav.appendChild(next); feed.appendChild(nav);
+
+    function step(dir) { track.scrollBy({ left: dir * Math.round(track.clientWidth * 0.85), behavior: 'smooth' }); }
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      prev.classList.toggle('is-hidden', track.scrollLeft <= 2);
+      next.classList.toggle('is-hidden', track.scrollLeft >= max);
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
   function ctaTile() {
     var a = document.createElement('a');
     a.className = 'tile tile--cta'; a.href = 'https://instagram.com/nudesyogurt';
@@ -93,6 +128,7 @@
       track.textContent = '';        // clear fallback tiles
       track.appendChild(frag);
       track.setAttribute('data-feed-ready', '1');
+      setupNav(track);
     })
     .catch(function () { /* leave the static fallback tiles in place */ });
 })();
