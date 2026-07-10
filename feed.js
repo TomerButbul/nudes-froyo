@@ -100,20 +100,33 @@
 
     function update() {
       var max = track.scrollWidth - track.clientWidth - 2;
-      prev.classList.toggle('is-hidden', track.scrollLeft <= 2);
-      next.classList.toggle('is-hidden', track.scrollLeft >= max);
+      var atStart = track.scrollLeft <= 2, atEnd = track.scrollLeft >= max;
+      prev.classList.toggle('is-hidden', atStart);
+      next.classList.toggle('is-hidden', atEnd);
+      // directional edge fade: fade only the side(s) with hidden content
+      track.dataset.edge = atStart ? 'start' : (atEnd ? 'end' : 'mid');
     }
     track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
   }
 
+  function monogram() {
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'mono'); svg.setAttribute('viewBox', '289.23 392.4 370.35 221.32');
+    svg.setAttribute('fill', 'currentColor'); svg.setAttribute('aria-hidden', 'true');
+    var p = document.createElementNS(SVGNS, 'path');
+    p.setAttribute('d', 'M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z');
+    svg.appendChild(p); return svg;
+  }
   function ctaTile() {
     var a = document.createElement('a');
     a.className = 'tile tile--cta'; a.href = 'https://instagram.com/nudesyogurt';
-    a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('role', 'listitem');
-    var b = document.createElement('b'); b.textContent = 'see the feed →';
-    a.appendChild(b);
+    a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('role', 'listitem'); a.setAttribute('aria-label', 'see the full feed on Instagram');
+    a.appendChild(monogram());
+    var b = document.createElement('b'); b.textContent = 'see the feed';
+    var sub = document.createElement('span'); sub.className = 'tile__cta-sub'; sub.textContent = '@nudesyogurt →';
+    a.appendChild(b); a.appendChild(sub);
     return a;
   }
 
