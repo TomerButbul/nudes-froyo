@@ -51,11 +51,34 @@ var TABS = {
   }
 };
 
+var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish'];
+
+// Adds a blog post to the "Posts" tab. Protected by a secret (Project Settings →
+// Script Properties → POST_SECRET) so only trusted callers can publish to the site.
+// Creates the Posts tab + headers automatically if it doesn't exist yet.
+function addPost(data) {
+  var secret = PropertiesService.getScriptProperties().getProperty('POST_SECRET');
+  if (!secret || String(data.secret) !== secret) return json({ ok: false, error: 'unauthorized' });
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Posts');
+  if (!sheet) { sheet = ss.insertSheet('Posts'); sheet.appendRow(POST_COLUMNS); sheet.setFrozenRows(1); }
+  else if (sheet.getLastRow() === 0) { sheet.appendRow(POST_COLUMNS); sheet.setFrozenRows(1); }
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(function (h) { return String(h).trim().toLowerCase(); });
+  if (headers.length < 2) headers = POST_COLUMNS;
+  var row = headers.map(function (h) {
+    if (h === 'publish' && data.publish) { var d = new Date(data.publish); return isNaN(d.getTime()) ? data.publish : d; }
+    return data[h] != null ? data[h] : '';
+  });
+  sheet.appendRow(row);
+  return json({ ok: true, slug: data.slug || '' });
+}
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000); // avoid two submissions writing the same row
   try {
     var data = JSON.parse(e.postData.contents);
+    if (data.action === 'addPost') return addPost(data); // blog post (secret-protected)
     var cfg = TABS[data.formType] || TABS.partnership; // unknown types go to Partnerships
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName(cfg.name);

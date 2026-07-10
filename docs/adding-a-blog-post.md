@@ -1,10 +1,19 @@
 # Adding a post to The Nude
 
-Two ways. Pick whichever you like.
+Three ways. Pick whichever you like.
 
 ---
 
-## Method 1 — No code (Google Sheet)  ◀ easiest
+## Method 0 — Just ask Claude  ◀ zero effort
+
+Tell Claude the topic ("write a post about our toppings") and it writes the post
+and pushes it straight into the `Posts` tab via the webhook (using the secret in
+Script Property `POST_SECRET`). Nothing to copy-paste. Works because the Apps
+Script `addPost` action appends a row for authorized callers.
+
+---
+
+## Method 1 — No code (Google Sheet)
 
 Posts live in the **same Google Sheet** as your form submissions, on a tab named
 **`Posts`**. Add a row, and it shows up on The Nude automatically.
