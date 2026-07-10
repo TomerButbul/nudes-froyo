@@ -119,3 +119,86 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .form-status--ok{color:var(--espresso);animation:pop .55s cubic-bezier(.2,.8,.2,1) both}
 .form-status--err{color:#a85b3d}
 @media (prefers-reduced-motion:reduce){.form-status--ok{animation:none}}
+
+/* =====================================================================
+   The Nude — editorial blog
+   ===================================================================== */
+
+/* ---- branded cover art (no photo needed): gradient + nu monogram + grain.
+        drop a real photo in later with .cover__img and it takes over. ---- */
+.cover{position:relative;overflow:hidden;isolation:isolate;background:var(--espresso)}
+.cover::before{content:"";position:absolute;width:78%;padding-bottom:78%;left:-12%;bottom:-20%;z-index:0;opacity:.15;
+  transform:rotate(-8deg);pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='289.23 392.4 370.35 221.32'%3E%3Cpath fill='%23DCCCBB' d='M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z'/%3E%3C/svg%3E") no-repeat center/contain}
+.cover::after{content:"";position:absolute;inset:0;z-index:1;opacity:.05;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cover__img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+/* category themes */
+.cover--clean{background:radial-gradient(130% 130% at 18% 8%, #6f4d31, #442917 62%, #2b180c)}
+.cover--culture{background:radial-gradient(130% 130% at 82% 10%, #b58f77, #8a6a54 45%, #422d1e)}
+.cover--build{background:radial-gradient(130% 130% at 30% 15%, #cbb097, #a3805f 48%, #5c3f2b)}
+.cover--wellness{background:radial-gradient(130% 130% at 75% 12%, #d8c3b0, #b5937f 46%, #6a4636)}
+.cover--menu{background:radial-gradient(130% 130% at 22% 12%, #c99f7f, #9c6f4e 48%, #4e3320)}
+
+/* chip / tag */
+.chip{display:inline-flex;align-items:center;font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.06em;
+  text-transform:lowercase;color:var(--espresso);background:color-mix(in srgb,var(--oat) 78%,white);
+  border-radius:100px;padding:.42em .95em;line-height:1}
+.crumbs{font-family:var(--display);font-weight:500;font-size:.8rem;letter-spacing:.04em;text-transform:lowercase;color:var(--taupe)}
+.crumbs a{text-decoration:none;color:inherit}
+.crumbs a:hover{color:var(--espresso)}
+
+/* ---- blog index: hero ---- */
+.journal-hero{padding-block:clamp(2.6rem,7vw,4.6rem) clamp(1.4rem,3vw,2.2rem);max-width:760px}
+.journal-hero .h1{margin-top:.4rem}
+.journal-hero .lede{margin-top:1rem}
+
+/* ---- post grid + cards ---- */
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(1.2rem,2.5vw,1.9rem);padding-bottom:clamp(2.4rem,5vw,3.4rem)}
+.pcard{display:flex;flex-direction:column;background:var(--cream);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  text-decoration:none;color:inherit;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .4s}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 34px 60px -34px rgba(51,30,19,.55);border-color:var(--taupe)}
+.pcard__cover{aspect-ratio:16/10;position:relative}
+.pcard__cover .chip{position:absolute;left:1rem;bottom:1rem;z-index:2}
+.pcard__body{display:flex;flex-direction:column;gap:.5rem;padding:clamp(1.3rem,2.4vw,1.7rem);flex:1}
+.pcard__meta{font-family:var(--display);font-weight:500;font-size:.76rem;text-transform:lowercase;letter-spacing:.05em;color:var(--taupe)}
+.pcard__title{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:clamp(1.35rem,2.4vw,1.75rem);
+  line-height:1.06;letter-spacing:-.01em;text-transform:lowercase;margin:0}
+.pcard__excerpt{color:color-mix(in srgb,var(--ink) 66%,var(--paper));font-size:.98rem;line-height:1.55;flex:1}
+.pcard__more{margin-top:.4rem;font-family:var(--display);font-weight:600;font-size:.86rem;text-transform:lowercase;
+  color:var(--espresso);display:inline-flex;gap:.35em;transition:gap .3s}
+.pcard:hover .pcard__more{gap:.7em}
+
+/* featured (first) post — big horizontal split on desktop */
+.pcard--feature{grid-column:1/-1;flex-direction:row}
+.pcard--feature .pcard__cover{aspect-ratio:auto;flex:0 0 48%;min-height:340px}
+.pcard--feature .pcard__body{justify-content:center;padding:clamp(1.8rem,3.4vw,2.8rem);gap:.7rem}
+.pcard--feature .pcard__title{font-size:clamp(1.9rem,3.4vw,2.7rem)}
+.pcard--feature .pcard__excerpt{font-size:clamp(1rem,1.6vw,1.12rem);max-width:52ch}
+@media (max-width:760px){
+  .pcard--feature{flex-direction:column}
+  .pcard--feature .pcard__cover{flex:auto;aspect-ratio:16/10;min-height:0}
+}
+
+/* ---- article hero: dark cover banner with the title on it ---- */
+.article-hero{position:relative;min-height:clamp(300px,42vw,440px);display:flex;align-items:flex-end;color:var(--oat)}
+.article-hero__inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin-inline:auto;padding:var(--gut);
+  padding-block:clamp(1.8rem,4vw,3rem)}
+.article-hero .crumbs{color:color-mix(in srgb,var(--oat) 70%,transparent);margin-bottom:1rem}
+.article-hero .crumbs a{color:color-mix(in srgb,var(--oat) 70%,transparent)}
+.article-hero .crumbs a:hover{color:var(--oat)}
+.article-hero__title{font-family:var(--display);font-weight:600;color:var(--cream);text-transform:lowercase;letter-spacing:-.025em;
+  line-height:.95;font-size:clamp(2.4rem,6vw,4.4rem);margin:.7rem 0 0;max-width:16ch}
+.article-hero__meta{margin-top:1rem;font-family:var(--display);font-weight:500;font-size:.85rem;text-transform:lowercase;
+  letter-spacing:.05em;color:color-mix(in srgb,var(--oat) 78%,transparent)}
+
+/* ---- article body: readable column + drop cap ---- */
+.article-body{padding-block:clamp(2rem,5vw,3.4rem) clamp(2rem,5vw,3rem)}
+.article-body .post{max-width:680px}
+.article-body .post > p:first-of-type::first-letter{float:left;font-family:var(--display);font-weight:600;color:var(--espresso);
+  font-size:3.4em;line-height:.72;padding:.06em .12em 0 0}
+.article-share{max-width:680px;margin:clamp(2rem,4vw,2.8rem) auto 0;padding-top:1.4rem;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;font-family:var(--display);font-weight:500;font-size:.85rem;
+  text-transform:lowercase;color:var(--taupe)}
+.article-share a{text-decoration:none;color:var(--espresso);border-bottom:1px solid transparent;transition:border-color .25s}
+.article-share a:hover{border-color:var(--espresso)}

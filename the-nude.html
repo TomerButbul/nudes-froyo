@@ -35,17 +35,6 @@
 }
 </script>
 <style>
-  .journal-hero{padding-block:clamp(2.5rem,7vw,5rem) clamp(1.5rem,4vw,2.5rem)}
-  .posts{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.4rem);padding-bottom:clamp(2rem,5vw,3rem)}
-  .pcard{display:block;background:var(--cream);border:1px solid var(--line);border-radius:18px;
-    padding:clamp(1.5rem,3vw,2.1rem);text-decoration:none;color:inherit;transition:transform .35s var(--ease,ease),box-shadow .35s}
-  .pcard:hover{transform:translateY(-4px);box-shadow:0 24px 48px -32px rgba(51,30,19,.5)}
-  .pcard__meta{font-family:var(--display);font-weight:500;font-size:.76rem;text-transform:lowercase;letter-spacing:.06em;color:var(--taupe)}
-  .pcard__title{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:clamp(1.4rem,3vw,1.9rem);
-    line-height:1.05;letter-spacing:-.01em;text-transform:lowercase;margin:.5rem 0 .6rem}
-  .pcard__excerpt{color:color-mix(in srgb,var(--ink) 66%,var(--paper));max-width:60ch}
-  .pcard__more{display:inline-block;margin-top:.9rem;font-family:var(--display);font-weight:600;font-size:.85rem;
-    text-transform:lowercase;color:var(--espresso)}
   .soon{text-align:center;color:var(--taupe);font-family:var(--display);font-size:.9rem;text-transform:lowercase;
     letter-spacing:.05em;padding:1.5rem 0 3rem}
 </style>
@@ -70,13 +59,18 @@
   </section>
 
   <section class="wrap">
-    <div class="posts">
-      <a class="pcard" href="/the-nude-what-is-mediterranean-frozen-yogurt.html">
-        <span class="pcard__meta">clean ingredients · jul 2026</span>
-        <h2 class="pcard__title">what is mediterranean frozen yogurt?</h2>
-        <p class="pcard__excerpt">Thicker, tangier, higher in protein and rooted in the Levant. here's what sets Mediterranean-style frozen yogurt apart from the everyday swirl, and why we built nudes around it.</p>
-        <span class="pcard__more">read →</span>
-      </a>
+    <!-- ▸ Cards render from the POSTS manifest in blog.js. To add a post, see docs/adding-a-blog-post.md. -->
+    <div class="posts" data-posts>
+      <noscript>
+        <a class="pcard" href="/the-nude-what-is-mediterranean-frozen-yogurt.html">
+          <div class="pcard__body">
+            <span class="pcard__meta">clean ingredients · jul 2026</span>
+            <h2 class="pcard__title">what is mediterranean frozen yogurt?</h2>
+            <p class="pcard__excerpt">Thicker, tangier, higher in protein and rooted in the Levant. here's what sets Mediterranean-style frozen yogurt apart, and why we built nudes around it.</p>
+            <span class="pcard__more">read →</span>
+          </div>
+        </a>
+      </noscript>
     </div>
     <p class="soon">more soon. follow <a href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener" style="color:var(--espresso)">@nudesyogurt</a> for the latest.</p>
   </section>
@@ -89,5 +83,6 @@
   </div>
 </footer>
 
+<script src="blog.js"></script>
 </body>
 </html>
