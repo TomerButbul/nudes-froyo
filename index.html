@@ -134,6 +134,7 @@
   .tile--cta{background:var(--cream);border:1.5px solid var(--taupe);color:var(--espresso)}
   .tile--cta b{font-size:1.05rem}
   .feed__live{display:block;width:100%;max-width:640px;margin:0 auto}
+  .feed__live[hidden]{display:none}
 
   a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--espresso);outline-offset:3px}
   @media (max-width:480px){ .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
@@ -141,18 +142,18 @@
   /* ---- desktop: two columns, single screen, tall feed ---- */
   @media (min-width:960px){
     body{overflow:hidden}
-    .split{flex-direction:row;height:100svh}
-    .split__brand{flex:1 1 50%;align-items:flex-start;text-align:left;justify-content:center;
-      padding:clamp(2.5rem,5vw,4.5rem);max-height:100svh;overflow-y:auto}
+    .split{flex-direction:row;height:100svh;max-width:1240px;margin-inline:auto}
+    .split__brand{flex:1 1 46%;min-width:0;align-items:flex-start;text-align:left;justify-content:center;
+      padding:clamp(2.5rem,4vw,3.5rem);max-height:100svh;overflow-y:auto}
     .split__brand .sub{margin-left:0;margin-right:0}
     .split__brand form.waitlist{margin-left:0;margin-right:0}
     .links{justify-content:flex-start}
     h1{font-size:clamp(3.4rem,6.4vw,5.8rem)}
-    .split__feed{flex:1 1 50%;height:100svh;padding:clamp(1.8rem,3vw,2.8rem)}
+    .split__feed{flex:1 1 54%;min-width:0;height:100svh;padding:clamp(1.8rem,2.5vw,2.4rem)}
     .feed__head{max-width:none;margin:0 0 1rem}
-    .feed__track{flex:1;min-height:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
+    .feed__track{flex:1;min-height:0;min-width:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
     .tile{height:min(calc(100svh - 9.5rem),84vh);width:auto;aspect-ratio:9/16}
-    .feed__live{flex:1;min-height:0;max-width:none;margin:0}
+    .feed__live{flex:1;min-height:0;min-width:0;max-width:none;margin:0;overflow:hidden}
   }
 
   /* ---- contact modal ---- */
