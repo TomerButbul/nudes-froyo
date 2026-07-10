@@ -204,3 +204,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   text-transform:lowercase;color:var(--taupe)}
 .article-share a{text-decoration:none;color:var(--espresso);border-bottom:1px solid transparent;transition:border-color .25s}
 .article-share a:hover{border-color:var(--espresso)}
+
+.endcta{max-width:680px;margin:clamp(2rem,4vw,2.8rem) auto 0;background:var(--espresso);color:var(--oat);border-radius:22px;
+  padding:clamp(1.8rem,4vw,2.6rem);text-align:center}
+.endcta h3{font-family:var(--display);font-weight:600;font-size:1.5rem;text-transform:lowercase;color:var(--cream)}
+.endcta p{margin:.6rem 0 1.3rem;color:rgba(220,204,187,.9)}
+.endcta .btn{background:var(--oat);color:var(--espresso)}
+.endcta .btn:hover{background:var(--cream)}
+.post-missing{max-width:680px;margin:0 auto;padding:clamp(3rem,8vw,5rem) 0;text-align:center;color:var(--taupe)}
+.post-missing a{color:var(--espresso)}
