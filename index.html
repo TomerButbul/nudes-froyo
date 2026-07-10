@@ -69,16 +69,13 @@
   .tag{font-family:var(--display);font-weight:400;color:var(--champ);font-size:clamp(1.02rem,2.8vw,1.34rem);letter-spacing:.04em;margin-top:clamp(.9rem,2.2vh,1.35rem)}
   .sub{max-width:33ch;margin:clamp(1.1rem,2.6vh,1.6rem) auto 0;font-weight:300;line-height:1.65;font-size:clamp(.93rem,2vw,1.02rem);color:color-mix(in srgb,var(--oat) 66%,transparent)}
 
-  form.waitlist{margin:clamp(1.5rem,3.5vh,2.1rem) auto 0;max-width:392px;width:100%}
-  .field{display:flex;gap:.5rem;align-items:center;background:rgba(220,204,187,.12);border:1px solid rgba(220,204,187,.34);border-radius:var(--pill);padding:.4rem .4rem .4rem 1.45rem;
-    box-shadow:inset 0 1px 0 rgba(242,233,216,.08);transition:border-color .3s,background .3s,box-shadow .3s}
-  .field:focus-within{border-color:rgba(220,204,187,.62);background:rgba(220,204,187,.16);box-shadow:inset 0 1px 0 rgba(242,233,216,.12),0 0 0 4px rgba(220,204,187,.08)}
-  .field input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:1rem;color:var(--oat);min-width:0;padding:.35rem 0}
-  .field input::placeholder{color:color-mix(in srgb,var(--oat) 58%,transparent)}
-  .field input:focus{outline:none}
-  .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;font-size:.85rem;text-transform:lowercase;letter-spacing:.03em;color:var(--choc);background:var(--oat);border-radius:var(--pill);padding:.85em 1.55em;transition:background .3s,filter .3s}
-  .field button:hover{background:var(--champ);filter:brightness(1.03)}
-  .microcopy{margin-top:.8rem;font-size:.75rem;color:color-mix(in srgb,var(--oat) 44%,transparent)}
+  .hero-cta{margin:clamp(1.4rem,3.2vh,2rem) auto 0;max-width:392px;width:100%;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+  .cta-join{width:100%;cursor:pointer;border:0;font-family:var(--display);font-weight:600;font-size:1.02rem;text-transform:lowercase;letter-spacing:.02em;color:var(--choc);background:var(--oat);border-radius:var(--pill);padding:1em 2em;
+    box-shadow:0 12px 30px -14px rgba(0,0,0,.5);transition:background .3s,transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+  .cta-join:hover{background:var(--champ);transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(0,0,0,.55)}
+  .cta-join:active{transform:translateY(0)}
+  .microcopy{margin:0;text-align:center;font-size:.76rem;color:color-mix(in srgb,var(--oat) 46%,transparent)}
+  .cform label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:color-mix(in srgb,var(--oat) 40%,transparent)}
 
   .links{display:flex;gap:clamp(1rem,3vw,1.6rem);justify-content:center;flex-wrap:wrap;margin-top:clamp(1.4rem,3vh,1.9rem)}
   .links a,.links .link-btn{font-family:var(--display);font-weight:500;font-size:.82rem;letter-spacing:.03em;text-transform:lowercase;
@@ -126,7 +123,9 @@
     .split{flex-direction:row;height:100svh}
     .brand{flex:0 0 clamp(360px,40vw,520px);min-width:0;justify-content:center;align-items:flex-start;text-align:left;
       padding:clamp(2.5rem,4vw,3.5rem);margin-left:clamp(.5rem,3vw,2.5rem);max-height:100svh;overflow-y:auto}
-    .brand .eyebrow,.brand form.waitlist,.brand .find{align-self:flex-start}
+    .brand .eyebrow,.brand .hero-cta,.brand .find{align-self:flex-start}
+    .brand .hero-cta{align-items:flex-start}
+    .brand .microcopy{text-align:left}
     .links{justify-content:flex-start}
     .sub{margin-left:0;margin-right:0}
     .wordmark__svg{width:clamp(250px,26vw,360px)}
@@ -167,7 +166,6 @@
   .csel__opt[aria-selected="true"]{font-weight:600;color:var(--champ)}
   .csel__opt[aria-selected="true"]::after{content:"\2713";float:right;opacity:.8}
 
-  @media (max-width:480px){ .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
 
   /* ===== texture: fine film grain over everything (static, no motion) ===== */
   .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.055;mix-blend-mode:soft-light;
@@ -217,19 +215,14 @@
     <p class="tag">nothing to hide.</p>
     <p class="sub">mediterranean frozen yogurt, reimagined. coming soon to beverly grove.</p>
 
-    <!-- ▸ FORMS post to /api/contact.js (in-house Vercel function -> Resend). Add RESEND_API_KEY in Vercel. -->
-    <form class="waitlist" action="/api/contact" method="POST" data-contact-form data-form-type="waitlist" data-success="you're on the list — talk soon x">
-      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
-      <div class="field">
-        <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
-        <button type="submit">join the list</button>
-      </div>
-      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+    <!-- ▸ Hero CTA opens the waitlist modal; forms post to /api/contact.js (Vercel -> Resend). Add RESEND_API_KEY in Vercel. -->
+    <div class="hero-cta">
+      <button type="button" class="cta-join" data-open-modal="waitlistModal" aria-haspopup="dialog" aria-controls="waitlistModal">join the list</button>
       <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
-    </form>
+    </div>
 
     <nav class="links">
-      <button type="button" class="link-btn" data-open-modal aria-haspopup="dialog" aria-controls="contactModal">partnerships &amp; press</button>
+      <button type="button" class="link-btn" data-open-modal="contactModal" aria-haspopup="dialog" aria-controls="contactModal">partnerships &amp; press</button>
       <a href="mailto:info@nudesyogurt.com?subject=Hello%20%E2%80%94%20nudes">say hello</a>
       <a href="/the-nude.html">the nude</a>
       <a href="/events.html">events</a>
@@ -267,6 +260,23 @@
 
 </main>
 
+<!-- ===== join the list (waitlist) modal ===== -->
+<div class="modal" id="waitlistModal" hidden>
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="wlTitle">
+    <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    <span class="modal__label">join the list</span>
+    <h2 id="wlTitle">be first in line</h2>
+    <p class="modal__sub">we'll email you the moment the doors open — and the little things along the way. no spam, ever.</p>
+    <form class="cform" action="/api/contact" method="POST" data-contact-form data-form-type="waitlist" data-success="you're on the list — talk soon x">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <div><label for="w-name">your name <span class="opt">(optional)</span></label><input id="w-name" name="name" type="text" autocomplete="name"></div>
+      <div><label for="w-email">email</label><input id="w-email" name="email" type="email" autocomplete="email" required></div>
+      <button class="btn" type="submit">count me in</button>
+    </form>
+  </div>
+</div>
+
 <!-- ===== partnerships & press contact modal ===== -->
 <div class="modal" id="contactModal" hidden>
   <div class="modal__overlay" data-close-modal></div>
@@ -296,16 +306,27 @@
 
 <script>
   (function () {
-    var modal = document.getElementById('contactModal');
-    var lastFocus = null;
-    function openModal() { lastFocus = document.activeElement; modal.hidden = false; document.body.style.overflow = 'hidden'; var f = modal.querySelector('input, select, textarea, button'); if (f) f.focus(); }
-    function closeModal() { modal.hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+    var lastFocus = null, openEl = null;
+    function open(modal) {
+      if (!modal) return;
+      lastFocus = document.activeElement; openEl = modal;
+      modal.hidden = false; document.body.style.overflow = 'hidden';
+      var first = modal.querySelector('input:not([tabindex="-1"]), select, textarea') || modal.querySelector('.modal__close');
+      if (first) first.focus();
+    }
+    function close() {
+      if (!openEl) return;
+      openEl.hidden = true; document.body.style.overflow = ''; openEl = null;
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    document.querySelectorAll('[data-open-modal]').forEach(function (b) {
+      b.addEventListener('click', function () { open(document.getElementById(b.getAttribute('data-open-modal'))); });
+    });
+    document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && openEl) close(); });
     var feed = document.querySelector('behold-widget');
     var fb = document.querySelector('[data-fallback]');
     if (feed && feed.getAttribute('feed-id') && feed.getAttribute('feed-id') !== 'YOUR_BEHOLD_FEED_ID') { feed.hidden = false; if (fb) fb.hidden = true; }
-    document.querySelectorAll('[data-open-modal]').forEach(function (b) { b.addEventListener('click', openModal); });
-    modal.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
   })();
 </script>
 <script src="https://w.behold.so/widget.js" type="module"></script>
