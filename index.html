@@ -105,19 +105,21 @@
   .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:rgba(58,34,20,.55);display:grid;place-items:center;
     transition:transform .5s cubic-bezier(.2,.7,.2,1),background .35s ease}
   .tile:hover .tile__play{transform:scale(1.14);background:rgba(58,34,20,.78)}
-  .tile__play{z-index:2}
+  .tile__play{z-index:3}
   .tile__play svg{width:12px;height:12px;color:var(--oat);margin-left:1.5px}
   .tile--a{background:var(--espresso);color:var(--oat)}
   .tile--b{background:var(--blush);color:var(--choc)}
   .tile--c{background:var(--taupe);color:var(--cream)}
   .tile--d{background:var(--oat);color:var(--choc)}
   .tile--cta{background:transparent;border:1px solid rgba(220,204,187,.3);color:var(--oat)}
-  /* live feed tiles — real reel thumbnails from the Behold JSON */
+  /* live feed tiles — real reel thumbnails (9:16, no crop) from the Behold JSON */
   .tile--live{background:var(--espresso)}
-  .tile__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  .tile--live::after{content:"";position:absolute;inset:0;pointer-events:none;
+  .tile__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .tile__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;opacity:0;pointer-events:none;background:var(--espresso);transition:opacity .35s ease}
+  .tile--live.is-playing .tile__vid{opacity:1}
+  .tile--live::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(to top,rgba(24,13,6,.4),transparent 42%)}
-  .tile--live:hover .tile__img{transform:scale(1.06)}
+  .tile--live:hover .tile__img{transform:scale(1.04)}
 
   a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--oat);outline-offset:3px}
   ::selection{background:rgba(220,204,187,.25);color:var(--cream)}
