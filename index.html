@@ -7,7 +7,7 @@
 <title>nudes — Mediterranean Frozen Yogurt · Opening Soon in Los Angeles</title>
 <meta name="description" content="nudes is a Mediterranean frozen yogurt boutique opening soon in Beverly Grove, Los Angeles. Clean ingredients, elevated design. Follow along and join the list.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#2c1a0e">
+<meta name="theme-color" content="#3a2214">
 <link rel="canonical" href="https://nudesyogurt.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="nudes">
@@ -42,152 +42,192 @@
 <style>
   :root{
     --espresso:#442917; --oat:#DCCCBB; --taupe:#B5937F; --blush:#CCADA0; --cream:#F2E9D8;
-    --gold:#d8b978; --gold-lite:#f6e8c8; --ink:#1d1005;
+    --choc:#3a2214; --champ:#e8dcc4; --tan:#cbb99a;
     --pill:100px; --display:'Fredoka',system-ui,sans-serif; --body:'Switzer',system-ui,sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    font-family:var(--body);color:var(--oat);min-height:100svh;overflow-x:hidden;
-    background:radial-gradient(125% 92% at 50% 30%, #5a3720 0%, #3d2414 40%, #29180a 74%, #1c0f05 100%) no-repeat fixed #1c0f05;
+    font-family:var(--body);color:var(--oat);min-height:100svh;overflow-x:hidden;position:relative;
+    background:radial-gradient(135% 100% at 50% 20%, #5a3a21 0%, var(--choc) 55%, #2b180c 100%) no-repeat fixed var(--choc);
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{width:100%;max-width:660px;margin-inline:auto;padding-inline:clamp(1.4rem,5vw,2rem)}
+  .bg-pattern{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.05;color:var(--oat)}
   a{color:inherit}
 
-  /* ---- hero ---- */
-  .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:clamp(3rem,9vh,6rem) clamp(1.4rem,5vw,2rem)}
-  .mark{width:clamp(42px,6.5vw,56px);height:auto;color:var(--gold-lite);margin-bottom:clamp(1.8rem,4.5vh,2.8rem);
-    filter:drop-shadow(0 2px 16px rgba(216,185,120,.18))}
-  .eyebrow{display:inline-flex;align-items:center;gap:.7em;margin-bottom:clamp(1.6rem,3.5vh,2.2rem);
-    font-family:var(--display);font-weight:500;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--taupe)}
-  .eyebrow i{width:.42em;height:.42em;border-radius:50%;background:var(--gold);box-shadow:0 0 9px 1px rgba(216,185,120,.55)}
+  .split{display:flex;flex-direction:column;min-height:100svh;position:relative;z-index:1}
 
+  /* brand column */
+  .brand{display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:clamp(2.4rem,7vw,3rem) clamp(1.4rem,5vw,2rem)}
+  .mark{width:clamp(40px,6vw,52px);height:auto;color:var(--oat);margin-bottom:clamp(1.3rem,3.5vh,2rem)}
+  .eyebrow{display:inline-flex;align-items:center;gap:.6em;margin-bottom:clamp(1.1rem,2.6vh,1.6rem);
+    font-family:var(--display);font-weight:500;font-size:.8rem;letter-spacing:.05em;text-transform:lowercase;color:var(--taupe)}
+  .eyebrow i{width:.46em;height:.46em;border-radius:50%;background:var(--tan)}
   .wordmark{margin:0;line-height:0}
-  .wordmark__svg{display:block;width:clamp(258px,58vw,430px);height:auto;
-    filter:drop-shadow(0 4px 26px rgba(216,185,120,.16))}
+  .wordmark__svg{display:block;width:clamp(238px,46vw,352px);height:auto}
+  .tag{font-family:var(--display);font-weight:400;color:var(--champ);font-size:clamp(1.02rem,2.8vw,1.34rem);letter-spacing:.04em;margin-top:clamp(.9rem,2.2vh,1.35rem)}
+  .sub{max-width:33ch;margin:clamp(1.1rem,2.6vh,1.6rem) auto 0;font-weight:300;line-height:1.65;font-size:clamp(.93rem,2vw,1.02rem);color:color-mix(in srgb,var(--oat) 66%,transparent)}
 
-  .tag{font-family:var(--display);font-weight:400;color:var(--oat);
-    font-size:clamp(1.05rem,3vw,1.45rem);letter-spacing:.05em;margin-top:clamp(1.1rem,2.6vh,1.6rem)}
-  .sub{max-width:36ch;margin:clamp(1.5rem,3.2vh,2.1rem) auto 0;font-weight:300;line-height:1.7;
-    font-size:clamp(.95rem,2vw,1.05rem);color:color-mix(in srgb,var(--oat) 62%,transparent)}
-
-  form.waitlist{margin:clamp(2rem,4.5vh,2.8rem) auto 0;max-width:392px;width:100%}
-  .field{display:flex;gap:.4rem;align-items:center;background:rgba(220,204,187,.055);
-    border:1px solid rgba(220,204,187,.22);border-radius:var(--pill);padding:.35rem .35rem .35rem 1.3rem;transition:border-color .3s}
-  .field:focus-within{border-color:rgba(216,185,120,.55)}
+  form.waitlist{margin:clamp(1.5rem,3.5vh,2.1rem) auto 0;max-width:384px;width:100%}
+  .field{display:flex;gap:.4rem;align-items:center;background:rgba(220,204,187,.07);border:1px solid rgba(220,204,187,.24);border-radius:var(--pill);padding:.35rem .35rem .35rem 1.3rem;transition:border-color .3s}
+  .field:focus-within{border-color:rgba(220,204,187,.55)}
   .field input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:1rem;color:var(--oat);min-width:0}
-  .field input::placeholder{color:color-mix(in srgb,var(--oat) 42%,transparent)}
+  .field input::placeholder{color:color-mix(in srgb,var(--oat) 45%,transparent)}
   .field input:focus{outline:none}
-  .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;font-size:.85rem;
-    text-transform:lowercase;letter-spacing:.03em;color:#2c1a0e;
-    background:linear-gradient(180deg,var(--gold-lite),var(--gold));border-radius:var(--pill);padding:.82em 1.6em;transition:filter .3s}
-  .field button:hover{filter:brightness(1.07)}
-  .microcopy{margin-top:.95rem;font-size:.74rem;letter-spacing:.03em;color:color-mix(in srgb,var(--oat) 40%,transparent)}
+  .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;font-size:.85rem;text-transform:lowercase;letter-spacing:.03em;color:var(--choc);background:var(--oat);border-radius:var(--pill);padding:.82em 1.6em;transition:background .3s}
+  .field button:hover{background:var(--champ)}
+  .microcopy{margin-top:.8rem;font-size:.75rem;color:color-mix(in srgb,var(--oat) 44%,transparent)}
 
-  .links{display:flex;gap:clamp(1.1rem,3.2vw,1.9rem);justify-content:center;flex-wrap:wrap;margin-top:clamp(2rem,4.5vh,2.8rem)}
-  .links a,.links .link-btn{font-family:var(--display);font-weight:500;font-size:.82rem;letter-spacing:.04em;
-    text-transform:lowercase;color:color-mix(in srgb,var(--oat) 78%,transparent);text-decoration:none;
-    border:0;background:none;cursor:pointer;padding:0;transition:color .3s}
-  .links a:hover,.links a:focus-visible,.links .link-btn:hover,.links .link-btn:focus-visible{color:var(--gold-lite);outline:none}
-
-  .find{margin-top:clamp(2.4rem,6vh,3.6rem);display:flex;flex-direction:column;align-items:center;gap:.4rem}
-  .find__label{font-family:var(--display);font-weight:500;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--taupe)}
-  .addr{font-family:var(--body);font-size:.92rem;font-weight:300;color:color-mix(in srgb,var(--oat) 62%,transparent);
-    text-decoration:none;line-height:1.5;transition:color .3s}
+  .links{display:flex;gap:clamp(1rem,3vw,1.6rem);justify-content:center;flex-wrap:wrap;margin-top:clamp(1.4rem,3vh,1.9rem)}
+  .links a,.links .link-btn{font-family:var(--display);font-weight:500;font-size:.82rem;letter-spacing:.03em;text-transform:lowercase;
+    color:color-mix(in srgb,var(--oat) 80%,transparent);text-decoration:none;border:0;background:none;cursor:pointer;padding:0;transition:color .3s}
+  .links a:hover,.links a:focus-visible,.links .link-btn:hover,.links .link-btn:focus-visible{color:var(--champ);outline:none}
+  .find{margin-top:clamp(1.4rem,3vh,1.9rem);display:flex;flex-direction:column;gap:.35rem}
+  .find__label{font-family:var(--display);font-weight:500;font-size:.68rem;letter-spacing:.06em;text-transform:lowercase;color:var(--taupe)}
+  .addr{font-weight:300;font-size:.9rem;color:color-mix(in srgb,var(--oat) 60%,transparent);text-decoration:none;transition:color .3s}
   .addr:hover,.addr:focus-visible{color:var(--oat);outline:none}
 
-  footer{padding:clamp(1.6rem,4vw,2rem);text-align:center;font-family:var(--display);font-weight:500;
-    font-size:.7rem;letter-spacing:.14em;text-transform:lowercase;color:color-mix(in srgb,var(--taupe) 70%,transparent)}
+  /* feed */
+  .feed{padding:0 clamp(1.2rem,5vw,1.6rem) clamp(2rem,6vw,2.6rem);display:flex;flex-direction:column;min-width:0}
+  .feed__head{display:flex;justify-content:space-between;align-items:baseline;margin:0 auto .8rem;max-width:640px;width:100%}
+  .feed__label{font-family:var(--display);font-weight:500;font-size:.8rem;letter-spacing:.05em;text-transform:lowercase;color:var(--taupe)}
+  .feed__handle{font-family:var(--display);font-weight:500;font-size:.84rem;text-transform:lowercase;color:var(--oat);text-decoration:none;transition:color .3s}
+  .feed__handle:hover,.feed__handle:focus-visible{color:var(--champ);outline:none}
+  .feed__track{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;max-width:640px;width:100%;margin:0 auto;min-width:0}
+  .feed__track::-webkit-scrollbar{display:none}
+  .tile{flex:0 0 auto;width:clamp(200px,54vw,246px);aspect-ratio:9/16;border-radius:22px;scroll-snap-align:start;display:grid;place-items:center;text-decoration:none;text-align:center;overflow:hidden;position:relative;transition:transform .4s ease}
+  .tile:hover{transform:translateY(-4px)}
+  .tile .mono{width:52px;height:auto}
+  .tile b{font-family:var(--display);font-weight:500;font-size:1.4rem;line-height:1.1;text-transform:lowercase;padding:0 1rem}
+  .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:rgba(58,34,20,.55);display:grid;place-items:center}
+  .tile__play svg{width:12px;height:12px;color:var(--oat);margin-left:1.5px}
+  .tile--a{background:var(--espresso);color:var(--oat)}
+  .tile--b{background:var(--blush);color:var(--choc)}
+  .tile--c{background:var(--taupe);color:var(--cream)}
+  .tile--d{background:var(--oat);color:var(--choc)}
+  .tile--cta{background:transparent;border:1px solid rgba(220,204,187,.3);color:var(--oat)}
+  .feed__live{display:block;width:100%;max-width:640px;margin:0 auto}
+  .feed__live[hidden]{display:none}
 
-  a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
-  ::selection{background:rgba(216,185,120,.28);color:var(--cream)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--oat);outline-offset:3px}
+  ::selection{background:rgba(220,204,187,.25);color:var(--cream)}
+
+  /* ---- desktop: split, single screen, no scroll ---- */
+  @media (min-width:960px){
+    body{overflow:hidden}
+    .split{flex-direction:row;height:100svh}
+    .brand{flex:0 0 clamp(360px,40vw,520px);min-width:0;justify-content:center;align-items:flex-start;text-align:left;
+      padding:clamp(2.5rem,4vw,3.5rem);margin-left:max(0px,calc((100vw - 1200px) / 2));max-height:100svh;overflow-y:auto}
+    .brand .eyebrow,.brand form.waitlist,.brand .find{align-self:flex-start}
+    .links{justify-content:flex-start}
+    .sub{margin-left:0;margin-right:0}
+    .wordmark__svg{width:clamp(250px,26vw,360px)}
+    .feed{flex:1 1 auto;min-width:0;height:100svh;padding:clamp(1.8rem,2.5vw,2.4rem)}
+    .feed__head{max-width:none;margin:0 0 1rem}
+    .feed__track{flex:1;min-height:0;min-width:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
+    .tile{height:min(calc(100svh - 8.5rem),86vh);width:auto;aspect-ratio:9/16}
+    .feed__live{flex:1;min-height:0;min-width:0;max-width:none;margin:0;overflow:hidden}
+  }
 
   /* ---- contact modal ---- */
   .modal[hidden]{display:none}
   .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1.4rem}
-  .modal__overlay{position:absolute;inset:0;background:rgba(15,8,3,.68);backdrop-filter:blur(4px)}
-  .modal__box{position:relative;z-index:1;width:100%;max-width:460px;background:#332015;
-    border:1px solid rgba(216,185,120,.22);border-radius:22px;padding:clamp(1.8rem,4.5vw,2.6rem);
-    box-shadow:0 50px 100px -40px rgba(0,0,0,.7);max-height:92svh;overflow-y:auto;text-align:left}
+  .modal__overlay{position:absolute;inset:0;background:rgba(24,13,6,.7);backdrop-filter:blur(4px)}
+  .modal__box{position:relative;z-index:1;width:100%;max-width:460px;background:#3f2718;border:1px solid rgba(220,204,187,.2);border-radius:22px;padding:clamp(1.8rem,4.5vw,2.6rem);box-shadow:0 50px 100px -40px rgba(0,0,0,.65);max-height:92svh;overflow-y:auto;text-align:left}
   .modal__close{position:absolute;top:.85rem;right:1rem;background:none;border:0;cursor:pointer;font-family:var(--display);font-size:1.05rem;color:var(--taupe)}
-  .modal__close:hover{color:var(--gold-lite)}
-  .modal__label{font-family:var(--display);font-weight:500;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe)}
-  .modal h2{font-family:var(--display);font-weight:600;font-size:1.7rem;color:var(--gold-lite);text-transform:lowercase;margin:.4rem 0 .5rem;line-height:1}
-  .modal__sub{font-size:.93rem;font-weight:300;color:color-mix(in srgb,var(--oat) 62%,transparent);line-height:1.55}
+  .modal__close:hover{color:var(--champ)}
+  .modal__label{font-family:var(--display);font-weight:500;font-size:.72rem;letter-spacing:.06em;text-transform:lowercase;color:var(--taupe)}
+  .modal h2{font-family:var(--display);font-weight:600;font-size:1.7rem;color:var(--champ);text-transform:lowercase;margin:.35rem 0 .5rem;line-height:1}
+  .modal__sub{font-size:.93rem;font-weight:300;color:color-mix(in srgb,var(--oat) 64%,transparent);line-height:1.55}
   .cform{display:grid;gap:.8rem;margin-top:1.3rem}
-  .cform label{display:block;font-family:var(--display);font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:lowercase;color:var(--taupe);margin-bottom:.35rem}
-  .cform input,.cform select,.cform textarea{width:100%;font-family:var(--body);font-size:.98rem;color:var(--oat);
-    background:rgba(220,204,187,.06);border:1px solid rgba(220,204,187,.2);border-radius:12px;padding:.75em .9em;transition:border-color .3s}
-  .cform input::placeholder,.cform textarea::placeholder{color:color-mix(in srgb,var(--oat) 40%,transparent)}
-  .cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:rgba(216,185,120,.55)}
+  .cform label{display:block;font-family:var(--display);font-weight:500;font-size:.72rem;letter-spacing:.04em;text-transform:lowercase;color:var(--taupe);margin-bottom:.35rem}
+  .cform input,.cform select,.cform textarea{width:100%;font-family:var(--body);font-size:.98rem;color:var(--oat);background:rgba(220,204,187,.07);border:1px solid rgba(220,204,187,.2);border-radius:12px;padding:.75em .9em;transition:border-color .3s}
+  .cform input::placeholder,.cform textarea::placeholder{color:color-mix(in srgb,var(--oat) 42%,transparent)}
+  .cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:rgba(220,204,187,.55)}
   .cform textarea{min-height:92px;resize:vertical}
-  .cform .btn{width:100%;cursor:pointer;border:0;margin-top:.3rem;font-family:var(--display);font-weight:600;font-size:.95rem;
-    text-transform:lowercase;letter-spacing:.03em;color:#2c1a0e;background:linear-gradient(180deg,var(--gold-lite),var(--gold));
-    border-radius:var(--pill);padding:.85em 1.5em;transition:filter .3s}
-  .cform .btn:hover{filter:brightness(1.07)}
-
-  /* on-brand custom select (dark) */
+  .cform .btn{width:100%;cursor:pointer;border:0;margin-top:.3rem;font-family:var(--display);font-weight:600;font-size:.95rem;text-transform:lowercase;letter-spacing:.03em;color:var(--choc);background:var(--oat);border-radius:var(--pill);padding:.85em 1.5em;transition:background .3s}
+  .cform .btn:hover{background:var(--champ)}
   .csel{position:relative}
-  .csel__btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.5em;font-family:var(--body);font-size:.98rem;
-    color:var(--oat);background:rgba(220,204,187,.06);border:1px solid rgba(220,204,187,.2);border-radius:12px;padding:.75em .9em;cursor:pointer;text-align:left;transition:border-color .3s}
-  .csel__btn:hover,.csel[aria-expanded="true"] .csel__btn{border-color:rgba(216,185,120,.55)}
+  .csel__btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.5em;font-family:var(--body);font-size:.98rem;color:var(--oat);background:rgba(220,204,187,.07);border:1px solid rgba(220,204,187,.2);border-radius:12px;padding:.75em .9em;cursor:pointer;text-align:left;transition:border-color .3s}
+  .csel__btn:hover,.csel[aria-expanded="true"] .csel__btn{border-color:rgba(220,204,187,.55)}
   .csel__val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .csel__chev{width:15px;height:15px;color:var(--taupe);flex:none;transition:transform .25s}
   .csel[aria-expanded="true"] .csel__chev{transform:rotate(180deg)}
-  .csel__list{position:absolute;z-index:40;top:calc(100% + 6px);left:0;right:0;margin:0;padding:.35rem;list-style:none;
-    background:#3a2618;border:1px solid rgba(216,185,120,.28);border-radius:14px;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);max-height:15rem;overflow:auto}
+  .csel__list{position:absolute;z-index:40;top:calc(100% + 6px);left:0;right:0;margin:0;padding:.35rem;list-style:none;background:#452b1a;border:1px solid rgba(220,204,187,.24);border-radius:14px;box-shadow:0 24px 50px -20px rgba(0,0,0,.65);max-height:15rem;overflow:auto}
   .csel__opt{font-family:var(--body);font-size:.96rem;color:var(--oat);padding:.6em .7em;border-radius:9px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .csel__opt.is-active{background:rgba(216,185,120,.18);color:var(--gold-lite)}
-  .csel__opt[aria-selected="true"]{font-weight:600;color:var(--gold-lite)}
+  .csel__opt.is-active{background:rgba(220,204,187,.16);color:var(--champ)}
+  .csel__opt[aria-selected="true"]{font-weight:600;color:var(--champ)}
   .csel__opt[aria-selected="true"]::after{content:"\2713";float:right;opacity:.8}
 
   @media (max-width:480px){ .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
 </style>
 </head>
 <body>
-<main class="hero wrap">
 
-  <svg class="mark" viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
+<svg class="bg-pattern" aria-hidden="true"><defs><pattern id="nupat" width="150" height="150" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)"><path transform="translate(-44 -50) scale(0.235)" fill="currentColor" d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></pattern></defs><rect width="100%" height="100%" fill="url(#nupat)"/></svg>
 
-  <span class="eyebrow"><i></i> opening soon · los angeles</span>
+<main class="split">
 
-  <h1 class="wordmark"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">nudes</span><svg class="wordmark__svg" viewBox="53.18 350.9 893.65 231.21" role="img" aria-label="nudes"><defs><linearGradient id="numetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7ecce"/><stop offset=".32" stop-color="#e2bd78"/><stop offset=".56" stop-color="#c99a4e"/><stop offset=".78" stop-color="#efd9a4"/><stop offset="1" stop-color="#caa25c"/></linearGradient></defs><g fill="url(#numetal)"><path transform="matrix(1,0,0,-1,59.1763,571.8979)" d="M -0.00051875 -0.0005375 L -0.00051875 87.0229 C -0.00051875 138.214306 30.714325 159.593212 80.6987 159.593212 C 130.683075 159.593212 161.397919 138.214306 161.397919 87.0229 L 161.397919 -0.0005375 L 112.015106 -0.0005375 L 112.015106 87.0229 C 112.015106 105.99165 102.378388 117.737744 80.6987 117.737744 C 59.019012 117.737744 49.382294 105.99165 49.382294 87.0229 L 49.382294 -0.0005375 Z"/><path d="M 244.355469 503.542969 L 244.355469 416.523438 L 293.742188 416.523438 L 293.742188 503.542969 C 293.742188 522.515625 303.375 534.257812 325.054688 534.257812 C 346.738281 534.257812 356.371094 522.515625 356.371094 503.542969 L 356.371094 416.523438 L 405.753906 416.523438 L 405.753906 503.542969 C 405.753906 554.734375 375.042969 576.113281 325.054688 576.113281 C 275.070312 576.113281 244.355469 554.734375 244.355469 503.542969 "/><path d="M 546.070312 494.210938 C 546.070312 469.519531 531.316406 452.65625 509.9375 452.65625 C 489.160156 452.65625 474.402344 465.90625 474.402344 494.210938 C 474.402344 522.515625 489.160156 535.765625 509.9375 535.765625 C 531.316406 535.765625 546.070312 518.902344 546.070312 494.210938 M 423.515625 494.210938 C 423.515625 438.503906 457.542969 412.304688 493.074219 412.304688 C 517.765625 412.304688 531.015625 421.039062 541.554688 435.792969 L 544.566406 435.792969 L 544.566406 356.902344 L 593.949219 356.902344 L 593.949219 571.898438 L 547.574219 571.898438 L 544.566406 552.625 L 541.554688 552.625 C 531.015625 567.078125 517.765625 576.113281 493.074219 576.113281 C 457.542969 576.113281 423.515625 550.21875 423.515625 494.210938 "/><path d="M 730.347656 475.539062 C 727.035156 455.96875 711.980469 448.140625 697.527344 448.140625 C 682.773438 448.140625 668.921875 458.074219 664.703125 475.539062 Z M 614.71875 494.210938 C 614.71875 438.804688 649.347656 412.304688 700.535156 412.304688 C 748.714844 412.304688 779.128906 440.910156 779.128906 489.089844 C 779.128906 494.8125 778.828125 500.835938 777.925781 507.15625 L 663.800781 507.15625 C 666.8125 529.140625 680.664062 540.28125 699.9375 540.28125 C 711.679688 540.28125 721.617188 535.765625 727.035156 528.234375 L 775.214844 528.234375 C 766.179688 555.9375 740.285156 576.113281 700.535156 576.113281 C 648.445312 576.113281 614.71875 548.710938 614.71875 494.210938 "/><path d="M 794.179688 531.847656 C 794.179688 529.441406 794.480469 527.03125 794.78125 524.921875 L 843.5625 524.921875 L 843.5625 526.730469 C 843.5625 534.859375 855.304688 540.28125 867.652344 540.28125 C 878.792969 540.28125 892.042969 537.570312 892.042969 527.332031 C 892.042969 502.640625 794.179688 528.535156 794.179688 463.496094 C 794.179688 431.277344 824.894531 412.304688 865.242188 412.304688 C 914.925781 412.304688 938.113281 430.976562 938.113281 458.375 C 938.113281 460.183594 938.113281 461.6875 937.8125 463.496094 L 889.03125 463.496094 C 889.03125 463.496094 889.332031 462.59375 889.332031 461.386719 C 889.332031 455.367188 883.609375 448.140625 865.242188 448.140625 C 852.296875 448.140625 842.960938 450.847656 842.960938 460.785156 C 842.960938 485.476562 940.824219 459.582031 940.824219 524.320312 C 940.824219 556.539062 911.917969 576.113281 867.652344 576.113281 C 809.535156 576.113281 794.179688 552.023438 794.179688 531.847656 "/></g></svg></h1>
+  <section class="brand">
+    <svg class="mark" viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
 
-  <p class="tag">nothing to hide.</p>
-  <p class="sub">mediterranean frozen yogurt, reimagined. a boutique coming soon to beverly grove.</p>
+    <span class="eyebrow"><i></i> opening soon · los angeles</span>
 
-  <!--
-    ▸ FORMS post to /api/contact.js (in-house Vercel function -> Resend). Add RESEND_API_KEY in Vercel.
-  -->
-  <form class="waitlist" action="/api/contact" method="POST" data-contact-form data-form-type="waitlist" data-success="you're on the list — talk soon x">
-    <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
-    <div class="field">
-      <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
-      <button type="submit">join the list</button>
+    <h1 class="wordmark"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">nudes</span><svg class="wordmark__svg" viewBox="53.18 350.9 893.65 231.21" role="img" aria-label="nudes"><defs><linearGradient id="nusoft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8dcc4"/><stop offset=".55" stop-color="#DCCCBB"/><stop offset="1" stop-color="#c6b394"/></linearGradient></defs><g fill="url(#nusoft)"><path transform="matrix(1,0,0,-1,59.1763,571.8979)" d="M -0.00051875 -0.0005375 L -0.00051875 87.0229 C -0.00051875 138.214306 30.714325 159.593212 80.6987 159.593212 C 130.683075 159.593212 161.397919 138.214306 161.397919 87.0229 L 161.397919 -0.0005375 L 112.015106 -0.0005375 L 112.015106 87.0229 C 112.015106 105.99165 102.378388 117.737744 80.6987 117.737744 C 59.019012 117.737744 49.382294 105.99165 49.382294 87.0229 L 49.382294 -0.0005375 Z"/><path d="M 244.355469 503.542969 L 244.355469 416.523438 L 293.742188 416.523438 L 293.742188 503.542969 C 293.742188 522.515625 303.375 534.257812 325.054688 534.257812 C 346.738281 534.257812 356.371094 522.515625 356.371094 503.542969 L 356.371094 416.523438 L 405.753906 416.523438 L 405.753906 503.542969 C 405.753906 554.734375 375.042969 576.113281 325.054688 576.113281 C 275.070312 576.113281 244.355469 554.734375 244.355469 503.542969 "/><path d="M 546.070312 494.210938 C 546.070312 469.519531 531.316406 452.65625 509.9375 452.65625 C 489.160156 452.65625 474.402344 465.90625 474.402344 494.210938 C 474.402344 522.515625 489.160156 535.765625 509.9375 535.765625 C 531.316406 535.765625 546.070312 518.902344 546.070312 494.210938 M 423.515625 494.210938 C 423.515625 438.503906 457.542969 412.304688 493.074219 412.304688 C 517.765625 412.304688 531.015625 421.039062 541.554688 435.792969 L 544.566406 435.792969 L 544.566406 356.902344 L 593.949219 356.902344 L 593.949219 571.898438 L 547.574219 571.898438 L 544.566406 552.625 L 541.554688 552.625 C 531.015625 567.078125 517.765625 576.113281 493.074219 576.113281 C 457.542969 576.113281 423.515625 550.21875 423.515625 494.210938 "/><path d="M 730.347656 475.539062 C 727.035156 455.96875 711.980469 448.140625 697.527344 448.140625 C 682.773438 448.140625 668.921875 458.074219 664.703125 475.539062 Z M 614.71875 494.210938 C 614.71875 438.804688 649.347656 412.304688 700.535156 412.304688 C 748.714844 412.304688 779.128906 440.910156 779.128906 489.089844 C 779.128906 494.8125 778.828125 500.835938 777.925781 507.15625 L 663.800781 507.15625 C 666.8125 529.140625 680.664062 540.28125 699.9375 540.28125 C 711.679688 540.28125 721.617188 535.765625 727.035156 528.234375 L 775.214844 528.234375 C 766.179688 555.9375 740.285156 576.113281 700.535156 576.113281 C 648.445312 576.113281 614.71875 548.710938 614.71875 494.210938 "/><path d="M 794.179688 531.847656 C 794.179688 529.441406 794.480469 527.03125 794.78125 524.921875 L 843.5625 524.921875 L 843.5625 526.730469 C 843.5625 534.859375 855.304688 540.28125 867.652344 540.28125 C 878.792969 540.28125 892.042969 537.570312 892.042969 527.332031 C 892.042969 502.640625 794.179688 528.535156 794.179688 463.496094 C 794.179688 431.277344 824.894531 412.304688 865.242188 412.304688 C 914.925781 412.304688 938.113281 430.976562 938.113281 458.375 C 938.113281 460.183594 938.113281 461.6875 937.8125 463.496094 L 889.03125 463.496094 C 889.03125 463.496094 889.332031 462.59375 889.332031 461.386719 C 889.332031 455.367188 883.609375 448.140625 865.242188 448.140625 C 852.296875 448.140625 842.960938 450.847656 842.960938 460.785156 C 842.960938 485.476562 940.824219 459.582031 940.824219 524.320312 C 940.824219 556.539062 911.917969 576.113281 867.652344 576.113281 C 809.535156 576.113281 794.179688 552.023438 794.179688 531.847656 "/></g></svg></h1>
+
+    <p class="tag">nothing to hide.</p>
+    <p class="sub">mediterranean frozen yogurt, reimagined. coming soon to beverly grove.</p>
+
+    <!-- ▸ FORMS post to /api/contact.js (in-house Vercel function -> Resend). Add RESEND_API_KEY in Vercel. -->
+    <form class="waitlist" action="/api/contact" method="POST" data-contact-form data-form-type="waitlist" data-success="you're on the list — talk soon x">
+      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+      <div class="field">
+        <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
+        <button type="submit">join the list</button>
+      </div>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
+    </form>
+
+    <nav class="links">
+      <button type="button" class="link-btn" data-open-modal aria-haspopup="dialog" aria-controls="contactModal">partnerships &amp; press</button>
+      <a href="mailto:info@nudesyogurt.com?subject=Hello%20%E2%80%94%20nudes">say hello</a>
+      <a href="/the-nude.html">the nude</a>
+      <a href="/events.html">events</a>
+    </nav>
+
+    <div class="find">
+      <span class="find__label">the boutique</span>
+      <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=165+S+Crescent+Heights+Blvd+Los+Angeles+CA+90048" target="_blank" rel="noopener">165 S Crescent Heights Blvd · Los Angeles, CA 90048</a>
     </div>
-    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
-    <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
-  </form>
+  </section>
 
-  <nav class="links">
-    <a href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">follow @nudesyogurt</a>
-    <a href="/the-nude.html">the nude</a>
-    <a href="/events.html">events</a>
-    <button type="button" class="link-btn" data-open-modal aria-haspopup="dialog" aria-controls="contactModal">partnerships &amp; press</button>
-    <a href="mailto:info@nudesyogurt.com?subject=Hello%20%E2%80%94%20nudes">say hello</a>
-  </nav>
-
-  <div class="find">
-    <span class="find__label">the boutique</span>
-    <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=165+S+Crescent+Heights+Blvd+Los+Angeles+CA+90048" target="_blank" rel="noopener">165 S Crescent Heights Blvd · Los Angeles, CA 90048</a>
-  </div>
+  <!-- ===== the feed (main) ===== -->
+  <aside class="feed" aria-label="Instagram">
+    <div class="feed__head">
+      <span class="feed__label">the feed</span>
+      <a class="feed__handle" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">follow @nudesyogurt →</a>
+    </div>
+    <!--
+      ▸ LIVE INSTAGRAM FEED — connect once, no more code: (1) set @nudesyogurt to Professional/Creator (free);
+        (2) create a free feed at behold.so (Carousel layout); (3) put the feed id in <behold-widget feed-id="...">.
+        The branded reel tiles auto-hide once a real feed id is set.
+    -->
+    <div class="feed__track" role="list" data-fallback>
+      <a class="tile tile--a" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener" aria-label="nudes on Instagram">
+        <svg class="mono" viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
+        <span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      </a>
+      <a class="tile tile--b" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--c" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>opening<br>soon</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--d" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>beverly<br>grove</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--cta" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>see the<br>feed →</b></a>
+    </div>
+    <behold-widget class="feed__live" feed-id="YOUR_BEHOLD_FEED_ID" hidden></behold-widget>
+  </aside>
 
 </main>
-
-<footer>© 2026 nudes · beverly grove, los angeles</footer>
 
 <!-- ===== partnerships & press contact modal ===== -->
 <div class="modal" id="contactModal" hidden>
@@ -222,11 +262,15 @@
     var lastFocus = null;
     function openModal() { lastFocus = document.activeElement; modal.hidden = false; document.body.style.overflow = 'hidden'; var f = modal.querySelector('input, select, textarea, button'); if (f) f.focus(); }
     function closeModal() { modal.hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+    var feed = document.querySelector('behold-widget');
+    var fb = document.querySelector('[data-fallback]');
+    if (feed && feed.getAttribute('feed-id') && feed.getAttribute('feed-id') !== 'YOUR_BEHOLD_FEED_ID') { feed.hidden = false; if (fb) fb.hidden = true; }
     document.querySelectorAll('[data-open-modal]').forEach(function (b) { b.addEventListener('click', openModal); });
     modal.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
   })();
 </script>
+<script src="https://w.behold.so/widget.js" type="module"></script>
 <script src="forms.js"></script>
 </body>
 </html>
