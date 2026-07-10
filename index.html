@@ -98,11 +98,15 @@
   .feed__track{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;max-width:640px;width:100%;margin:0 auto;min-width:0;
     -webkit-mask-image:linear-gradient(to right,#000 80%,transparent 99%);mask-image:linear-gradient(to right,#000 80%,transparent 99%)}
   .feed__track::-webkit-scrollbar{display:none}
-  .tile{flex:0 0 auto;width:clamp(200px,54vw,246px);aspect-ratio:9/16;border-radius:22px;scroll-snap-align:start;display:grid;place-items:center;text-decoration:none;text-align:center;overflow:hidden;position:relative;transition:transform .4s ease}
-  .tile:hover{transform:translateY(-4px)}
-  .tile .mono{width:52px;height:auto}
+  .tile{flex:0 0 auto;width:clamp(200px,54vw,246px);aspect-ratio:9/16;border-radius:22px;scroll-snap-align:start;display:grid;place-items:center;text-decoration:none;text-align:center;overflow:hidden;position:relative;
+    box-shadow:0 14px 30px -22px rgba(0,0,0,.55);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1)}
+  .tile:hover{transform:translateY(-6px);box-shadow:0 34px 60px -26px rgba(0,0,0,.62)}
+  .tile .mono{width:52px;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .tile:hover .mono{transform:scale(1.05)}
   .tile b{font-family:var(--display);font-weight:500;font-size:1.4rem;line-height:1.1;text-transform:lowercase;padding:0 1rem}
-  .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:rgba(58,34,20,.55);display:grid;place-items:center}
+  .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:rgba(58,34,20,.55);display:grid;place-items:center;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1),background .35s ease}
+  .tile:hover .tile__play{transform:scale(1.14);background:rgba(58,34,20,.78)}
   .tile__play svg{width:12px;height:12px;color:var(--oat);margin-left:1.5px}
   .tile--a{background:var(--espresso);color:var(--oat)}
   .tile--b{background:var(--blush);color:var(--choc)}
@@ -163,11 +167,42 @@
   .csel__opt[aria-selected="true"]::after{content:"\2713";float:right;opacity:.8}
 
   @media (max-width:480px){ .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
+
+  /* ===== texture: fine film grain over everything (static, no motion) ===== */
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.055;mix-blend-mode:soft-light;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:120px 120px}
+
+  /* ===== buttery load reveal — one-time entrance, staggered ===== */
+  @keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+  .brand>*{animation:rise .75s cubic-bezier(.2,.7,.2,1) both}
+  .brand>*:nth-child(1){animation-delay:.05s}
+  .brand>*:nth-child(2){animation-delay:.12s}
+  .brand>*:nth-child(3){animation-delay:.19s}
+  .brand>*:nth-child(4){animation-delay:.26s}
+  .brand>*:nth-child(5){animation-delay:.33s}
+  .brand>*:nth-child(6){animation-delay:.40s}
+  .brand>*:nth-child(7){animation-delay:.47s}
+  .brand>*:nth-child(8){animation-delay:.54s}
+  .feed{animation:rise .9s cubic-bezier(.2,.7,.2,1) both .3s}
+
+  /* ===== delightful waitlist confirmation ===== */
+  .form-status{margin-top:.9rem;font-family:var(--display);font-weight:500;font-size:.86rem;letter-spacing:.02em}
+  @keyframes pop{0%{opacity:0;transform:scale(.9)}55%{transform:scale(1.045)}100%{opacity:1;transform:scale(1)}}
+  .form-status--ok{color:var(--champ);animation:pop .55s cubic-bezier(.2,.8,.2,1) both}
+  .form-status--err{color:#e6b49c}
+
+  @media (prefers-reduced-motion:reduce){
+    .brand>*,.feed{animation:none}
+    .form-status--ok{animation:none}
+    .tile,.tile .mono,.tile__play{transition:none}
+  }
 </style>
 </head>
 <body>
 
 <svg class="bg-pattern" aria-hidden="true"><defs><pattern id="nupat" width="150" height="150" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)"><path transform="translate(-44 -50) scale(0.235)" fill="currentColor" d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></pattern></defs><rect width="100%" height="100%" fill="url(#nupat)"/></svg>
+<div class="grain" aria-hidden="true"></div>
 
 <main class="split">
 
