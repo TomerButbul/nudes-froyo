@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Cpath d='M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14' fill='none' stroke='%23DCCCBB' stroke-width='21' stroke-linecap='round' stroke-linejoin='round' transform='translate(0 5.25) scale(0.25)'/%3E%3C/svg%3E">
 <title>nudes — Mediterranean Frozen Yogurt · Opening Soon in Los Angeles</title>
-<meta name="description" content="nudes is a Mediterranean frozen yogurt boutique opening soon in Beverly Grove, Los Angeles. Clean ingredients, elevated design. Join the list and follow along.">
+<meta name="description" content="nudes is a Mediterranean frozen yogurt boutique opening soon in Beverly Grove, Los Angeles. Clean ingredients, elevated design. Follow along and join the list.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#442917">
 <link rel="canonical" href="https://nudesyogurt.com/">
@@ -13,11 +13,11 @@
 <meta property="og:site_name" content="nudes">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="nudes — Opening Soon in Los Angeles">
-<meta property="og:description" content="Mediterranean frozen yogurt, reimagined. A boutique coming soon to Beverly Grove, LA. Join the list.">
+<meta property="og:description" content="Mediterranean frozen yogurt, reimagined. A boutique coming soon to Beverly Grove, LA. Follow @nudesyogurt.">
 <meta property="og:url" content="https://nudesyogurt.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="nudes — Opening Soon in Los Angeles">
-<meta name="twitter:description" content="Mediterranean frozen yogurt, reimagined. A boutique coming soon to Beverly Grove, LA. Join the list.">
+<meta name="twitter:description" content="Mediterranean frozen yogurt, reimagined. A boutique coming soon to Beverly Grove, LA. Follow @nudesyogurt.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
@@ -27,8 +27,8 @@
   :root{
     --espresso:#442917; --espresso-800:#331E13; --oat:#DCCCBB; --taupe:#B5937F;
     --blush:#CCADA0; --paper:#EBE4D8; --cream:#F8F4EC; --ink:#2A1810;
-    --display:'Fredoka',system-ui,sans-serif; --body:'Switzer',system-ui,sans-serif;
     --pill:100px;
+    --display:'Fredoka',system-ui,sans-serif; --body:'Switzer',system-ui,sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -36,36 +36,55 @@
     font-family:var(--body);color:var(--espresso);min-height:100svh;
     display:grid;place-items:center;padding:clamp(1.5rem,5vw,3rem);
     background:
-      radial-gradient(60% 55% at 82% 12%,rgba(204,173,160,.55),transparent 60%),
-      radial-gradient(55% 50% at 12% 92%,rgba(220,204,187,.6),transparent 60%),
+      radial-gradient(60% 55% at 82% 10%,rgba(204,173,160,.5),transparent 60%),
+      radial-gradient(55% 50% at 12% 94%,rgba(220,204,187,.55),transparent 60%),
       linear-gradient(160deg,var(--paper) 0%,#e2d6c6 120%);
     overflow-x:hidden;
   }
   .card{width:100%;max-width:600px;text-align:center;position:relative;z-index:2}
 
-  .mark{width:64px;height:auto;margin:0 auto 1.6rem;display:block;color:var(--espresso)}
+  .mark{width:60px;height:auto;margin:0 auto 1.5rem;display:block;color:var(--espresso)}
   .eyebrow{
-    display:inline-flex;align-items:center;gap:.55em;margin-bottom:1.6rem;
+    display:inline-flex;align-items:center;gap:.55em;margin-bottom:1.5rem;
     font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.02em;
     text-transform:lowercase;color:var(--espresso);
     background:var(--cream);border:1px solid var(--taupe);border-radius:var(--pill);padding:.5em 1.05em;
   }
   .eyebrow i{width:.5em;height:.5em;border-radius:50%;background:#d99a3c;box-shadow:0 0 10px 1px rgba(217,154,60,.7)}
 
-  .froyo{width:clamp(120px,26vw,168px);height:auto;margin:0 auto .4rem;display:block;filter:drop-shadow(0 20px 30px rgba(42,24,16,.22))}
-
   h1{font-family:var(--display);font-weight:600;color:var(--espresso);
-    font-size:clamp(4.2rem,20vw,10rem);line-height:.82;letter-spacing:-.045em}
+    font-size:clamp(4.2rem,20vw,9.5rem);line-height:.82;letter-spacing:-.045em}
   .tag{font-family:var(--display);font-weight:500;color:var(--taupe);
     font-size:clamp(1.05rem,3.4vw,1.5rem);letter-spacing:.02em;margin-top:.4rem}
-  .sub{max-width:40ch;margin:1.5rem auto 0;color:color-mix(in srgb,var(--ink) 74%,var(--paper));
-    font-size:clamp(1rem,2.2vw,1.12rem);line-height:1.55}
+  .sub{max-width:42ch;margin:1.4rem auto 0;color:color-mix(in srgb,var(--ink) 74%,var(--paper));
+    font-size:clamp(1rem,2.2vw,1.1rem);line-height:1.55}
 
-  form{margin:2.2rem auto 0;max-width:440px}
+  /* instagram feed carousel */
+  .feed{margin:2.6rem 0 0;text-align:left}
+  .feed__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.9rem;padding:0 .15rem}
+  .feed__label{font-family:var(--display);font-weight:600;font-size:.78rem;text-transform:lowercase;letter-spacing:.08em;color:var(--taupe)}
+  .feed__handle{font-family:var(--display);font-weight:600;font-size:.85rem;text-transform:lowercase;
+    color:var(--espresso);text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:1px;transition:border-color .3s}
+  .feed__handle:hover,.feed__handle:focus-visible{border-color:var(--espresso);outline:none}
+  .feed__track{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:.5rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .feed__track::-webkit-scrollbar{display:none}
+  .tile{flex:0 0 auto;width:clamp(128px,38vw,152px);aspect-ratio:1;border-radius:16px;scroll-snap-align:start;
+    display:grid;place-items:center;text-decoration:none;text-align:center;transition:transform .35s ease}
+  .tile:hover{transform:translateY(-3px)}
+  .tile svg{width:42px;height:auto}
+  .tile b{font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1.02;text-transform:lowercase;padding:0 .8rem}
+  .tile--espresso{background:var(--espresso);color:var(--oat)}
+  .tile--blush{background:var(--blush);color:var(--cream)}
+  .tile--taupe{background:var(--taupe);color:var(--cream)}
+  .tile--oat{background:var(--oat);color:var(--espresso)}
+  .tile--cta{background:var(--cream);border:1.5px solid var(--taupe);color:var(--espresso)}
+  .tile--cta b{font-size:.95rem}
+
+  form{margin:2.4rem auto 0;max-width:440px}
   .field{display:flex;gap:.5rem;background:var(--cream);border:1px solid var(--taupe);
     border-radius:var(--pill);padding:.4rem .4rem .4rem 1.2rem;align-items:center}
-  .field input{flex:1;border:0;background:transparent;font-family:var(--body);
-    font-size:1rem;color:var(--espresso);min-width:0}
+  .field input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:1rem;color:var(--espresso);min-width:0}
   .field input::placeholder{color:color-mix(in srgb,var(--taupe) 90%,var(--espresso))}
   .field input:focus{outline:none}
   .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;
@@ -75,14 +94,20 @@
   .field:focus-within{border-color:var(--espresso)}
   .microcopy{margin-top:.8rem;font-size:.82rem;color:color-mix(in srgb,var(--ink) 55%,var(--paper))}
 
-  .links{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-top:2.4rem}
+  .links{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
   .links a{display:inline-flex;align-items:center;gap:.5em;font-family:var(--display);
     font-weight:500;font-size:.92rem;text-transform:lowercase;color:var(--espresso);
     text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:2px;transition:border-color .3s}
   .links a:hover,.links a:focus-visible{border-color:var(--espresso);outline:none}
   .links svg{width:17px;height:17px}
 
-  footer{margin-top:3rem;font-family:var(--display);font-weight:500;font-size:.76rem;
+  .addr{display:inline-flex;align-items:center;gap:.5em;margin-top:2.2rem;font-family:var(--body);
+    font-size:.92rem;color:color-mix(in srgb,var(--ink) 66%,var(--paper));text-decoration:none;
+    border-bottom:1px solid transparent;transition:border-color .3s}
+  .addr:hover,.addr:focus-visible{border-color:var(--taupe);outline:none}
+  .addr svg{width:15px;height:15px;color:var(--taupe);flex:none}
+
+  footer{margin-top:1.4rem;font-family:var(--display);font-weight:500;font-size:.74rem;
     text-transform:lowercase;letter-spacing:.04em;color:var(--taupe)}
 
   a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--espresso);outline-offset:3px}
@@ -92,41 +117,47 @@
 <body>
 <main class="card">
 
-  <!-- nu monogram -->
+  <!-- nu monogram (logo) -->
   <svg class="mark" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/>
   </svg>
 
   <span class="eyebrow"><i></i> opening soon · los angeles</span>
 
-  <!-- froyo illustration (original vector art — no photography) -->
-  <svg class="froyo" viewBox="0 0 240 320" role="img" aria-label="A swirl of nudes frozen yogurt">
-    <ellipse cx="120" cy="198" rx="58" ry="12" fill="#efe7d6"/>
-    <path d="M66 196 L86 298 Q88 305 97 305 H143 Q152 305 154 298 L174 196 Z" fill="#efe7d6"/>
-    <path d="M68 206 H172 L170 218 H70 Z" fill="rgba(42,24,16,.08)"/>
-    <g fill="#caa089">
-      <ellipse cx="120" cy="194" rx="60" ry="24"/><ellipse cx="112" cy="165" rx="52" ry="22"/>
-      <ellipse cx="126" cy="139" rx="43" ry="20"/><ellipse cx="114" cy="115" rx="34" ry="17"/>
-      <ellipse cx="124" cy="96" rx="25" ry="14"/><path d="M106 86 Q110 52 120 46 Q130 52 132 86 Z"/>
-    </g>
-    <g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".32">
-      <path d="M78 194 Q120 212 162 194"/><path d="M86 165 Q118 181 156 165"/>
-      <path d="M94 139 Q124 153 152 139"/><path d="M92 115 Q116 127 142 115"/>
-    </g>
-    <circle cx="120" cy="50" r="7" fill="#5b3a26"/>
-  </svg>
-
   <h1>nudes</h1>
   <p class="tag">nothing to hide.</p>
-  <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove.</p>
+  <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove, Los Angeles.</p>
+
+  <!-- ===== instagram feed carousel ===== -->
+  <section class="feed" aria-label="Instagram">
+    <div class="feed__head">
+      <span class="feed__label">the feed</span>
+      <!-- TODO: confirm real Instagram handle/URL -->
+      <a class="feed__handle" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">follow @nudesyogurt →</a>
+    </div>
+    <!--
+      ▸ LIVE INSTAGRAM CAROUSEL — replace the .feed__track block below with your widget embed.
+        Connect @nudesyogurt once in a no-code widget (e.g. Behold.so or SnapWidget), choose the
+        CAROUSEL/slider layout, and paste its embed snippet here. Setup steps provided separately.
+        Until then, these branded tiles keep the page looking finished and all link to Instagram.
+    -->
+    <div class="feed__track" role="list">
+      <a class="tile tile--espresso" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener" aria-label="nudes on Instagram">
+        <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+      </a>
+      <a class="tile tile--blush" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b></a>
+      <a class="tile tile--taupe" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>opening<br>soon</b></a>
+      <a class="tile tile--oat" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>beverly<br>grove</b></a>
+      <a class="tile tile--cta" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>see the<br>feed →</b></a>
+    </div>
+  </section>
 
   <!--
     ▸ WAITLIST — to actually collect these emails (no code after one paste):
       1. Create a free account at https://formspree.io (use info@nudesyogurt.com).
       2. Make a new form; it gives you an endpoint like https://formspree.io/f/abcdwxyz
       3. Replace YOUR_FORM_ID in the action below with that code.
-      Signups then arrive in your inbox + Formspree dashboard. (Tally.so or Mailchimp work too — just ask.)
-      Until connected, the Instagram + email links below are your live CTAs.
+      Signups then arrive in your inbox + Formspree dashboard. (Tally.so or Mailchimp work too.)
   -->
   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
     <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
@@ -139,11 +170,6 @@
   </form>
 
   <div class="links">
-    <!-- TODO: confirm the real Instagram handle/URL -->
-    <a href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-      follow @nudesyogurt
-    </a>
     <a href="mailto:partnerships@nudesyogurt.com?subject=Partnership%20%2F%20press%20%E2%80%94%20nudes">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
       partnerships &amp; press
@@ -153,6 +179,11 @@
       say hello
     </a>
   </div>
+
+  <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=161+S+Crescent+Heights+Blvd+Los+Angeles+CA+90048" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    161 S Crescent Heights Blvd · Los Angeles, CA 90048
+  </a>
 
   <footer>© 2026 nudes · beverly grove, los angeles</footer>
 
