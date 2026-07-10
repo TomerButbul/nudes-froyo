@@ -97,11 +97,11 @@
       <h2 class="h2" style="margin-top:.4rem;margin-bottom:.7rem">let's plan it</h2>
       <p class="lede" style="margin-bottom:1.6rem">tell us a little and we'll get right back to you.</p>
       <!--
-        ▸ These inquiries post to the same free Formspree form as the site's other forms
-          (replace YOUR_FORM_ID with your endpoint). They arrive in your inbox tagged
-          "Event / collab inquiry". The email link below works with zero setup.
+        ▸ These inquiries POST to /api/contact.js (in-house Vercel function → Resend email).
+          They arrive tagged "Event / collab inquiry". The email link below is a fallback.
       -->
-      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="form" action="/api/contact" method="POST" data-contact-form data-form-type="event" data-success="got it — we'll be in touch soon x">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
         <div><label for="e-name">your name</label><input id="e-name" name="name" type="text" autocomplete="name" required></div>
         <div><label for="e-email">email</label><input id="e-email" name="email" type="email" autocomplete="email" required></div>
         <div><label for="e-phone">phone</label><input id="e-phone" name="phone" type="tel" autocomplete="tel"></div>
@@ -118,7 +118,6 @@
         <div><label for="e-date">preferred date</label><input id="e-date" name="preferred_date" type="date"></div>
         <div><label for="e-guests">guest count</label><input id="e-guests" name="guests" type="number" min="1" placeholder="approx."></div>
         <div class="full"><label for="e-msg">tell us about it</label><textarea id="e-msg" name="message" placeholder="the occasion, the vibe, any flavor requests…" required></textarea></div>
-        <input type="hidden" name="_subject" value="Event / collab inquiry — nudes">
         <div class="submit"><button class="btn" type="submit">send inquiry ··</button></div>
       </form>
       <p class="form-alt">prefer email? write us at <a href="mailto:partnerships@nudesyogurt.com?subject=Event%20%2F%20collab%20inquiry%20%E2%80%94%20nudes">partnerships@nudesyogurt.com</a>.</p>
@@ -133,5 +132,6 @@
   </div>
 </footer>
 
+<script src="forms.js"></script>
 </body>
 </html>

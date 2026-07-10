@@ -194,20 +194,18 @@
     <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove, Los Angeles.</p>
 
     <!--
-      ▸ WAITLIST + CONTACT both post to ONE free Formspree form (no code after one paste):
-        1. Create a free account at https://formspree.io (use info@nudesyogurt.com).
-        2. Make a form; it gives an endpoint like https://formspree.io/f/abcdwxyz
-        3. Replace BOTH occurrences of YOUR_FORM_ID below with that code.
-        Waitlist signups and partnership/press inquiries then both arrive in your inbox,
-        tagged by the "_subject" field. (Tally.so / Mailchimp also work — just ask.)
+      ▸ FORMS: all three forms (waitlist, partnerships, events) POST to /api/contact.js —
+        an in-house Vercel function that emails you via Resend (no third-party form vendor).
+        Setup: add RESEND_API_KEY in Vercel env vars, and verify nudesyogurt.com in Resend
+        to send from your domain. See api/contact.js for details.
     -->
-    <form class="waitlist" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="waitlist" action="/api/contact" method="POST" data-contact-form data-form-type="waitlist" data-success="you're on the list — talk soon x">
       <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
       <div class="field">
         <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
         <button type="submit">join the list</button>
       </div>
-      <input type="hidden" name="_subject" value="New nudes waitlist signup">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
       <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
     </form>
 
@@ -270,7 +268,8 @@
     <span class="modal__label">get in touch</span>
     <h2 id="cmTitle">partnerships &amp; press</h2>
     <p class="modal__sub">Collabs, wholesale, press or events — tell us a little and we'll get right back to you.</p>
-    <form class="cform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="cform" action="/api/contact" method="POST" data-contact-form data-form-type="partnership" data-success="got it — we'll be in touch soon x">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
       <div><label for="c-name">your name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
       <div><label for="c-email">email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
       <div><label for="c-org">company / outlet</label><input id="c-org" name="company" type="text"></div>
@@ -283,7 +282,6 @@
           <option>something else</option>
         </select></div>
       <div><label for="c-msg">message</label><textarea id="c-msg" name="message" placeholder="tell us what you have in mind…" required></textarea></div>
-      <input type="hidden" name="_subject" value="Partnerships / press inquiry — nudes">
       <button class="btn" type="submit">send it ··</button>
     </form>
   </div>
@@ -321,5 +319,6 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
   })();
 </script>
+<script src="forms.js"></script>
 </body>
 </html>
