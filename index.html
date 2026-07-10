@@ -105,15 +105,19 @@
   .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:rgba(58,34,20,.55);display:grid;place-items:center;
     transition:transform .5s cubic-bezier(.2,.7,.2,1),background .35s ease}
   .tile:hover .tile__play{transform:scale(1.14);background:rgba(58,34,20,.78)}
+  .tile__play{z-index:2}
   .tile__play svg{width:12px;height:12px;color:var(--oat);margin-left:1.5px}
   .tile--a{background:var(--espresso);color:var(--oat)}
   .tile--b{background:var(--blush);color:var(--choc)}
   .tile--c{background:var(--taupe);color:var(--cream)}
   .tile--d{background:var(--oat);color:var(--choc)}
   .tile--cta{background:transparent;border:1px solid rgba(220,204,187,.3);color:var(--oat)}
-  .feed__track[hidden]{display:none}
-  .feed__live{display:block;width:100%;max-width:640px;margin:0 auto}
-  .feed__live[hidden]{display:none}
+  /* live feed tiles — real reel thumbnails from the Behold JSON */
+  .tile--live{background:var(--espresso)}
+  .tile__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .tile--live::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top,rgba(24,13,6,.4),transparent 42%)}
+  .tile--live:hover .tile__img{transform:scale(1.06)}
 
   a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--oat);outline-offset:3px}
   ::selection{background:rgba(220,204,187,.25);color:var(--cream)}
@@ -134,7 +138,6 @@
     .feed__head{max-width:none;margin:0 0 1rem}
     .feed__track{flex:1;min-height:0;min-width:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
     .tile{height:min(calc(100svh - 8.5rem),86vh);width:auto;aspect-ratio:9/16}
-    .feed__live{flex:1;min-height:0;min-width:0;max-width:none;margin:0;overflow:hidden}
   }
 
   /* ---- contact modal ---- */
@@ -242,21 +245,18 @@
       <a class="feed__handle" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">follow @nudesyogurt →</a>
     </div>
     <!--
-      ▸ LIVE INSTAGRAM FEED — connect once, no more code: (1) set @nudesyogurt to Professional/Creator (free);
-        (2) create a free feed at behold.so (Carousel layout); (3) put the feed id in <behold-widget feed-id="...">.
-        The branded reel tiles auto-hide once a real feed id is set.
+      ▸ LIVE INSTAGRAM FEED — feed.js fetches the Behold JSON (feed-id below) and renders our own
+        reel cards into this track. Behold is just the auto-updating data source; the look is ours.
+        The branded tiles below are the graceful fallback shown only if the fetch fails.
     -->
-    <div class="feed__track" role="list" data-fallback>
+    <div class="feed__track" role="list" data-feed data-feed-id="pQ5AuOeYfqpM0us18ZhW">
       <a class="tile tile--a" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener" aria-label="nudes on Instagram">
         <svg class="mono" viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
         <span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
       </a>
-      <a class="tile tile--b" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
-      <a class="tile tile--c" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>opening<br>soon</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
-      <a class="tile tile--d" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>beverly<br>grove</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--b" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b></a>
       <a class="tile tile--cta" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>see the<br>feed →</b></a>
     </div>
-    <behold-widget class="feed__live" feed-id="pQ5AuOeYfqpM0us18ZhW" hidden></behold-widget>
   </aside>
 
 </main>
@@ -325,12 +325,9 @@
     });
     document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && openEl) close(); });
-    var feed = document.querySelector('behold-widget');
-    var fb = document.querySelector('[data-fallback]');
-    if (feed && feed.getAttribute('feed-id') && feed.getAttribute('feed-id') !== 'YOUR_BEHOLD_FEED_ID') { feed.hidden = false; if (fb) fb.hidden = true; }
   })();
 </script>
-<script src="https://w.behold.so/widget.js" type="module"></script>
+<script src="feed.js"></script>
 <script src="forms.js"></script>
 </body>
 </html>
