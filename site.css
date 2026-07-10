@@ -72,6 +72,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   background:var(--cream);border:1px solid var(--taupe);border-radius:12px;padding:.8em .9em;transition:border-color .3s}
 .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--espresso)}
 .form textarea{min-height:120px;resize:vertical}
+/* native date input: keep its value left-aligned & the same size as text fields
+   (iOS Safari centers and slightly enlarges it via the shadow-DOM value) */
+.form input[type="date"]{text-align:left}
+.form input[type="date"]::-webkit-date-and-time-value{text-align:left;font-size:1rem;margin:0}
+.form input[type="date"]::-webkit-datetime-edit{line-height:normal;padding:0;color:var(--espresso)}
+.form input[type="date"]:invalid::-webkit-datetime-edit{color:color-mix(in srgb,var(--espresso) 45%,transparent)}
 .form .submit{grid-column:1/-1}
 .form .submit .btn{width:100%;justify-content:center}
 @media (max-width:560px){.form{grid-template-columns:1fr}}
