@@ -80,3 +80,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .post a{color:var(--espresso);text-decoration:underline;text-underline-offset:3px}
 .post blockquote{border-left:3px solid var(--taupe);padding-left:1.2rem;margin:1.5rem 0;
   font-family:var(--display);font-weight:500;font-size:1.2rem;color:var(--espresso)}
+
+/* on-brand custom select */
+.csel{position:relative}
+.csel__btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.5em;
+  font-family:var(--body);font-size:1rem;color:var(--espresso);background:var(--cream);
+  border:1px solid var(--taupe);border-radius:12px;padding:.8em .9em;cursor:pointer;text-align:left;transition:border-color .3s}
+.csel__btn:hover,.csel[aria-expanded="true"] .csel__btn{border-color:var(--espresso)}
+.csel__val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.csel__chev{width:15px;height:15px;color:var(--taupe);flex:none;transition:transform .25s}
+.csel[aria-expanded="true"] .csel__chev{transform:rotate(180deg)}
+.csel__list{position:absolute;z-index:40;top:calc(100% + 6px);left:0;right:0;margin:0;padding:.35rem;list-style:none;
+  background:var(--cream);border:1px solid var(--taupe);border-radius:14px;
+  box-shadow:0 24px 50px -24px rgba(51,30,19,.55);max-height:15rem;overflow:auto}
+.csel__opt{font-family:var(--body);font-size:.98rem;color:var(--espresso);padding:.6em .7em;border-radius:9px;cursor:pointer;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.csel__opt.is-active{background:var(--taupe);color:var(--cream)}
+.csel__opt[aria-selected="true"]{font-weight:600}
+.csel__opt[aria-selected="true"]::after{content:"\2713";float:right;opacity:.7}
