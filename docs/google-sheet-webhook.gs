@@ -27,8 +27,9 @@
  * To change what lands where, edit the TABS map below.
  *
  * BLOG (optional): make ONE more tab named exactly "Posts" with these column
- * headers in row 1 — slug · title · category · cover · date · read · excerpt · body · published
- * Add a row per post and it appears on The Nude automatically. Full guide:
+ * headers in row 1 — slug · title · category · cover · date · read · excerpt · body · publish
+ * Add a row per post and it appears on The Nude automatically. The `publish`
+ * column is a date: future date = scheduled (auto-appears later). Full guide:
  * docs/adding-a-blog-post.md.
  */
 
@@ -79,33 +80,50 @@ function doPost(e) {
 // (The website fetches this via /api/posts, so the sheet itself stays private —
 //  only the Posts tab is ever exposed; your captured emails are not.)
 // Posts tab columns (row 1 headers, any order):
-//   slug · title · category · cover · date · read · excerpt · body · published
+//   slug · title · category · cover · date · read · excerpt · body · publish
+// SCHEDULING: `publish` is a real DATE.
+//   • blank or a past date  -> the post is live now
+//   • a future date         -> scheduled: hidden until that day, then auto-appears
+// `date` is the label shown on the post; leave it blank to auto-use the publish month/year.
 function doGet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Posts');
   if (!sheet || sheet.getLastRow() < 2) return json({ posts: [] });
   var values = sheet.getDataRange().getValues();
   var headers = values[0].map(function (h) { return String(h).trim().toLowerCase(); });
-  var out = [];
+  var tz = ss.getSpreadsheetTimeZone();
+  var now = Date.now();
+  var rows = [];
   for (var i = 1; i < values.length; i++) {
     var obj = {};
     for (var c = 0; c < headers.length; c++) obj[headers[c]] = values[i][c];
-    var published = String(obj.published == null || obj.published === '' ? 'yes' : obj.published).trim().toLowerCase();
-    if (published === 'no' || published === 'false' || published === 'draft' || published === '0') continue;
     if (!obj.slug && !obj.title) continue;
-    out.push({
+
+    // scheduling by the publish date
+    var raw = obj.publish;
+    var when = (raw instanceof Date) ? raw : (raw ? new Date(raw) : null);
+    var valid = when && !isNaN(when.getTime());
+    if (valid && when.getTime() > now) continue;   // future -> not published yet
+    var ts = valid ? when.getTime() : now;          // used for ordering
+
+    // display label: use the free-text `date` cell, else format the publish date
+    var display = String(obj.date || '').trim();
+    if (!display && valid) display = Utilities.formatDate(when, tz, 'MMMM yyyy').toLowerCase();
+
+    rows.push({
+      _ts: ts,
       slug: String(obj.slug || '').trim(),
       title: String(obj.title || '').trim(),
       category: String(obj.category || '').trim(),
       cover: String(obj.cover || '').trim(),
-      date: String(obj.date || '').trim(),
+      date: display,
       read: String(obj.read || '').trim(),
       excerpt: String(obj.excerpt || '').trim(),
       body: String(obj.body || '')
     });
   }
-  out.reverse(); // newest rows (added at the bottom) show first
-  return json({ posts: out });
+  rows.sort(function (a, b) { return b._ts - a._ts; }); // newest publish date first
+  return json({ posts: rows.map(function (r) { delete r._ts; return r; }) });
 }
 
 function json(obj) {
