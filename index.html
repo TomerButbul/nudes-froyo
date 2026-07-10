@@ -49,7 +49,7 @@
 <style>
   :root{
     --espresso:#442917; --espresso-800:#331E13; --oat:#DCCCBB; --taupe:#B5937F;
-    --blush:#CCADA0; --paper:#EBE4D8; --cream:#F8F4EC; --ink:#2A1810;
+    --blush:#CCADA0; --paper:#EBE4D8; --cream:#EFE7D6; --ink:#331E13;
     --pill:100px;
     --display:'Fredoka',system-ui,sans-serif; --body:'Switzer',system-ui,sans-serif;
   }
@@ -72,9 +72,10 @@
   .eyebrow{display:inline-flex;align-items:center;gap:.55em;margin-bottom:1.1rem;
     font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.02em;text-transform:lowercase;
     color:var(--espresso);background:var(--cream);border:1px solid var(--taupe);border-radius:var(--pill);padding:.5em 1.05em}
-  .eyebrow i{width:.5em;height:.5em;border-radius:50%;background:#d99a3c;box-shadow:0 0 10px 1px rgba(217,154,60,.7)}
-  h1{font-family:var(--display);font-weight:600;color:var(--espresso);
-    font-size:clamp(3.6rem,16vw,5.4rem);line-height:.82;letter-spacing:-.045em}
+  .eyebrow i{width:.5em;height:.5em;border-radius:50%;background:#B5937F;box-shadow:0 0 10px 1px rgba(181,147,127,.7)}
+  .wordmark{color:var(--espresso);line-height:0;margin:0}
+  .wordmark__svg{display:block;width:clamp(250px,58vw,360px);height:auto}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .tag{font-family:var(--display);font-weight:500;color:var(--taupe);
     font-size:clamp(1.05rem,3.4vw,1.4rem);letter-spacing:.02em;margin-top:.35rem}
   .sub{max-width:40ch;margin:1rem auto 0;color:color-mix(in srgb,var(--ink) 74%,var(--paper));
@@ -149,7 +150,6 @@
     .split__brand .sub{margin-left:0;margin-right:0}
     .split__brand form.waitlist{margin-left:0;margin-right:0}
     .links{justify-content:flex-start}
-    h1{font-size:clamp(3.4rem,6.4vw,5.8rem)}
     .split__feed{flex:1 1 auto;min-width:0;height:100svh;padding:clamp(1.8rem,2.5vw,2.4rem)}
     .feed__head{max-width:none;margin:0 0 1rem}
     .feed__track{flex:1;min-height:0;min-width:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
@@ -160,7 +160,7 @@
   /* ---- contact modal ---- */
   .modal[hidden]{display:none}
   .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1.4rem}
-  .modal__overlay{position:absolute;inset:0;background:rgba(42,24,16,.5);backdrop-filter:blur(3px)}
+  .modal__overlay{position:absolute;inset:0;background:rgba(51,30,19,.5);backdrop-filter:blur(3px)}
   .modal__box{position:relative;z-index:1;width:100%;max-width:470px;background:var(--cream);
     border:1px solid var(--taupe);border-radius:22px;padding:clamp(1.8rem,4.5vw,2.6rem);
     box-shadow:0 40px 90px -40px rgba(20,10,4,.55);max-height:92svh;overflow-y:auto;text-align:left}
@@ -189,7 +189,7 @@
   <section class="split__brand">
     <svg class="mark" viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
     <span class="eyebrow"><i></i> opening soon · los angeles</span>
-    <h1>nudes</h1>
+    <h1 class="wordmark"><span class="sr-only">nudes</span><svg class="wordmark__svg" viewBox="53.18 350.9 893.65 231.21" fill="currentColor" role="img" aria-label="nudes"><path transform="matrix(1,0,0,-1,59.1763,571.8979)" d="M -0.00051875 -0.0005375 L -0.00051875 87.0229 C -0.00051875 138.214306 30.714325 159.593212 80.6987 159.593212 C 130.683075 159.593212 161.397919 138.214306 161.397919 87.0229 L 161.397919 -0.0005375 L 112.015106 -0.0005375 L 112.015106 87.0229 C 112.015106 105.99165 102.378388 117.737744 80.6987 117.737744 C 59.019012 117.737744 49.382294 105.99165 49.382294 87.0229 L 49.382294 -0.0005375 Z"/><path d="M 244.355469 503.542969 L 244.355469 416.523438 L 293.742188 416.523438 L 293.742188 503.542969 C 293.742188 522.515625 303.375 534.257812 325.054688 534.257812 C 346.738281 534.257812 356.371094 522.515625 356.371094 503.542969 L 356.371094 416.523438 L 405.753906 416.523438 L 405.753906 503.542969 C 405.753906 554.734375 375.042969 576.113281 325.054688 576.113281 C 275.070312 576.113281 244.355469 554.734375 244.355469 503.542969 "/><path d="M 546.070312 494.210938 C 546.070312 469.519531 531.316406 452.65625 509.9375 452.65625 C 489.160156 452.65625 474.402344 465.90625 474.402344 494.210938 C 474.402344 522.515625 489.160156 535.765625 509.9375 535.765625 C 531.316406 535.765625 546.070312 518.902344 546.070312 494.210938 M 423.515625 494.210938 C 423.515625 438.503906 457.542969 412.304688 493.074219 412.304688 C 517.765625 412.304688 531.015625 421.039062 541.554688 435.792969 L 544.566406 435.792969 L 544.566406 356.902344 L 593.949219 356.902344 L 593.949219 571.898438 L 547.574219 571.898438 L 544.566406 552.625 L 541.554688 552.625 C 531.015625 567.078125 517.765625 576.113281 493.074219 576.113281 C 457.542969 576.113281 423.515625 550.21875 423.515625 494.210938 "/><path d="M 730.347656 475.539062 C 727.035156 455.96875 711.980469 448.140625 697.527344 448.140625 C 682.773438 448.140625 668.921875 458.074219 664.703125 475.539062 Z M 614.71875 494.210938 C 614.71875 438.804688 649.347656 412.304688 700.535156 412.304688 C 748.714844 412.304688 779.128906 440.910156 779.128906 489.089844 C 779.128906 494.8125 778.828125 500.835938 777.925781 507.15625 L 663.800781 507.15625 C 666.8125 529.140625 680.664062 540.28125 699.9375 540.28125 C 711.679688 540.28125 721.617188 535.765625 727.035156 528.234375 L 775.214844 528.234375 C 766.179688 555.9375 740.285156 576.113281 700.535156 576.113281 C 648.445312 576.113281 614.71875 548.710938 614.71875 494.210938 "/><path d="M 794.179688 531.847656 C 794.179688 529.441406 794.480469 527.03125 794.78125 524.921875 L 843.5625 524.921875 L 843.5625 526.730469 C 843.5625 534.859375 855.304688 540.28125 867.652344 540.28125 C 878.792969 540.28125 892.042969 537.570312 892.042969 527.332031 C 892.042969 502.640625 794.179688 528.535156 794.179688 463.496094 C 794.179688 431.277344 824.894531 412.304688 865.242188 412.304688 C 914.925781 412.304688 938.113281 430.976562 938.113281 458.375 C 938.113281 460.183594 938.113281 461.6875 937.8125 463.496094 L 889.03125 463.496094 C 889.03125 463.496094 889.332031 462.59375 889.332031 461.386719 C 889.332031 455.367188 883.609375 448.140625 865.242188 448.140625 C 852.296875 448.140625 842.960938 450.847656 842.960938 460.785156 C 842.960938 485.476562 940.824219 459.582031 940.824219 524.320312 C 940.824219 556.539062 911.917969 576.113281 867.652344 576.113281 C 809.535156 576.113281 794.179688 552.023438 794.179688 531.847656 "/></svg></h1>
     <p class="tag">nothing to hide.</p>
     <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove, Los Angeles.</p>
 
@@ -282,7 +282,7 @@
           <option>something else</option>
         </select></div>
       <div><label for="c-msg">message</label><textarea id="c-msg" name="message" placeholder="tell us what you have in mind…" required></textarea></div>
-      <button class="btn" type="submit">send it ··</button>
+      <button class="btn" type="submit">send it</button>
     </form>
   </div>
 </div>

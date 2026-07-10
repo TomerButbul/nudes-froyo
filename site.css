@@ -1,7 +1,7 @@
 /* ===== nudes — shared styles for pre-launch content pages (The Nude blog + Events) ===== */
 :root{
   --espresso:#442917; --espresso-800:#331E13; --oat:#DCCCBB; --taupe:#B5937F;
-  --blush:#CCADA0; --paper:#EBE4D8; --cream:#F8F4EC; --ink:#2A1810; --line:#d9cbb9;
+  --blush:#CCADA0; --paper:#EBE4D8; --cream:#EFE7D6; --ink:#331E13; --line:#d9cbb9;
   --pill:100px; --gut:clamp(1.4rem,5vw,3rem); --maxw:1080px;
   --display:'Fredoka',system-ui,sans-serif; --body:'Switzer',system-ui,sans-serif;
 }
