@@ -33,160 +33,269 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    font-family:var(--body);color:var(--espresso);min-height:100svh;
-    display:grid;place-items:center;padding:clamp(1.5rem,5vw,3rem);
+    font-family:var(--body);color:var(--espresso);min-height:100svh;overflow-x:hidden;
     background:
-      radial-gradient(60% 55% at 82% 10%,rgba(204,173,160,.5),transparent 60%),
-      radial-gradient(55% 50% at 12% 94%,rgba(220,204,187,.55),transparent 60%),
+      radial-gradient(60% 55% at 88% 8%,rgba(204,173,160,.5),transparent 60%),
+      radial-gradient(55% 50% at 8% 96%,rgba(220,204,187,.55),transparent 60%),
       linear-gradient(160deg,var(--paper) 0%,#e2d6c6 120%);
-    overflow-x:hidden;
   }
-  .card{width:100%;max-width:600px;text-align:center;position:relative;z-index:2}
 
-  .mark{width:60px;height:auto;margin:0 auto 1.5rem;display:block;color:var(--espresso)}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:.55em;margin-bottom:1.5rem;
-    font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.02em;
-    text-transform:lowercase;color:var(--espresso);
-    background:var(--cream);border:1px solid var(--taupe);border-radius:var(--pill);padding:.5em 1.05em;
-  }
+  .split{display:flex;flex-direction:column;min-height:100svh}
+
+  /* ---- brand column ---- */
+  .split__brand{display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:clamp(2rem,7vw,2.6rem)}
+  .mark{width:52px;height:auto;margin-bottom:1.1rem;color:var(--espresso)}
+  .eyebrow{display:inline-flex;align-items:center;gap:.55em;margin-bottom:1.1rem;
+    font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.02em;text-transform:lowercase;
+    color:var(--espresso);background:var(--cream);border:1px solid var(--taupe);border-radius:var(--pill);padding:.5em 1.05em}
   .eyebrow i{width:.5em;height:.5em;border-radius:50%;background:#d99a3c;box-shadow:0 0 10px 1px rgba(217,154,60,.7)}
-
   h1{font-family:var(--display);font-weight:600;color:var(--espresso);
-    font-size:clamp(4.2rem,20vw,9.5rem);line-height:.82;letter-spacing:-.045em}
+    font-size:clamp(3.6rem,16vw,5.4rem);line-height:.82;letter-spacing:-.045em}
   .tag{font-family:var(--display);font-weight:500;color:var(--taupe);
-    font-size:clamp(1.05rem,3.4vw,1.5rem);letter-spacing:.02em;margin-top:.4rem}
-  .sub{max-width:42ch;margin:1.4rem auto 0;color:color-mix(in srgb,var(--ink) 74%,var(--paper));
-    font-size:clamp(1rem,2.2vw,1.1rem);line-height:1.55}
+    font-size:clamp(1.05rem,3.4vw,1.4rem);letter-spacing:.02em;margin-top:.35rem}
+  .sub{max-width:40ch;margin:1rem auto 0;color:color-mix(in srgb,var(--ink) 74%,var(--paper));
+    font-size:clamp(.98rem,2.2vw,1.06rem);line-height:1.5}
 
-  /* instagram feed carousel */
-  .feed{margin:2.6rem 0 0;text-align:left}
-  .feed__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.9rem;padding:0 .15rem}
-  .feed__label{font-family:var(--display);font-weight:600;font-size:.78rem;text-transform:lowercase;letter-spacing:.08em;color:var(--taupe)}
-  .feed__handle{font-family:var(--display);font-weight:600;font-size:.85rem;text-transform:lowercase;
-    color:var(--espresso);text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:1px;transition:border-color .3s}
-  .feed__handle:hover,.feed__handle:focus-visible{border-color:var(--espresso);outline:none}
-  .feed__track{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;
-    padding-bottom:.5rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .feed__track::-webkit-scrollbar{display:none}
-  .tile{flex:0 0 auto;width:clamp(128px,38vw,152px);aspect-ratio:1;border-radius:16px;scroll-snap-align:start;
-    display:grid;place-items:center;text-decoration:none;text-align:center;transition:transform .35s ease}
-  .tile:hover{transform:translateY(-3px)}
-  .tile svg{width:42px;height:auto}
-  .tile b{font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1.02;text-transform:lowercase;padding:0 .8rem}
-  .tile--espresso{background:var(--espresso);color:var(--oat)}
-  .tile--blush{background:var(--blush);color:var(--cream)}
-  .tile--taupe{background:var(--taupe);color:var(--cream)}
-  .tile--oat{background:var(--oat);color:var(--espresso)}
-  .tile--cta{background:var(--cream);border:1.5px solid var(--taupe);color:var(--espresso)}
-  .tile--cta b{font-size:.95rem}
-
-  form{margin:2.4rem auto 0;max-width:440px}
+  form.waitlist{margin:1.4rem auto 0;max-width:420px;width:100%}
   .field{display:flex;gap:.5rem;background:var(--cream);border:1px solid var(--taupe);
     border-radius:var(--pill);padding:.4rem .4rem .4rem 1.2rem;align-items:center}
   .field input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:1rem;color:var(--espresso);min-width:0}
   .field input::placeholder{color:color-mix(in srgb,var(--taupe) 90%,var(--espresso))}
   .field input:focus{outline:none}
-  .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;
-    font-size:.9rem;text-transform:lowercase;letter-spacing:.03em;color:var(--oat);
-    background:var(--espresso);border-radius:var(--pill);padding:.75em 1.5em;transition:background .3s}
+  .field button{flex:none;cursor:pointer;border:0;font-family:var(--display);font-weight:600;font-size:.9rem;
+    text-transform:lowercase;letter-spacing:.03em;color:var(--oat);background:var(--espresso);
+    border-radius:var(--pill);padding:.75em 1.5em;transition:background .3s}
   .field button:hover{background:var(--espresso-800)}
   .field:focus-within{border-color:var(--espresso)}
-  .microcopy{margin-top:.8rem;font-size:.82rem;color:color-mix(in srgb,var(--ink) 55%,var(--paper))}
+  .microcopy{margin-top:.7rem;font-size:.8rem;color:color-mix(in srgb,var(--ink) 55%,var(--paper))}
 
-  .links{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
-  .links a{display:inline-flex;align-items:center;gap:.5em;font-family:var(--display);
-    font-weight:500;font-size:.92rem;text-transform:lowercase;color:var(--espresso);
-    text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:2px;transition:border-color .3s}
-  .links a:hover,.links a:focus-visible{border-color:var(--espresso);outline:none}
+  .links{display:flex;gap:1.3rem;justify-content:center;flex-wrap:wrap;margin-top:1.3rem}
+  .links a,.links .link-btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--display);
+    font-weight:500;font-size:.92rem;text-transform:lowercase;color:var(--espresso);text-decoration:none;
+    border:0;background:none;cursor:pointer;padding:0 0 2px;border-bottom:1.5px solid transparent;transition:border-color .3s}
+  .links a:hover,.links a:focus-visible,.links .link-btn:hover,.links .link-btn:focus-visible{border-color:var(--espresso);outline:none}
   .links svg{width:17px;height:17px}
 
-  .addr{display:inline-flex;align-items:center;gap:.5em;margin-top:2.2rem;font-family:var(--body);
-    font-size:.92rem;color:color-mix(in srgb,var(--ink) 66%,var(--paper));text-decoration:none;
-    border-bottom:1px solid transparent;transition:border-color .3s}
+  .find{margin-top:1.4rem}
+  .find__label{display:block;font-family:var(--display);font-weight:600;font-size:.74rem;
+    text-transform:lowercase;letter-spacing:.08em;color:var(--taupe);margin-bottom:.6rem}
+  .addr{display:inline-flex;align-items:center;gap:.55em;font-family:var(--display);font-weight:500;
+    font-size:clamp(1.05rem,2.8vw,1.26rem);line-height:1.3;text-align:left;color:var(--espresso);text-decoration:none;
+    border-bottom:1.5px solid transparent;padding-bottom:3px;transition:border-color .3s}
   .addr:hover,.addr:focus-visible{border-color:var(--taupe);outline:none}
-  .addr svg{width:15px;height:15px;color:var(--taupe);flex:none}
+  .addr svg{width:20px;height:20px;color:var(--taupe);flex:none}
 
-  footer{margin-top:1.4rem;font-family:var(--display);font-weight:500;font-size:.74rem;
-    text-transform:lowercase;letter-spacing:.04em;color:var(--taupe)}
+  /* ---- instagram feed ---- */
+  .split__feed{padding:0 clamp(1.2rem,6vw,1.6rem) clamp(2rem,7vw,2.6rem);display:flex;flex-direction:column}
+  .feed__head{display:flex;justify-content:space-between;align-items:baseline;margin:0 auto .8rem;max-width:640px;width:100%}
+  .feed__label{font-family:var(--display);font-weight:600;font-size:.78rem;text-transform:lowercase;letter-spacing:.08em;color:var(--taupe)}
+  .feed__handle{font-family:var(--display);font-weight:600;font-size:.85rem;text-transform:lowercase;color:var(--espresso);
+    text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:1px;transition:border-color .3s}
+  .feed__handle:hover,.feed__handle:focus-visible{border-color:var(--espresso);outline:none}
+  .feed__track{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:640px;width:100%;margin:0 auto}
+  .feed__track::-webkit-scrollbar{display:none}
+  .tile{flex:0 0 auto;width:clamp(214px,66vw,252px);aspect-ratio:9/16;border-radius:20px;scroll-snap-align:start;
+    display:grid;place-items:center;text-decoration:none;text-align:center;position:relative;overflow:hidden;transition:transform .35s ease}
+  .tile:hover{transform:translateY(-4px)}
+  .tile .mono{width:58px;height:auto}
+  .tile b{font-family:var(--display);font-weight:600;font-size:1.6rem;line-height:1.02;text-transform:lowercase;padding:0 1rem}
+  .tile__play{position:absolute;left:14px;bottom:14px;width:30px;height:30px;border-radius:50%;
+    background:rgba(248,244,236,.92);display:grid;place-items:center}
+  .tile__play svg{width:12px;height:12px;color:var(--espresso);margin-left:1.5px}
+  .tile--espresso{background:var(--espresso);color:var(--oat)}
+  .tile--blush{background:var(--blush);color:var(--cream)}
+  .tile--taupe{background:var(--taupe);color:var(--cream)}
+  .tile--oat{background:var(--oat);color:var(--espresso)}
+  .tile--cta{background:var(--cream);border:1.5px solid var(--taupe);color:var(--espresso)}
+  .tile--cta b{font-size:1.05rem}
+  .feed__live{display:block;width:100%;max-width:640px;margin:0 auto}
 
-  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--espresso);outline-offset:3px}
-  @media (max-width:480px){ .links{gap:1rem} .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--espresso);outline-offset:3px}
+  @media (max-width:480px){ .field{flex-wrap:wrap;border-radius:22px} .field button{width:100%} }
+
+  /* ---- desktop: two columns, single screen, tall feed ---- */
+  @media (min-width:960px){
+    body{overflow:hidden}
+    .split{flex-direction:row;height:100svh}
+    .split__brand{flex:1 1 50%;align-items:flex-start;text-align:left;justify-content:center;
+      padding:clamp(2.5rem,5vw,4.5rem);max-height:100svh;overflow-y:auto}
+    .split__brand .sub{margin-left:0;margin-right:0}
+    .split__brand form.waitlist{margin-left:0;margin-right:0}
+    .links{justify-content:flex-start}
+    h1{font-size:clamp(3.4rem,6.4vw,5.8rem)}
+    .split__feed{flex:1 1 50%;height:100svh;padding:clamp(1.8rem,3vw,2.8rem)}
+    .feed__head{max-width:none;margin:0 0 1rem}
+    .feed__track{flex:1;min-height:0;max-width:none;margin:0;align-items:center;padding-bottom:0}
+    .tile{height:min(calc(100svh - 9.5rem),84vh);width:auto;aspect-ratio:9/16}
+    .feed__live{flex:1;min-height:0;max-width:none;margin:0}
+  }
+
+  /* ---- contact modal ---- */
+  .modal[hidden]{display:none}
+  .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1.4rem}
+  .modal__overlay{position:absolute;inset:0;background:rgba(42,24,16,.5);backdrop-filter:blur(3px)}
+  .modal__box{position:relative;z-index:1;width:100%;max-width:470px;background:var(--cream);
+    border:1px solid var(--taupe);border-radius:22px;padding:clamp(1.8rem,4.5vw,2.6rem);
+    box-shadow:0 40px 90px -40px rgba(20,10,4,.55);max-height:92svh;overflow-y:auto;text-align:left}
+  .modal__close{position:absolute;top:.85rem;right:1rem;background:none;border:0;cursor:pointer;
+    font-family:var(--display);font-size:1.05rem;color:var(--taupe);line-height:1}
+  .modal__close:hover{color:var(--espresso)}
+  .modal__label{font-family:var(--display);font-weight:600;font-size:.74rem;text-transform:lowercase;letter-spacing:.08em;color:var(--taupe)}
+  .modal h2{font-family:var(--display);font-weight:600;font-size:1.9rem;color:var(--espresso);text-transform:lowercase;margin:.3rem 0 .5rem;line-height:1}
+  .modal__sub{font-size:.94rem;color:color-mix(in srgb,var(--ink) 62%,var(--paper));line-height:1.5}
+  .cform{display:grid;gap:.75rem;margin-top:1.3rem}
+  .cform label{display:block;font-family:var(--display);font-weight:500;font-size:.74rem;text-transform:lowercase;letter-spacing:.05em;color:var(--taupe);margin-bottom:.35rem}
+  .cform input,.cform select,.cform textarea{width:100%;font-family:var(--body);font-size:.98rem;color:var(--espresso);
+    background:var(--paper);border:1px solid var(--taupe);border-radius:12px;padding:.75em .9em;transition:border-color .3s}
+  .cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--espresso)}
+  .cform textarea{min-height:92px;resize:vertical}
+  .cform .btn{width:100%;cursor:pointer;border:0;margin-top:.3rem;font-family:var(--display);font-weight:600;
+    font-size:.95rem;text-transform:lowercase;letter-spacing:.03em;color:var(--oat);background:var(--espresso);
+    border-radius:var(--pill);padding:.85em 1.5em;transition:background .3s}
+  .cform .btn:hover{background:var(--espresso-800)}
 </style>
 </head>
 <body>
-<main class="card">
+<main class="split">
 
-  <!-- nu monogram (logo) -->
-  <svg class="mark" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/>
-  </svg>
+  <!-- ===== brand ===== -->
+  <section class="split__brand">
+    <svg class="mark" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/>
+    </svg>
+    <span class="eyebrow"><i></i> opening soon · los angeles</span>
+    <h1>nudes</h1>
+    <p class="tag">nothing to hide.</p>
+    <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove, Los Angeles.</p>
 
-  <span class="eyebrow"><i></i> opening soon · los angeles</span>
+    <!--
+      ▸ WAITLIST + CONTACT both post to ONE free Formspree form (no code after one paste):
+        1. Create a free account at https://formspree.io (use info@nudesyogurt.com).
+        2. Make a form; it gives an endpoint like https://formspree.io/f/abcdwxyz
+        3. Replace BOTH occurrences of YOUR_FORM_ID below with that code.
+        Waitlist signups and partnership/press inquiries then both arrive in your inbox,
+        tagged by the "_subject" field. (Tally.so / Mailchimp also work — just ask.)
+    -->
+    <form class="waitlist" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+      <div class="field">
+        <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
+        <button type="submit">join the list</button>
+      </div>
+      <input type="hidden" name="_subject" value="New nudes waitlist signup">
+      <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
+    </form>
 
-  <h1>nudes</h1>
-  <p class="tag">nothing to hide.</p>
-  <p class="sub">Mediterranean frozen yogurt — clean ingredients, elevated design. Our first boutique is on the way to Beverly Grove, Los Angeles.</p>
+    <div class="links">
+      <button type="button" class="link-btn" data-open-modal aria-haspopup="dialog" aria-controls="contactModal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        partnerships &amp; press
+      </button>
+      <a href="mailto:info@nudesyogurt.com?subject=Hello%20%E2%80%94%20nudes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        say hello
+      </a>
+    </div>
 
-  <!-- ===== instagram feed carousel ===== -->
-  <section class="feed" aria-label="Instagram">
+    <div class="find">
+      <span class="find__label">the boutique</span>
+      <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=165+S+Crescent+Heights+Blvd+Los+Angeles+CA+90048" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>165 S Crescent Heights Blvd<br>Los Angeles, CA 90048</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== instagram feed ===== -->
+  <aside class="split__feed" aria-label="Instagram">
     <div class="feed__head">
       <span class="feed__label">the feed</span>
       <!-- TODO: confirm real Instagram handle/URL -->
       <a class="feed__handle" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener">follow @nudesyogurt →</a>
     </div>
     <!--
-      ▸ LIVE INSTAGRAM CAROUSEL — replace the .feed__track block below with your widget embed.
-        Connect @nudesyogurt once in a no-code widget (e.g. Behold.so or SnapWidget), choose the
-        CAROUSEL/slider layout, and paste its embed snippet here. Setup steps provided separately.
-        Until then, these branded tiles keep the page looking finished and all link to Instagram.
+      ▸ LIVE INSTAGRAM FEED (auto-updating, plays reels/video inline). The <behold-widget> is already
+        wired below — you only connect your account once and paste your feed id:
+        (1) Set @nudesyogurt to a Professional/Creator account (free): IG app → Settings → Account type.
+        (2) At behold.so, create a free feed, connect @nudesyogurt, choose the Carousel layout.
+        (3) Copy the feed id into <behold-widget feed-id="..."> below (replace YOUR_BEHOLD_FEED_ID).
+        The branded tiles then auto-hide and your live posts appear — and keep updating as you post.
     -->
-    <div class="feed__track" role="list">
+    <div class="feed__track" role="list" data-fallback>
       <a class="tile tile--espresso" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener" aria-label="nudes on Instagram">
-        <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+        <svg class="mono" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+        <span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
       </a>
-      <a class="tile tile--blush" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b></a>
-      <a class="tile tile--taupe" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>opening<br>soon</b></a>
-      <a class="tile tile--oat" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>beverly<br>grove</b></a>
+      <a class="tile tile--blush" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>nothing<br>to hide.</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--taupe" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>opening<br>soon</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
+      <a class="tile tile--oat" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>beverly<br>grove</b><span class="tile__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></a>
       <a class="tile tile--cta" role="listitem" href="https://instagram.com/nudesyogurt" target="_blank" rel="noopener"><b>see the<br>feed →</b></a>
     </div>
-  </section>
-
-  <!--
-    ▸ WAITLIST — to actually collect these emails (no code after one paste):
-      1. Create a free account at https://formspree.io (use info@nudesyogurt.com).
-      2. Make a new form; it gives you an endpoint like https://formspree.io/f/abcdwxyz
-      3. Replace YOUR_FORM_ID in the action below with that code.
-      Signups then arrive in your inbox + Formspree dashboard. (Tally.so or Mailchimp work too.)
-  -->
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
-    <div class="field">
-      <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" required>
-      <button type="submit">join the list</button>
-    </div>
-    <input type="hidden" name="_subject" value="New nudes waitlist signup">
-    <p class="microcopy">be first in line when the doors open. no spam, ever.</p>
-  </form>
-
-  <div class="links">
-    <a href="mailto:partnerships@nudesyogurt.com?subject=Partnership%20%2F%20press%20%E2%80%94%20nudes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      partnerships &amp; press
-    </a>
-    <a href="mailto:info@nudesyogurt.com?subject=Hello%20%E2%80%94%20nudes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      say hello
-    </a>
-  </div>
-
-  <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=161+S+Crescent+Heights+Blvd+Los+Angeles+CA+90048" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-    161 S Crescent Heights Blvd · Los Angeles, CA 90048
-  </a>
-
-  <footer>© 2026 nudes · beverly grove, los angeles</footer>
+    <behold-widget class="feed__live" feed-id="YOUR_BEHOLD_FEED_ID" hidden></behold-widget>
+  </aside>
 
 </main>
+
+<!-- ===== partnerships & press contact modal ===== -->
+<div class="modal" id="contactModal" hidden>
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+    <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    <span class="modal__label">get in touch</span>
+    <h2 id="cmTitle">partnerships &amp; press</h2>
+    <p class="modal__sub">Collabs, wholesale, press or events — tell us a little and we'll get right back to you.</p>
+    <form class="cform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div><label for="c-name">your name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
+      <div><label for="c-email">email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+      <div><label for="c-org">company / outlet</label><input id="c-org" name="company" type="text"></div>
+      <div><label for="c-type">reason</label>
+        <select id="c-type" name="reason">
+          <option>partnership / collab</option>
+          <option>press / media</option>
+          <option>wholesale</option>
+          <option>event / catering</option>
+          <option>something else</option>
+        </select></div>
+      <div><label for="c-msg">message</label><textarea id="c-msg" name="message" placeholder="tell us what you have in mind…" required></textarea></div>
+      <input type="hidden" name="_subject" value="Partnerships / press inquiry — nudes">
+      <button class="btn" type="submit">send it ··</button>
+    </form>
+  </div>
+</div>
+
+<!-- Behold.so — live Instagram feed (renders your real posts/reels once your feed id is set above) -->
+<script src="https://w.behold.so/widget.js" type="module"></script>
+
+<script>
+  (function () {
+    // When a real Behold feed id is set, reveal the live feed and hide the placeholder tiles.
+    var feed = document.querySelector('behold-widget');
+    var fallback = document.querySelector('[data-fallback]');
+    if (feed && feed.getAttribute('feed-id') && feed.getAttribute('feed-id') !== 'YOUR_BEHOLD_FEED_ID') {
+      feed.hidden = false;
+      if (fallback) fallback.hidden = true;
+    }
+
+    var modal = document.getElementById('contactModal');
+    var lastFocus = null;
+    function openModal() {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var first = modal.querySelector('input, select, textarea, button');
+      if (first) first.focus();
+    }
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    document.querySelectorAll('[data-open-modal]').forEach(function (b) { b.addEventListener('click', openModal); });
+    modal.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+  })();
+</script>
 </body>
 </html>
