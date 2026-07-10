@@ -85,7 +85,8 @@
   .links a:hover,.links a:focus-visible,.links .link-btn:hover,.links .link-btn:focus-visible{color:var(--champ);outline:none}
   .find{margin-top:clamp(1.4rem,3vh,1.9rem);display:flex;flex-direction:column;gap:.35rem}
   .find__label{font-family:var(--display);font-weight:500;font-size:.68rem;letter-spacing:.06em;text-transform:lowercase;color:var(--taupe)}
-  .addr{font-weight:300;font-size:.9rem;color:color-mix(in srgb,var(--oat) 60%,transparent);text-decoration:none;transition:color .3s}
+  .addr{font-family:var(--display);font-weight:500;font-size:clamp(1.05rem,2.3vw,1.24rem);line-height:1.35;color:var(--oat);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .3s,color .3s}
+  .addr:hover,.addr:focus-visible{border-color:var(--taupe);color:var(--champ);outline:none}
   .addr:hover,.addr:focus-visible{color:var(--oat);outline:none}
 
   /* feed */
@@ -94,7 +95,8 @@
   .feed__label{font-family:var(--display);font-weight:500;font-size:.8rem;letter-spacing:.05em;text-transform:lowercase;color:var(--taupe)}
   .feed__handle{font-family:var(--display);font-weight:500;font-size:.84rem;text-transform:lowercase;color:var(--oat);text-decoration:none;transition:color .3s}
   .feed__handle:hover,.feed__handle:focus-visible{color:var(--champ);outline:none}
-  .feed__track{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;max-width:640px;width:100%;margin:0 auto;min-width:0}
+  .feed__track{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;max-width:640px;width:100%;margin:0 auto;min-width:0;
+    -webkit-mask-image:linear-gradient(to right,#000 80%,transparent 99%);mask-image:linear-gradient(to right,#000 80%,transparent 99%)}
   .feed__track::-webkit-scrollbar{display:none}
   .tile{flex:0 0 auto;width:clamp(200px,54vw,246px);aspect-ratio:9/16;border-radius:22px;scroll-snap-align:start;display:grid;place-items:center;text-decoration:none;text-align:center;overflow:hidden;position:relative;transition:transform .4s ease}
   .tile:hover{transform:translateY(-4px)}
@@ -118,7 +120,7 @@
     body{overflow:hidden}
     .split{flex-direction:row;height:100svh}
     .brand{flex:0 0 clamp(360px,40vw,520px);min-width:0;justify-content:center;align-items:flex-start;text-align:left;
-      padding:clamp(2.5rem,4vw,3.5rem);margin-left:max(0px,calc((100vw - 1200px) / 2));max-height:100svh;overflow-y:auto}
+      padding:clamp(2.5rem,4vw,3.5rem);margin-left:clamp(.5rem,3vw,2.5rem);max-height:100svh;overflow-y:auto}
     .brand .eyebrow,.brand form.waitlist,.brand .find{align-self:flex-start}
     .links{justify-content:flex-start}
     .sub{margin-left:0;margin-right:0}
