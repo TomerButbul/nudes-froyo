@@ -3,236 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23442917'/%3E%3Cpath d='M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14' fill='none' stroke='%23DCCCBB' stroke-width='21' stroke-linecap='round' stroke-linejoin='round' transform='translate(0 5.25) scale(0.25)'/%3E%3C/svg%3E">
-<title>nudes — Private Events in Los Angeles</title>
-<meta name="description" content="Host your event at nudes — private buyouts, birthdays, team days, brand shoots and froyo-cart catering at our Beverly Grove boutique in Los Angeles. Start an inquiry.">
+<title>Events &amp; Collabs — Private &amp; Branded Events | nudes Los Angeles</title>
+<meta name="description" content="Host private events, brand activations, shoots and collabs with nudes — Mediterranean frozen yogurt in Beverly Grove, Los Angeles. Buyouts, celebrations, corporate, and a froyo cart that comes to you. Start an inquiry.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#442917">
 <link rel="canonical" href="https://nudesyogurt.com/events.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="nudes">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="nudes — Private Events in Los Angeles">
-<meta property="og:description" content="Private buyouts, birthdays, team days, brand shoots and froyo-cart catering at our Beverly Grove boutique. Start an inquiry.">
+<meta property="og:title" content="Events & Collabs — nudes Los Angeles">
+<meta property="og:description" content="Private events, brand activations, shoots and collabs with nudes. Buyouts, celebrations, corporate, and a froyo cart to you.">
 <meta property="og:url" content="https://nudesyogurt.com/events.html">
-<meta property="og:image" content="https://nudesyogurt.com/images/store-duo.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="nudes — Private Events in Los Angeles">
-<meta name="twitter:description" content="Private buyouts, birthdays, team days, brand shoots and froyo-cart catering at our Beverly Grove boutique. Start an inquiry.">
-<meta name="twitter:image" content="https://nudesyogurt.com/images/store-duo.jpg">
+<meta name="twitter:title" content="Events & Collabs — nudes Los Angeles">
+<meta name="twitter:description" content="Private events, brand activations, shoots and collabs with nudes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nudes.css?v=22">
+<link rel="stylesheet" href="site.css">
 <style>
-/* ---------- private events ---------- */
-.p-day .pe-hero{position:relative;min-height:86svh;display:flex;align-items:center;overflow:hidden;
-  background:radial-gradient(52% 55% at 84% 22%,rgba(230,200,140,.45),transparent 60%),
-             linear-gradient(155deg,var(--paper) 0%,var(--blush) 135%)}
-.p-day .pe-hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);
-  align-items:center;width:100%;position:relative;z-index:2;
-  padding-top:calc(var(--topbar-h) + var(--nav-h));padding-bottom:clamp(2rem,5vh,4rem)}
-.p-day .pe-hero h1{font-size:clamp(3rem,8.5vw,7rem);line-height:.86;letter-spacing:-.04em;color:var(--espresso)}
-.p-day .pe-hero .lede{max-width:44ch;margin-top:1.3rem;color:color-mix(in srgb,var(--ink) 82%,var(--paper))}
-.p-day .pe-hero .row{margin-top:2.2rem}
-.p-day .pe-hero__media .media{aspect-ratio:4/5;border-radius:50% 50% 26px 26px/42% 42% 26px 26px}
-.p-day .pill-tag{display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.3rem;
-  font-family:var(--display);font-weight:600;font-size:.82rem;text-transform:lowercase;
-  color:var(--espresso);background:var(--cream);border:1px solid var(--taupe);border-radius:var(--pill);padding:.5em 1.05em}
-.p-day .pill-tag i{width:.55em;height:.55em;border-radius:50%;background:#d99a3c;box-shadow:0 0 10px 1px rgba(217,154,60,.7)}
-@media (max-width:820px){
-  .p-day .pe-hero{min-height:auto;padding-block:clamp(2rem,6vh,4rem)}
-  .p-day .pe-hero__grid{grid-template-columns:1fr;gap:2.4rem}
-  .p-day .pe-hero__media{width:78%;max-width:330px;margin-inline:auto}
-}
-
-/* what we host */
-.p-day .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}
-.p-day .way{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:1.7rem 1.5rem;
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.p-day .way:hover{transform:translateY(-4px);box-shadow:0 22px 44px -30px rgba(42,24,16,.55)}
-.p-day .way__n{font-family:var(--display);font-weight:600;color:var(--taupe);font-size:.82rem}
-.p-day .way h3{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.35rem;
-  text-transform:lowercase;letter-spacing:-.01em;margin:.4rem 0 .55rem}
-.p-day .way p{color:color-mix(in srgb,var(--ink) 62%,var(--paper));font-size:.95rem;line-height:1.5}
-@media (max-width:820px){.p-day .ways{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.p-day .ways{grid-template-columns:1fr}}
-
-/* how it works */
-.p-day .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,2.6rem)}
-.p-day .step{padding-top:1.3rem;border-top:2px solid var(--taupe)}
-.p-day .step .num{font-family:var(--display);font-weight:600;color:var(--taupe);font-size:.9rem}
-.p-day .step h4{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.25rem;
-  text-transform:lowercase;margin:.4rem 0 .5rem}
-.p-day .step p{color:color-mix(in srgb,var(--ink) 62%,var(--paper));font-size:.95rem;line-height:1.5}
-@media (max-width:720px){.p-day .steps{grid-template-columns:1fr}}
-
-/* inquiry */
-.p-day .booth{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
-.p-day .booth .media{aspect-ratio:4/5;border-radius:22px}
-@media (max-width:860px){.p-day .booth{grid-template-columns:1fr}.p-day .booth .media{display:none}}
-.p-day .bform{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.p-day .bform .full{grid-column:1 / -1}
-.p-day .bform label{display:block;font-family:var(--display);font-weight:500;font-size:.76rem;
-  text-transform:lowercase;letter-spacing:.05em;color:var(--taupe);margin-bottom:.4rem}
-.p-day .bform input,.p-day .bform select,.p-day .bform textarea{width:100%;font-family:var(--body);
-  font-size:.98rem;color:var(--espresso);background:var(--cream);border:1px solid var(--line);
-  border-radius:12px;padding:.8em .9em;transition:border-color .3s}
-.p-day .bform input:focus,.p-day .bform select:focus,.p-day .bform textarea:focus{outline:none;border-color:var(--taupe)}
-.p-day .bform textarea{min-height:120px;resize:vertical}
-.p-day .bform .submit{grid-column:1 / -1;margin-top:.3rem}
-.p-day .bform .submit .btn{width:100%;cursor:pointer;border:0}
-.p-day .form-alt{margin-top:1.1rem;font-size:.9rem;color:color-mix(in srgb,var(--ink) 60%,var(--paper))}
-.p-day .form-alt a{color:var(--espresso);text-decoration:underline;text-underline-offset:3px}
-@media (max-width:520px){.p-day .bform{grid-template-columns:1fr}}
+  .ev-hero{padding:clamp(2.5rem,7vw,4.5rem) 0 clamp(1.5rem,4vw,2.5rem)}
+  .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.5rem);padding-bottom:clamp(2rem,5vw,3rem)}
+  .way{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.5rem;transition:transform .35s ease,box-shadow .35s}
+  .way:hover{transform:translateY(-4px);box-shadow:0 22px 44px -30px rgba(42,24,16,.5)}
+  .way__n{font-family:var(--display);font-weight:600;color:var(--taupe);font-size:.82rem}
+  .way h3{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.3rem;text-transform:lowercase;margin:.4rem 0 .5rem}
+  .way p{color:color-mix(in srgb,var(--ink) 62%,var(--paper));font-size:.95rem}
+  @media(max-width:820px){.ways{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.ways{grid-template-columns:1fr}}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,2.4rem);padding:clamp(1.5rem,4vw,2.5rem) 0}
+  .step{padding-top:1.2rem;border-top:2px solid var(--taupe)}
+  .step .num{font-family:var(--display);font-weight:600;color:var(--taupe);font-size:.9rem}
+  .step h4{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.2rem;text-transform:lowercase;margin:.4rem 0 .5rem}
+  .step p{color:color-mix(in srgb,var(--ink) 62%,var(--paper));font-size:.95rem}
+  @media(max-width:720px){.steps{grid-template-columns:1fr}}
+  .inquire{background:var(--espresso);border-radius:24px;padding:clamp(1.8rem,4vw,3rem);margin-bottom:clamp(2rem,5vw,3rem)}
+  .inquire .eyebrow{color:var(--blush)}
+  .inquire h2{color:var(--cream)}
+  .inquire .lede{color:rgba(220,204,187,.9)}
+  .inquire .form input,.inquire .form select,.inquire .form textarea{background:color-mix(in srgb,var(--paper) 96%,white);border-color:transparent}
+  .inquire .form label{color:var(--oat)}
+  .inquire .form .btn{background:var(--oat);color:var(--espresso)}
+  .inquire .form .btn:hover{background:var(--cream)}
+  .form-alt{margin-top:1rem;font-size:.9rem;color:rgba(220,204,187,.85)}
+  .form-alt a{color:var(--oat);text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
-<body class="p-day" data-intro>
+<body>
 
-<div class="topbar"><div class="ticker">
-  <span>private events ·· buyouts ·· birthdays ·· team offsites ·· brand shoots ·· froyo catering ··</span>
-  <span>private events ·· buyouts ·· birthdays ·· team offsites ·· brand shoots ·· froyo catering ··</span>
-</div></div>
-
-<header class="nav"><div class="nav__inner">
-  <a class="wordmark nav__logo" href="index.html">nudes</a>
-  <nav class="nav__links">
-    <a href="menu.html">flavors</a>
-    <a href="about.html">story</a>
-    <a href="visit.html">visit</a>
-    <a href="lookbook.html">lookbook</a>
-    <a href="events.html" class="nav__events" aria-current="page">events</a>
+<header class="topnav">
+  <a class="topnav__logo" href="/" aria-label="nudes home">
+    <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg>
+  </a>
+  <nav class="topnav__links">
+    <a href="/the-nude.html">the nude</a>
+    <a href="/events.html" aria-current="page">events</a>
   </nav>
-  <div class="nav__cta">
-    <a class="btn" href="#inquire">enquire</a>
-  </div>
-  <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-</div></header>
+</header>
 
-<div class="menu" id="menu">
-  <button class="menu__close">close ✕</button>
-  <a href="menu.html"><span>flavors</span><small>01</small></a>
-  <a href="about.html"><span>story</span><small>02</small></a>
-  <a href="visit.html"><span>visit</span><small>03</small></a>
-  <a href="lookbook.html"><span>lookbook</span><small>04</small></a>
-  <a href="events.html"><span>events</span><small>05</small></a>
-  <div class="menu__foot"><span>mare nostrum</span><span>@nudesyogurt</span></div>
-</div>
+<main>
+  <section class="wrap ev-hero">
+    <span class="eyebrow">private &amp; branded events</span>
+    <h1 class="h1" style="margin-top:.5rem">events &amp; collabs</h1>
+    <p class="lede" style="margin-top:1.1rem">buyouts, birthdays, brand activations, shoots and partnerships — take over our Beverly Grove boutique, or bring the froyo cart to you. tell us what you're planning and we'll build it.</p>
+  </section>
 
-<!-- ===== hero ===== -->
-<section class="pe-hero grain">
-  <div class="pe-hero__grid wrap">
-    <div class="pe-hero__copy">
-      <span class="pill-tag reveal"><i></i> private events · beverly grove</span>
-      <h1 class="reveal" style="--d:60ms">your event,<br>our swirl</h1>
-      <p class="lede reveal" style="--d:160ms">birthdays, showers, team days, brand shoots — take over our Beverly Grove boutique, or bring the froyo cart to you. tell us what you're planning and we'll build it.</p>
-      <div class="row reveal" style="--d:260ms">
-        <a class="btn" href="#inquire">start an inquiry</a>
-        <a class="btn btn--ghost" href="visit.html">see the space</a>
-      </div>
+  <section class="wrap">
+    <div class="ways">
+      <div class="way"><span class="way__n">01</span><h3>private buyouts</h3><p>the whole boutique, just your people — full flavor line-up and the toppings bar, styled to your moment.</p></div>
+      <div class="way"><span class="way__n">02</span><h3>celebrations</h3><p>birthdays, showers, graduations, engagements. we handle the sweet; you handle the guest list.</p></div>
+      <div class="way"><span class="way__n">03</span><h3>brand &amp; press</h3><p>launches, press days and brand activations in a space that's already art-directed and very postable.</p></div>
+      <div class="way"><span class="way__n">04</span><h3>shoots</h3><p>content and campaign shoots — the room, the cups and the swirl, ready for camera.</p></div>
+      <div class="way"><span class="way__n">05</span><h3>froyo cart</h3><p>can't come to us? our cart comes to you — weddings, markets, offices, on-set.</p></div>
+      <div class="way"><span class="way__n">06</span><h3>collabs</h3><p>co-branded flavors, pop-ups and creator partnerships. pitch us — we like a good idea.</p></div>
     </div>
-    <div class="pe-hero__media reveal" style="--d:200ms">
-      <div class="media"><img src="images/store-duo.jpg" alt="nudes cups on the counter at the Beverly Grove boutique"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== what we host ===== -->
-<section class="section wrap">
-  <div class="row between" style="align-items:flex-end;margin-bottom:2.4rem">
-    <div class="reveal"><span class="eyebrow">the ways</span>
-      <h2 class="h-1" style="margin-top:.5rem">what we host</h2></div>
-    <p class="reveal muted" style="--d:120ms;max-width:28ch">one boutique, a lot of ways to celebrate — all of it froyo-first.</p>
-  </div>
-  <div class="ways reveal">
-    <div class="way"><span class="way__n">01</span><h3>private buyouts</h3><p>the whole boutique, just your people — full flavor line-up and the toppings bar, styled to your moment.</p></div>
-    <div class="way"><span class="way__n">02</span><h3>celebrations</h3><p>birthdays, showers, graduations, engagements. we handle the sweet; you handle the guest list.</p></div>
-    <div class="way"><span class="way__n">03</span><h3>team &amp; corporate</h3><p>offsites, client days, appreciation drops and bulk gifting for the office — easy, and very postable.</p></div>
-    <div class="way"><span class="way__n">04</span><h3>shoots &amp; brand</h3><p>content shoots, launches and press moments in a space that's already art-directed.</p></div>
-    <div class="way"><span class="way__n">05</span><h3>froyo cart</h3><p>can't come to us? our cart comes to you — weddings, markets, block parties, on-set.</p></div>
-    <div class="way"><span class="way__n">06</span><h3>something else</h3><p>a theme, a takeover, a wild idea? pitch us. we like a challenge.</p></div>
-  </div>
-</section>
-
-<!-- ===== how it works ===== -->
-<section class="section--tight band-oat">
-  <div class="wrap">
-    <div class="reveal" style="margin-bottom:2rem"><span class="eyebrow">how it works</span>
-      <h2 class="h-2" style="margin-top:.5rem">three easy scoops</h2></div>
-    <div class="steps reveal">
+  <section class="wrap">
+    <span class="eyebrow">how it works</span>
+    <div class="steps">
       <div class="step"><span class="num">01</span><h4>send a note</h4><p>fill out the form (or email us). date, headcount, vibe — whatever you know so far.</p></div>
       <div class="step"><span class="num">02</span><h4>we plan it</h4><p>we come back with options — flavors, timing, add-ons and a simple quote. no pressure.</p></div>
       <div class="step"><span class="num">03</span><h4>celebrate</h4><p>you show up, we swirl. you leave with the photos and zero cleanup.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== inquiry ===== -->
-<section class="section" id="inquire">
-  <div class="wrap"><div class="booth">
-    <div class="reveal-clip"><div class="media"><img src="images/duo-handheld.jpg" alt="Two nudes cups held — matcha and cookies-and-cream"></div></div>
-    <div class="reveal" style="--d:100ms">
+  <section class="wrap" id="inquire">
+    <div class="inquire">
       <span class="eyebrow">start an inquiry</span>
-      <h2 class="h-1" style="margin-top:.5rem;margin-bottom:1.4rem">let's plan it</h2>
+      <h2 class="h2" style="margin-top:.4rem;margin-bottom:.7rem">let's plan it</h2>
+      <p class="lede" style="margin-bottom:1.6rem">tell us a little and we'll get right back to you.</p>
       <!--
-        ▸ HOW TO RECEIVE THESE INQUIRIES — one-time setup, then no code ever again:
-          1. Go to https://formspree.io and create a free account (use hello@nudesyogurt.com).
-          2. Create a new form; Formspree gives you an endpoint like https://formspree.io/f/abcdwxyz
-          3. Replace YOUR_FORM_ID in the <form action> below with that code.
-          Submissions then land in your inbox AND the Formspree dashboard — managed without touching code.
-          (Prefer a fully visual builder? Tally.so or Google Forms can be embedded instead — ask and we'll swap it in.)
-          Until connected, the "email us directly" link below works with zero setup.
+        ▸ These inquiries post to the same free Formspree form as the site's other forms
+          (replace YOUR_FORM_ID with your endpoint). They arrive in your inbox tagged
+          "Event / collab inquiry". The email link below works with zero setup.
       -->
-      <form class="bform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div><label for="f-name">your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-        <div><label for="f-email">email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-        <div><label for="f-phone">phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
-        <div><label for="f-type">event type</label>
-          <select id="f-type" name="event_type">
+      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div><label for="e-name">your name</label><input id="e-name" name="name" type="text" autocomplete="name" required></div>
+        <div><label for="e-email">email</label><input id="e-email" name="email" type="email" autocomplete="email" required></div>
+        <div><label for="e-phone">phone</label><input id="e-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div><label for="e-type">type</label>
+          <select id="e-type" name="event_type">
             <option>private buyout</option>
             <option>celebration / party</option>
-            <option>team / corporate</option>
-            <option>shoot / brand</option>
+            <option>brand / press event</option>
+            <option>content shoot</option>
             <option>froyo cart (offsite)</option>
+            <option>collab / partnership</option>
             <option>something else</option>
           </select></div>
-        <div><label for="f-date">preferred date</label><input id="f-date" name="preferred_date" type="date"></div>
-        <div><label for="f-guests">guest count</label><input id="f-guests" name="guests" type="number" min="1" placeholder="approx."></div>
-        <div class="full"><label for="f-msg">tell us about it</label><textarea id="f-msg" name="message" placeholder="the occasion, the vibe, any flavor requests…"></textarea></div>
-        <input type="hidden" name="_subject" value="New private event inquiry — nudes">
+        <div><label for="e-date">preferred date</label><input id="e-date" name="preferred_date" type="date"></div>
+        <div><label for="e-guests">guest count</label><input id="e-guests" name="guests" type="number" min="1" placeholder="approx."></div>
+        <div class="full"><label for="e-msg">tell us about it</label><textarea id="e-msg" name="message" placeholder="the occasion, the vibe, any flavor requests…" required></textarea></div>
+        <input type="hidden" name="_subject" value="Event / collab inquiry — nudes">
         <div class="submit"><button class="btn" type="submit">send inquiry ··</button></div>
       </form>
-      <p class="form-alt">prefer email? write us at <a href="mailto:hello@nudesyogurt.com?subject=Private%20event%20inquiry%20%E2%80%94%20nudes">hello@nudesyogurt.com</a>.</p>
+      <p class="form-alt">prefer email? write us at <a href="mailto:partnerships@nudesyogurt.com?subject=Event%20%2F%20collab%20inquiry%20%E2%80%94%20nudes">partnerships@nudesyogurt.com</a>.</p>
     </div>
-  </div></div>
-</section>
+  </section>
+</main>
 
-<!-- ===== footer ===== -->
-<footer class="footer">
-  <div class="nu-mark footer__mark"><svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"><path d="M24 72 V44 a20 20 0 0 1 40 0 a20 20 0 0 0 40 0 V14"/></svg></div>
+<footer class="site-footer">
   <div class="wrap">
-    <div class="footer__top">
-      <div class="footer__news">
-        <span class="eyebrow eyebrow--light">the inner circle</span>
-        <h3 class="h-2" style="margin-top:1rem">join the list,<br>get the first scoop</h3>
-        <div class="field"><input type="email" placeholder="your email" aria-label="Email"><button>join</button></div>
-      </div>
-      <div class="footer__col"><h4>explore</h4>
-        <a href="menu.html">flavors</a><a href="events.html">private events</a><a href="visit.html">visit</a><a href="lookbook.html">lookbook</a></div>
-      <div class="footer__col"><h4>nudes</h4>
-        <a href="about.html">our story</a><a href="menu.html">flavors</a><a href="visit.html">find us</a><a href="lookbook.html">press</a></div>
-    </div>
-    <div class="footer__bar">
-      <span>© <span data-year></span> nudes — los angeles</span>
-      <span>still doing the most, with less.</span>
-      <span>instagram · tiktok · pinterest</span>
-    </div>
+    <span>© 2026 nudes · beverly grove, los angeles</span>
+    <a href="mailto:info@nudesyogurt.com">info@nudesyogurt.com</a>
   </div>
 </footer>
 
-<script src="nudes.js?v=22"></script>
 </body>
 </html>
