@@ -37,16 +37,16 @@
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (res.ok && res.j && res.j.ok) {
-            showStatus(form, form.getAttribute('data-success') || 'got it — talk soon x', true);
+            showStatus(form, form.getAttribute('data-success') || 'got it. talk soon x', true);
             form.reset();
             if (btn) btn.textContent = 'sent ✓';
           } else {
-            showStatus(form, (res.j && res.j.error) || 'something went wrong — try again or email us.', false);
+            showStatus(form, (res.j && res.j.error) || 'something went wrong. try again or email us.', false);
             if (btn) { btn.disabled = false; btn.textContent = label; }
           }
         })
         .catch(function () {
-          showStatus(form, 'network error — try again or email us.', false);
+          showStatus(form, 'network error. try again or email us.', false);
           if (btn) { btn.disabled = false; btn.textContent = label; }
         });
     });
