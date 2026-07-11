@@ -129,8 +129,10 @@ function doGet() {
     if (valid && when.getTime() > now) continue;   // future -> not published yet
     var ts = valid ? when.getTime() : now;          // used for ordering
 
-    // display label: use the free-text `date` cell, else format the publish date
-    var display = String(obj.date || '').trim();
+    // display label: a real date cell -> format it; else the free-text `date`; else the publish date
+    var display;
+    if (obj.date instanceof Date) display = Utilities.formatDate(obj.date, tz, 'MMMM yyyy').toLowerCase();
+    else display = String(obj.date || '').trim();
     if (!display && valid) display = Utilities.formatDate(when, tz, 'MMMM yyyy').toLowerCase();
 
     rows.push({

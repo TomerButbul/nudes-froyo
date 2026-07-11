@@ -143,9 +143,38 @@
     return d;
   }
 
-  function buildArticle(root, p) {
+  function upsertMeta(attr, key, val) {
+    var m = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute(attr, key); document.head.appendChild(m); }
+    m.setAttribute('content', val);
+  }
+  function setSEO(p, url) {
+    var desc = p.excerpt || 'Notes from nudes, Mediterranean frozen yogurt in Los Angeles.';
     document.title = p.title + ' | The Nude by nudes';
+    upsertMeta('name', 'description', desc);
+    upsertMeta('property', 'og:title', p.title);
+    upsertMeta('property', 'og:description', desc);
+    upsertMeta('property', 'og:url', url);
+    upsertMeta('property', 'og:type', 'article');
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
+    upsertMeta('name', 'twitter:title', p.title);
+    upsertMeta('name', 'twitter:description', desc);
+    var c = document.head.querySelector('link[rel="canonical"]');
+    if (!c) { c = document.createElement('link'); c.setAttribute('rel', 'canonical'); document.head.appendChild(c); }
+    c.setAttribute('href', url);
+    var ld = document.getElementById('post-jsonld');
+    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'post-jsonld'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'Article', headline: p.title, description: desc,
+      author: { '@type': 'Organization', name: 'nudes' },
+      publisher: { '@type': 'Organization', name: 'nudes', url: 'https://nudesyogurt.com/' },
+      mainEntityOfPage: url
+    });
+  }
+
+  function buildArticle(root, p) {
     var pageUrl = 'https://nudesyogurt.com/post.html?slug=' + encodeURIComponent(p.slug);
+    setSEO(p, pageUrl);
 
     var hero = cover(p, 'article-hero');
     var inner = document.createElement('div'); inner.className = 'article-hero__inner';
