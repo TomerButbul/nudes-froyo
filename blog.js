@@ -48,6 +48,7 @@
     if (isImage(p.cover)) {
       var im = document.createElement('img');
       im.className = 'cover__img'; im.src = p.cover; im.alt = ''; im.loading = 'lazy';
+      im.addEventListener('error', function () { im.style.display = 'none'; }); // fall back to branded gradient
       d.appendChild(im);
     }
     return d;
@@ -100,6 +101,15 @@
       block = block.replace(/^\n+|\n+$/g, '');
       if (!block) return;
       var lines = block.split('\n');
+      var im = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/); // ![alt](image-url) on its own line
+      if (im) {
+        var fig = document.createElement('figure'); fig.className = 'post-fig';
+        var img = document.createElement('img'); img.src = im[2].trim(); img.alt = im[1]; img.loading = 'lazy'; img.decoding = 'async';
+        img.addEventListener('error', function () { fig.style.display = 'none'; });
+        fig.appendChild(img);
+        if (im[1]) { var cap = document.createElement('figcaption'); cap.textContent = im[1]; fig.appendChild(cap); }
+        nodes.push(fig); return;
+      }
       if (/^##\s+/.test(block)) {
         var h = document.createElement('h2'); inline(h, block.replace(/^##\s+/, '')); nodes.push(h);
       } else if (lines.every(function (l) { return /^-\s+/.test(l); })) {

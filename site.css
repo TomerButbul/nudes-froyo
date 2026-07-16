@@ -213,3 +213,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .endcta .btn:hover{background:var(--cream)}
 .post-missing{max-width:680px;margin:0 auto;padding:clamp(3rem,8vw,5rem) 0;text-align:center;color:var(--taupe)}
 .post-missing a{color:var(--espresso)}
+/* inline article images: ![alt](url) */
+.post figure.post-fig{margin:1.8rem 0}
+.post figure.post-fig img{width:100%;height:auto;border-radius:16px;display:block}
+.post figure.post-fig figcaption{margin-top:.55rem;font-family:var(--display);font-weight:500;font-size:.82rem;
+  letter-spacing:.02em;color:var(--taupe);text-align:center}
