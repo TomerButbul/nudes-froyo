@@ -166,9 +166,12 @@
     upsertMeta('property', 'og:description', desc);
     upsertMeta('property', 'og:url', url);
     upsertMeta('property', 'og:type', 'article');
+    var ogImg = isImage(p.cover) ? p.cover : 'https://nudesyogurt.com/assets/og.png';
+    upsertMeta('property', 'og:image', ogImg);
     upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', p.title);
     upsertMeta('name', 'twitter:description', desc);
+    upsertMeta('name', 'twitter:image', ogImg);
     var c = document.head.querySelector('link[rel="canonical"]');
     if (!c) { c = document.createElement('link'); c.setAttribute('rel', 'canonical'); document.head.appendChild(c); }
     c.setAttribute('href', url);
