@@ -24,9 +24,27 @@
     }
   ];
 
+  // Posts that have their own static .html file (matches api/_blog.js STATIC_PAGES).
+  var STATIC_PAGES = { 'what-is-mediterranean-frozen-yogurt': 'the-nude-what-is-mediterranean-frozen-yogurt.html' };
+
   function isImage(c) { return typeof c === 'string' && /[\/.]/.test(c) && !THEMES[c]; }
   function coverClass(c) { return 'cover--' + (THEMES[c] ? c : 'clean'); }
-  function postUrl(p) { return p.url || ('post.html?slug=' + encodeURIComponent(p.slug)); }
+  // Clean, server-rendered URL so links match what Google indexes.
+  function postUrl(p) {
+    if (p.url) return p.url;
+    if (STATIC_PAGES[p.slug]) return '/' + STATIC_PAGES[p.slug];
+    return '/the-nude/' + encodeURIComponent(p.slug);
+  }
+  // Normalise a raw sheet Date string ("Wed Jul 01 2026 …") to "jul 2026".
+  function fmtDate(v) {
+    if (!v) return '';
+    var s = String(v), d = new Date(s);
+    if (!isNaN(d.getTime()) && /\d{4}/.test(s) && /[A-Za-z]{3}|\d{4}-\d{2}/.test(s)) {
+      var m = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][d.getMonth()];
+      return m + ' ' + d.getFullYear();
+    }
+    return s;
+  }
 
   function getPosts() {
     return fetch('/api/posts', { cache: 'no-cache' })
@@ -66,7 +84,7 @@
 
     var body = document.createElement('div'); body.className = 'pcard__body';
     var meta = document.createElement('span'); meta.className = 'pcard__meta';
-    meta.textContent = (p.date || '') + (p.read ? ' · ' + p.read : '');
+    meta.textContent = (fmtDate(p.date) || '') + (p.read ? ' · ' + p.read : '');
     var h = document.createElement('h2'); h.className = 'pcard__title'; h.textContent = p.title;
     var ex = document.createElement('p'); ex.className = 'pcard__excerpt'; ex.textContent = p.excerpt || '';
     var more = document.createElement('span'); more.className = 'pcard__more'; more.textContent = 'read →';
@@ -84,149 +102,11 @@
   }
 
   // ================= single article =================
-  // inline **bold** -> <strong>, everything else plain text
-  function inline(target, text) {
-    var parts = String(text).split('**');
-    parts.forEach(function (seg, i) {
-      if (!seg) return;
-      if (i % 2) { var s = document.createElement('strong'); s.textContent = seg; target.appendChild(s); }
-      else target.appendChild(document.createTextNode(seg));
-    });
-  }
-  // plain text with light markers -> block nodes
-  //   blank line = new block · "## " = heading · "- " lines = list · "> " = quote · "1. " lines = numbered
-  function parseBody(text) {
-    var nodes = [];
-    String(text).replace(/\r/g, '').split(/\n{2,}/).forEach(function (block) {
-      block = block.replace(/^\n+|\n+$/g, '');
-      if (!block) return;
-      var lines = block.split('\n');
-      var im = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/); // ![alt](image-url) on its own line
-      if (im) {
-        var fig = document.createElement('figure'); fig.className = 'post-fig';
-        var img = document.createElement('img'); img.src = im[2].trim(); img.alt = im[1]; img.loading = 'lazy'; img.decoding = 'async';
-        img.addEventListener('error', function () { fig.style.display = 'none'; });
-        fig.appendChild(img);
-        if (im[1]) { var cap = document.createElement('figcaption'); cap.textContent = im[1]; fig.appendChild(cap); }
-        nodes.push(fig); return;
-      }
-      if (/^##\s+/.test(block)) {
-        var h = document.createElement('h2'); inline(h, block.replace(/^##\s+/, '')); nodes.push(h);
-      } else if (lines.every(function (l) { return /^-\s+/.test(l); })) {
-        var ul = document.createElement('ul');
-        lines.forEach(function (l) { var li = document.createElement('li'); inline(li, l.replace(/^-\s+/, '')); ul.appendChild(li); });
-        nodes.push(ul);
-      } else if (lines.every(function (l) { return /^\d+\.\s+/.test(l); })) {
-        var ol = document.createElement('ol');
-        lines.forEach(function (l) { var li = document.createElement('li'); inline(li, l.replace(/^\d+\.\s+/, '')); ol.appendChild(li); });
-        nodes.push(ol);
-      } else if (/^>\s+/.test(block)) {
-        var bq = document.createElement('blockquote'); inline(bq, block.replace(/^>\s+/gm, '').replace(/\n/g, ' ')); nodes.push(bq);
-      } else {
-        var p = document.createElement('p'); inline(p, block.replace(/\n/g, ' ')); nodes.push(p);
-      }
-    });
-    return nodes;
-  }
-
-  function shareRow(p, url) {
-    var enc = encodeURIComponent(p.title || 'the nude');
-    var u = encodeURIComponent(url);
-    var wrap = document.createElement('div'); wrap.className = 'article-share';
-    var label = document.createElement('span'); label.textContent = 'share'; wrap.appendChild(label);
-    [['twitter', 'https://twitter.com/intent/tweet?text=' + enc + '&url=' + u],
-     ['facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + u],
-     ['email', 'mailto:?subject=' + enc + '&body=' + u]].forEach(function (s) {
-      var a = document.createElement('a'); a.href = s[1]; a.textContent = s[0];
-      if (s[0] !== 'email') { a.target = '_blank'; a.rel = 'noopener'; }
-      wrap.appendChild(a);
-    });
-    return wrap;
-  }
-
-  function endCta() {
-    var d = document.createElement('div'); d.className = 'endcta';
-    var h = document.createElement('h3'); h.textContent = 'opening soon in los angeles';
-    var p = document.createElement('p'); p.textContent = 'Be first in line when the doors open at 165 S Crescent Heights Blvd.';
-    var a = document.createElement('a'); a.className = 'btn'; a.href = '/'; a.textContent = 'join the list →';
-    d.appendChild(h); d.appendChild(p); d.appendChild(a);
-    return d;
-  }
-
-  function upsertMeta(attr, key, val) {
-    var m = document.head.querySelector('meta[' + attr + '="' + key + '"]');
-    if (!m) { m = document.createElement('meta'); m.setAttribute(attr, key); document.head.appendChild(m); }
-    m.setAttribute('content', val);
-  }
-  function setSEO(p, url) {
-    var desc = p.excerpt || 'Notes from nudes, Mediterranean frozen yogurt in Los Angeles.';
-    document.title = p.title + ' | The Nude by nudes';
-    upsertMeta('name', 'description', desc);
-    upsertMeta('property', 'og:title', p.title);
-    upsertMeta('property', 'og:description', desc);
-    upsertMeta('property', 'og:url', url);
-    upsertMeta('property', 'og:type', 'article');
-    var ogImg = isImage(p.cover) ? p.cover : 'https://nudesyogurt.com/assets/og.png';
-    upsertMeta('property', 'og:image', ogImg);
-    upsertMeta('name', 'twitter:card', 'summary_large_image');
-    upsertMeta('name', 'twitter:title', p.title);
-    upsertMeta('name', 'twitter:description', desc);
-    upsertMeta('name', 'twitter:image', ogImg);
-    var c = document.head.querySelector('link[rel="canonical"]');
-    if (!c) { c = document.createElement('link'); c.setAttribute('rel', 'canonical'); document.head.appendChild(c); }
-    c.setAttribute('href', url);
-    var ld = document.getElementById('post-jsonld');
-    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'post-jsonld'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({
-      '@context': 'https://schema.org', '@type': 'Article', headline: p.title, description: desc,
-      author: { '@type': 'Organization', name: 'nudes' },
-      publisher: { '@type': 'Organization', name: 'nudes', url: 'https://nudesyogurt.com/' },
-      mainEntityOfPage: url
-    });
-  }
-
-  function buildArticle(root, p) {
-    var pageUrl = 'https://nudesyogurt.com/post.html?slug=' + encodeURIComponent(p.slug);
-    setSEO(p, pageUrl);
-
-    var hero = cover(p, 'article-hero');
-    var inner = document.createElement('div'); inner.className = 'article-hero__inner';
-    var crumbs = document.createElement('nav'); crumbs.className = 'crumbs';
-    var back = document.createElement('a'); back.href = 'the-nude.html'; back.textContent = 'the nude';
-    crumbs.appendChild(back); crumbs.appendChild(document.createTextNode(' · ' + (p.category || '')));
-    var title = document.createElement('h1'); title.className = 'article-hero__title'; title.textContent = p.title;
-    var meta = document.createElement('p'); meta.className = 'article-hero__meta';
-    meta.textContent = 'nudes' + (p.date ? ' · ' + p.date : '') + (p.read ? ' · ' + p.read : '');
-    inner.appendChild(crumbs); inner.appendChild(title); inner.appendChild(meta);
-    hero.appendChild(inner);
-
-    var wrap = document.createElement('div'); wrap.className = 'wrap article-body';
-    var post = document.createElement('div'); post.className = 'post';
-    parseBody(p.body || '').forEach(function (n) { post.appendChild(n); });
-    wrap.appendChild(post);
-    wrap.appendChild(endCta());
-    wrap.appendChild(shareRow(p, pageUrl));
-
-    root.textContent = '';
-    root.appendChild(hero);
-    root.appendChild(wrap);
-  }
-
+  // Articles are now server-rendered at /the-nude/<slug> (crawlable HTML). This page
+  // only exists to redirect any old ?slug= links to that canonical URL.
   function renderArticle(root) {
     var slug = new URLSearchParams(location.search).get('slug') || '';
-    getPosts().then(function (posts) {
-      var p = posts.filter(function (x) { return x.slug === slug; })[0];
-      if (!p) {
-        var miss = document.createElement('div'); miss.className = 'wrap';
-        var box = document.createElement('div'); box.className = 'post-missing';
-        var h = document.createElement('p'); h.textContent = 'that post isn’t here.';
-        var a = document.createElement('a'); a.href = 'the-nude.html'; a.textContent = '← back to the nude';
-        box.appendChild(h); box.appendChild(a); miss.appendChild(box); root.appendChild(miss);
-        return;
-      }
-      if (p.url) { location.replace(p.url); return; } // static post has its own page
-      buildArticle(root, p);
-    });
+    location.replace(slug ? postUrl({ slug: slug }) : '/the-nude.html');
   }
 
   var idx = document.querySelector('[data-posts]');
