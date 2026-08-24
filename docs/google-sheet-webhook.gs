@@ -26,11 +26,17 @@
  *
  * To change what lands where, edit the TABS map below.
  *
- * BLOG (optional): make ONE more tab named exactly "Posts" with these column
- * headers in row 1 — slug · title · category · cover · date · read · excerpt · body · publish
+ * BLOG (optional): make ONE more tab named exactly "Posts". Row 1 headers:
+ *
+ *   REQUIRED   slug · title · category · excerpt · body · publish
+ *   MEDIA      cover · alt · images · video · video_thumb
+ *   ANSWERS    answer · faq            <- the two columns that win AI answers
+ *   EXTRAS     date · read · keywords · author · updated
+ *
  * Add a row per post and it appears on The Nude automatically. The `publish`
- * column is a date: future date = scheduled (auto-appears later). Full guide:
- * docs/adding-a-blog-post.md.
+ * column is a date: future date = scheduled (auto-appears later). Every column
+ * outside REQUIRED is optional and safe to leave blank — old sheets keep working.
+ * Full guide: docs/adding-a-blog-post.md · media: docs/media-guide.md.
  */
 
 var TABS = {
@@ -51,7 +57,16 @@ var TABS = {
   }
 };
 
-var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish'];
+var POST_COLUMNS = [
+  'slug', 'title', 'category', 'excerpt', 'body', 'publish',
+  'cover', 'alt', 'images', 'video', 'video_thumb',
+  'answer', 'faq',
+  'date', 'read', 'keywords', 'author', 'updated'
+];
+
+// Columns that are plain pass-through text (trimmed) on the way out to the site.
+var TEXT_COLUMNS = ['slug', 'title', 'category', 'cover', 'alt', 'images', 'video',
+                    'video_thumb', 'answer', 'faq', 'keywords', 'author', 'read', 'excerpt'];
 
 // Adds a blog post to the "Posts" tab. Protected by a secret (Project Settings →
 // Script Properties → POST_SECRET) so only trusted callers can publish to the site.
@@ -102,8 +117,9 @@ function doPost(e) {
 // Serves the blog: reads the "Posts" tab and returns it as JSON for the website.
 // (The website fetches this via /api/posts, so the sheet itself stays private —
 //  only the Posts tab is ever exposed; your captured emails are not.)
-// Posts tab columns (row 1 headers, any order):
-//   slug · title · category · cover · date · read · excerpt · body · publish
+// Posts tab columns (row 1 headers, any order — see POST_COLUMNS above).
+// Only `slug · title · category · excerpt · body · publish` are required; the
+// media (cover/alt/images/video) and answer (answer/faq) columns are optional.
 // SCHEDULING: `publish` is a real DATE.
 //   • blank or a past date  -> the post is live now
 //   • a future date         -> scheduled: hidden until that day, then auto-appears
@@ -135,17 +151,16 @@ function doGet() {
     else display = String(obj.date || '').trim();
     if (!display && valid) display = Utilities.formatDate(when, tz, 'MMMM yyyy').toLowerCase();
 
-    rows.push({
-      _ts: ts,
-      slug: String(obj.slug || '').trim(),
-      title: String(obj.title || '').trim(),
-      category: String(obj.category || '').trim(),
-      cover: String(obj.cover || '').trim(),
-      date: display,
-      read: String(obj.read || '').trim(),
-      excerpt: String(obj.excerpt || '').trim(),
-      body: String(obj.body || '')
-    });
+    var row = { _ts: ts, date: display, body: String(obj.body || '') };
+    TEXT_COLUMNS.forEach(function (k) { row[k] = String(obj[k] == null ? '' : obj[k]).trim(); });
+
+    // Machine-readable dates for the Article schema (datePublished / dateModified).
+    // `publish` itself is never exposed — only the ISO timestamp derived from it.
+    row.published = valid ? when.toISOString() : '';
+    var upd = (obj.updated instanceof Date) ? obj.updated : (obj.updated ? new Date(obj.updated) : null);
+    row.updated = (upd && !isNaN(upd.getTime())) ? upd.toISOString() : '';
+
+    rows.push(row);
   }
   rows.sort(function (a, b) { return b._ts - a._ts; }); // newest publish date first
   return json({ posts: rows.map(function (r) { delete r._ts; return r; }) });

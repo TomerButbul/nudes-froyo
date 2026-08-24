@@ -6,7 +6,12 @@
        2. Find/replace the {{PLACEHOLDERS}} below.
        3. Write your post inside <div class="post"> … </div>
           (use <p>, <h2>, <ul><li>, <ol><li>, <blockquote>).
-       4. Add one entry to the POSTS array at the top of blog.js.
+       4. Add the slug to BOTH STATIC_POSTS and STATIC_PAGES in api/_blog.js,
+          so it shows on the index and owns its canonical URL.
+       5. Add a "the short answer" block above the first paragraph and a
+          "questions, answered" section at the end, then mirror both in the
+          JSON-LD (BlogPosting abstract + FAQPage). See
+          the-nude-what-is-mediterranean-frozen-yogurt.html for the pattern.
      Cover themes for cover--{{THEME}}:  clean · culture · build · wellness · menu
      (or put a real photo in: see the note near the hero below)
      =================================================================== -->

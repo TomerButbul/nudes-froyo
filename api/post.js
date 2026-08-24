@@ -2,7 +2,7 @@
 // (vercel.json rewrites /the-nude/:slug -> /api/post?slug=:slug).
 // Returns full crawlable HTML so Google indexes the real content, not a JS shell.
 
-const { fetchPosts, renderArticle, STATIC_PAGES, SITE } = require('./_blog');
+const { fetchAllPosts, renderArticle, STATIC_PAGES } = require('./_blog');
 
 module.exports = async function handler(req, res) {
   const slug = (req.query && req.query.slug ? String(req.query.slug) : '').trim();
@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
     return res.end();
   }
 
-  const posts = await fetchPosts();
+  const posts = await fetchAllPosts();
   const post = posts.filter(function (p) { return p && p.slug === slug; })[0];
 
   if (!post) {
@@ -30,5 +30,5 @@ module.exports = async function handler(req, res) {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
-  res.end(renderArticle(post));
+  res.end(renderArticle(post, posts)); // `posts` powers the "keep reading" internal links
 };

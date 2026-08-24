@@ -7,6 +7,8 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/nudes-avatar.png">
 <link rel="apple-touch-icon" href="/assets/nudes-avatar.png">
 <title>The Nude — nudes</title>
+<!-- This page only forwards old ?slug= links to the server-rendered article, so it must never be indexed itself. -->
+<meta name="robots" content="noindex, follow">
 <meta name="description" content="Notes from nudes — Mediterranean frozen yogurt in Los Angeles.">
 <meta name="theme-color" content="#442917">
 <meta property="og:type" content="article">
@@ -33,7 +35,7 @@
 </header>
 
 <main>
-  <!-- ▸ blog.js reads ?slug= , fetches the post from the Google Sheet (via /api/posts), and renders it here. -->
+  <!-- ▸ blog.js forwards ?slug= to the canonical server-rendered article at /the-nude/<slug>. -->
   <article data-post>
     <div class="wrap"><div class="post-missing"><p>loading…</p></div></div>
   </article>

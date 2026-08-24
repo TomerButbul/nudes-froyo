@@ -134,6 +134,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cover::after{content:"";position:absolute;inset:0;z-index:1;opacity:.05;mix-blend-mode:overlay;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .cover__img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+/* scrim over a photo cover so the title stays legible whatever the shot looks like */
+.cover__scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(24,13,6,.34) 0%,rgba(24,13,6,.14) 38%,rgba(24,13,6,.78) 100%)}
 /* category themes — clean diagonal warm gradients */
 .cover--clean{background:linear-gradient(135deg,#5a3d27 0%,#442917 55%,#2b180c 100%)}
 .cover--culture{background:linear-gradient(135deg,#b08a70 0%,#8a6a54 50%,#452e1f 100%)}
@@ -218,3 +221,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .post figure.post-fig img{width:100%;height:auto;border-radius:16px;display:block}
 .post figure.post-fig figcaption{margin-top:.55rem;font-family:var(--display);font-weight:500;font-size:.82rem;
   letter-spacing:.02em;color:var(--taupe);text-align:center}
+
+/* ---- media from the sheet: gallery, video embeds ---- */
+.post figure.post-fig video{width:100%;height:auto;border-radius:16px;display:block;background:var(--espresso)}
+.post .embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--espresso)}
+.post .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.post-gallery{margin:2rem 0}
+.post-gallery figure.post-fig:first-child{margin-top:0}
+
+/* ---- the short answer: the block AI assistants and featured snippets quote ---- */
+.answer{background:var(--cream);border:1px solid var(--line);border-left:4px solid var(--espresso);
+  border-radius:16px;padding:clamp(1.1rem,3vw,1.5rem);margin:0 0 1.9rem}
+.answer__label{font-family:var(--display);font-weight:600;font-size:.74rem;letter-spacing:.08em;
+  text-transform:lowercase;color:var(--taupe);margin:0 0 .45rem}
+.answer__text{margin:0;font-size:1.1rem;line-height:1.55;color:var(--espresso)}
+
+/* ---- Q&A: visible copy that matches the FAQPage structured data ---- */
+.faq{margin:2.6rem 0 0;padding-top:1.6rem;border-top:1px solid var(--line)}
+.faq h2{margin-top:0}
+.faq__item{margin-bottom:1.4rem}
+.faq__q{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.1rem;
+  text-transform:lowercase;letter-spacing:-.01em;margin:0 0 .35rem}
+.faq__a{margin:0}
+
+/* ---- keep reading: internal links out of every article ---- */
+.related{max-width:680px;margin:clamp(2rem,4vw,2.8rem) auto 0;padding-top:1.5rem;border-top:1px solid var(--line)}
+.related h2{font-family:var(--display);font-weight:600;color:var(--espresso);font-size:1.35rem;
+  text-transform:lowercase;letter-spacing:-.01em;margin:0 0 .9rem}
+.related ul{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.related li{display:flex;flex-direction:column;gap:.2rem}
+.related a{font-family:var(--display);font-weight:500;font-size:1.02rem;color:var(--espresso);
+  text-decoration:none;border-bottom:1px solid transparent;align-self:flex-start;transition:border-color .25s}
+.related a:hover{border-color:var(--espresso)}
+.related span{font-size:.92rem;color:var(--taupe);line-height:1.5}
+
+/* ---- index footnote (was inline in the old static the-nude.html) ---- */
+.soon{text-align:center;color:var(--taupe);font-family:var(--display);font-size:.9rem;
+  text-transform:lowercase;letter-spacing:.05em;padding:1.5rem 0 3rem}
+.soon a{color:var(--espresso)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
