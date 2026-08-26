@@ -166,7 +166,20 @@
     var t = document.createElement('button');
     t.type = 'button'; t.className = 'pt__title'; t.textContent = p.title || p.slug;
     t.addEventListener('click', function () { openEditor(p); });
-    var sl = document.createElement('span'); sl.className = 'pt__slug'; sl.textContent = '/' + p.slug;
+    // The real, full path — printing just the slug read as a url and sent people
+    // to nudesyogurt.com/<slug>, which 404s. Live posts link straight there.
+    var path = '/the-nude/' + p.slug;
+    var sl;
+    if (p.live) {
+      sl = document.createElement('a');
+      sl.href = path; sl.target = '_blank'; sl.rel = 'noopener';
+      sl.title = 'Open this post on the site';
+    } else {
+      sl = document.createElement('span');
+      sl.title = p.hidden ? 'Hidden — this url is not live' : 'Not live until its publish date';
+    }
+    sl.className = 'pt__slug' + (p.live ? ' pt__slug--live' : '');
+    sl.textContent = path;
     tdT.appendChild(t); tdT.appendChild(sl);
 
     var tdC = document.createElement('td');
@@ -319,6 +332,7 @@
     editor.read.value = '3 min read';
     editor.slug.readOnly = false;
     viewLive.hidden = true;
+    showSlugUrl();
     say(editorMsg, '');
     savedEl.textContent = '';
     showEditor();
@@ -337,6 +351,7 @@
     editor.body.value = p.body || '';
     editor.publish.value = /^\d{4}-\d{2}-\d{2}$/.test(p.publish) ? p.publish : '';
     editor.slug.readOnly = true;   // the slug is the url + the row key; renaming would orphan it
+    showSlugUrl();
     setCover(p.cover || 'clean');
     viewLive.hidden = !p.live;
     viewLive.href = '/the-nude/' + encodeURIComponent(p.slug);
@@ -345,13 +360,25 @@
     preview();
   }
 
+  // Spell out where the post will actually live. "url id" alone reads as the
+  // whole url, and posts sit under /the-nude/, not at the root.
+  var slugHint = $('[data-slug-hint]');
+  function showSlugUrl() {
+    var s = editor.slug.value.trim();
+    slugHint.textContent = s ? 'nudesyogurt.com/the-nude/' + s : 'lowercase-words-with-hyphens';
+  }
+
   // title -> url id, only while writing a new post
   editor.title.addEventListener('input', function () {
     if (state.mode !== 'new' || editor.slug.dataset.touched) return;
     editor.slug.value = editor.title.value.toLowerCase().trim()
       .replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+    showSlugUrl();
   });
-  editor.slug.addEventListener('input', function () { editor.slug.dataset.touched = '1'; });
+  editor.slug.addEventListener('input', function () {
+    editor.slug.dataset.touched = '1';
+    showSlugUrl();
+  });
 
   editor.publish.addEventListener('change', function () {
     var hint = $('[data-publish-hint]');
