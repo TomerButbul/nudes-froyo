@@ -228,8 +228,9 @@
     v.className = 'pt__views' + (has ? '' : ' pt__views--none');
     v.textContent = has ? p.views.toLocaleString() : '—';
     v.title = has
-      ? p.views.toLocaleString() + ' views. Click to open this post in Vercel Analytics.'
-      : 'No figure yet. Tracking started 26 Aug 2026 — it can only count visits from then on.';
+      ? p.views.toLocaleString() + ' reads since counting began on 26 Aug 2026. ' +
+        'One per person per visit. Click for referrers and countries in Vercel Analytics.'
+      : 'No figure yet — the sheet has no Views row for this post.';
     v.href = VIEWS_BASE + '?path=' + encodeURIComponent('/the-nude/' + p.slug);
     v.target = '_blank'; v.rel = 'noopener';
     tdV.appendChild(v);

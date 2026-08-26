@@ -53,6 +53,7 @@ var TABS = {
 
 var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish', 'status'];
 var MEDIA_COLUMNS = ['added', 'type', 'url', 'label', 'by'];
+var VIEW_COLUMNS = ['slug', 'views', 'last read'];
 
 // Every write/read below this line is gated on the same shared secret (Project
 // Settings → Script Properties → POST_SECRET). The studio page at
@@ -162,6 +163,42 @@ function deletePost(data) {
   return json({ ok: false, error: 'no post with slug ' + slug });
 }
 
+// ---------------------------------------------------------------------------
+// READ COUNTS
+// Each article pings /api/hit once per browser session; that endpoint adds the
+// secret and calls this. One row per post, counter bumped in place — so the
+// sheet stays small however much traffic there is.
+// ---------------------------------------------------------------------------
+function addView(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var slug = String(data.slug || '').trim();
+  if (!slug) return json({ ok: false, error: 'missing slug' });
+  var sheet = sheetFor('Views', VIEW_COLUMNS);
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    if (String(values[i][0]).trim() !== slug) continue;
+    var n = (Number(values[i][1]) || 0) + 1;
+    sheet.getRange(i + 1, 2).setValue(n);
+    sheet.getRange(i + 1, 3).setValue(new Date());
+    return json({ ok: true, views: n });
+  }
+  sheet.appendRow([slug, 1, new Date()]);
+  return json({ ok: true, views: 1 });
+}
+
+// slug -> count, read once per listPosts rather than per row.
+function viewsBySlug() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Views');
+  var map = {};
+  if (!sheet || sheet.getLastRow() < 2) return map;
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    var s = String(values[i][0]).trim();
+    if (s) map[s] = Number(values[i][1]) || 0;
+  }
+  return map;
+}
+
 // Everything in the Posts tab, drafts and scheduled posts included, for the
 // studio's editor. Secret-protected — the public /api/posts feed (doGet) still
 // hides drafts and anything with a future publish date.
@@ -173,6 +210,7 @@ function listPosts(data) {
   var values = sheet.getDataRange().getValues();
   var headers = values[0].map(function (h) { return String(h).trim().toLowerCase(); });
   var now = Date.now(), out = [];
+  var views = viewsBySlug();
   for (var i = 1; i < values.length; i++) {
     var obj = {};
     for (var c = 0; c < headers.length; c++) obj[headers[c]] = values[i][c];
@@ -191,6 +229,7 @@ function listPosts(data) {
       body: String(obj.body || ''),
       publish: valid ? Utilities.formatDate(when, ss.getSpreadsheetTimeZone(), 'yyyy-MM-dd') : '',
       hidden: hidden,
+      views: views[String(obj.slug || '').trim()] || 0,
       // draft beats the calendar: a hidden post stays hidden whatever its date
       live: !hidden && (!valid || when.getTime() <= now)
     });
@@ -238,11 +277,11 @@ function listMedia(data) {
 // BEFORE sending any studio action, so that if this script is still on an older
 // deployment the site refuses to talk to it instead of falling through to the
 // form handler and appending junk rows to Partnerships.
-var SCRIPT_VERSION = 3;
+var SCRIPT_VERSION = 4;
 
 var STUDIO_ACTIONS = {
   addPost: addPost, updatePost: updatePost, deletePost: deletePost, listPosts: listPosts,
-  addMedia: addMedia, listMedia: listMedia
+  addMedia: addMedia, listMedia: listMedia, addView: addView
 };
 
 function doPost(e) {

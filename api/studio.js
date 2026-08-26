@@ -38,7 +38,7 @@ function sameSecret(a, b) {
 // fall through to its form handler, quietly appending junk rows to Partnerships.
 // So: read the version marker from doGet (read-only, safe on any version) and
 // refuse to POST anything at all until the deployment is current.
-const NEEDS_VERSION = 3;
+const NEEDS_VERSION = 4;
 let versionCache = { v: 0, at: 0 };
 
 async function sheetVersion() {

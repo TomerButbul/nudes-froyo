@@ -247,6 +247,18 @@ const HEAD_ICONS =
   '<link rel="icon" type="image/png" sizes="512x512" href="/assets/nudes-avatar.png">' +
   '<link rel="apple-touch-icon" href="/assets/nudes-avatar.png">';
 
+// Counts one read per browser session, so refreshing or coming back to finish an
+// article doesn't inflate the number. sendBeacon fires without delaying anything
+// and survives the reader navigating away mid-request.
+function countScript(slug) {
+  return '<script>(function(){try{' +
+    'var s=' + JSON.stringify(String(slug)) + ',k="nv:"+s;' +
+    'if(sessionStorage.getItem(k))return;' +
+    'sessionStorage.setItem(k,"1");' +
+    'navigator.sendBeacon("/api/hit?slug="+encodeURIComponent(s));' +
+    '}catch(e){}})();</script>';
+}
+
 // Full HTML document for a single article, everything crawlable in the source.
 function renderArticle(p) {
   const date = fmtDate(p.date);
@@ -310,6 +322,7 @@ function renderArticle(p) {
     FOOTER +
     // Vercel Web Analytics: served from our own domain, no cookies, no consent banner.
     '<script defer src="/_vercel/insights/script.js"></script>' +
+    countScript(p.slug) +
     '</body></html>';
 }
 
