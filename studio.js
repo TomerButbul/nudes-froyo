@@ -131,9 +131,21 @@
   function sortPosts() {
     var k = state.sort.key, dir = state.sort.dir;
     return state.posts.slice().sort(function (a, b) {
-      var x = a[k] == null ? '' : a[k], y = b[k] == null ? '' : b[k];
-      // publish is yyyy-mm-dd, so plain string compare sorts it correctly
-      var r = String(x).localeCompare(String(y), undefined, { numeric: true, sensitivity: 'base' });
+      var r;
+      if (k === 'views') {
+        // Posts with no number yet always sit at the bottom, whichever way it's
+        // sorted — they're "unknown", not "zero", and shouldn't top most-viewed.
+        var x = typeof a.views === 'number' ? a.views : null;
+        var y = typeof b.views === 'number' ? b.views : null;
+        if (x === null && y === null) return 0;
+        if (x === null) return 1;
+        if (y === null) return -1;
+        r = x - y;
+      } else {
+        // publish is yyyy-mm-dd, so plain string compare sorts it correctly
+        r = String(a[k] == null ? '' : a[k])
+          .localeCompare(String(b[k] == null ? '' : b[k]), undefined, { numeric: true, sensitivity: 'base' });
+      }
       return dir === 'asc' ? r : -r;
     });
   }
@@ -210,13 +222,16 @@
     if (p.hidden) tag.title = 'Hidden from the site, whatever its publish date says';
     tdS.appendChild(tag);
 
-    // views: no numbers until analytics has data, so link out to the real thing
     var tdV = document.createElement('td');
     var v = document.createElement('a');
-    v.className = 'pt__views pt__views--none';
-    v.textContent = '—';
-    v.title = 'Views appear once Vercel Analytics has collected data. Click to open it.';
-    v.href = VIEWS_BASE; v.target = '_blank'; v.rel = 'noopener';
+    var has = typeof p.views === 'number';
+    v.className = 'pt__views' + (has ? '' : ' pt__views--none');
+    v.textContent = has ? p.views.toLocaleString() : '—';
+    v.title = has
+      ? p.views.toLocaleString() + ' views. Click to open this post in Vercel Analytics.'
+      : 'No figure yet. Tracking started 26 Aug 2026 — it can only count visits from then on.';
+    v.href = VIEWS_BASE + '?path=' + encodeURIComponent('/the-nude/' + p.slug);
+    v.target = '_blank'; v.rel = 'noopener';
     tdV.appendChild(v);
 
     var tdE = document.createElement('td');
