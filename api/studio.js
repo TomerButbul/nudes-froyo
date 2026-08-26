@@ -33,6 +33,36 @@ function sameSecret(a, b) {
   return diff === 0;
 }
 
+// The Apps Script has to be redeployed by hand after it changes, which is easy
+// to half-do. An older deployment does not know the studio actions and would
+// fall through to its form handler, quietly appending junk rows to Partnerships.
+// So: read the version marker from doGet (read-only, safe on any version) and
+// refuse to POST anything at all until the deployment is current.
+const NEEDS_VERSION = 2;
+let versionCache = { v: 0, at: 0 };
+
+async function sheetVersion() {
+  if (versionCache.v >= NEEDS_VERSION && Date.now() - versionCache.at < 300000) return versionCache.v;
+  try {
+    const r = await fetch(SHEETS_URL, { redirect: 'follow' });
+    const d = r.ok ? await r.json() : null;
+    versionCache = { v: (d && Number(d.v)) || 0, at: Date.now() };
+  } catch (e) {
+    versionCache = { v: 0, at: Date.now() };
+  }
+  return versionCache.v;
+}
+
+async function assertCurrent() {
+  if (await sheetVersion() >= NEEDS_VERSION) return;
+  const err = new Error('stale-script');
+  err.userMessage = 'The Google Apps Script is still on an older version, so the studio ' +
+    'cannot read or write posts yet. In the Sheet: Extensions → Apps Script → paste the ' +
+    'current docs/google-sheet-webhook.gs → save (⌘S) → Deploy → Manage deployments → ' +
+    'pencil → Version: New version → Deploy.';
+  throw err;
+}
+
 // Talk to the Apps Script Web App with the secret attached.
 async function toSheet(action, payload) {
   const r = await fetch(SHEETS_URL, {
@@ -98,19 +128,24 @@ module.exports = async function handler(req, res) {
         });
 
       case 'posts': {
+        await assertCurrent();
         const d = await toSheet('listPosts', {});
-        return res.status(200).json({ ok: true, posts: (d && d.posts) || [] });
+        if (!d || !Array.isArray(d.posts)) throw new Error('bad listPosts reply');
+        return res.status(200).json({ ok: true, posts: d.posts });
       }
 
       case 'media': {
+        await assertCurrent();
         const d = await toSheet('listMedia', {});
-        return res.status(200).json({ ok: true, media: (d && d.media) || [] });
+        if (!d || !Array.isArray(d.media)) throw new Error('bad listMedia reply');
+        return res.status(200).json({ ok: true, media: d.media });
       }
 
       // Record an upload in the Media tab so it shows up in the library later.
       case 'addMedia': {
         const url = String(body.url || '').trim();
         if (!/^https:\/\//.test(url)) return res.status(400).json({ ok: false, error: 'Bad media url.' });
+        await assertCurrent();
         await toSheet('addMedia', {
           url: url,
           type: String(body.type || 'image').trim(),
@@ -124,6 +159,7 @@ module.exports = async function handler(req, res) {
       case 'save': {
         const c = cleanPost(body.post || {});
         if (c.error) return res.status(400).json({ ok: false, error: c.error });
+        await assertCurrent();
         const isEdit = body.mode === 'edit';
         const d = await toSheet(isEdit ? 'updatePost' : 'addPost', c.post);
         if (!d || d.ok === false) {
@@ -142,6 +178,7 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ ok: false, error: 'Unknown action.' });
     }
   } catch (e) {
+    if (e && e.userMessage) return res.status(503).json({ ok: false, error: e.userMessage });
     return res.status(502).json({ ok: false, error: 'Could not reach the sheet — try again.' });
   }
 };

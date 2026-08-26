@@ -188,17 +188,29 @@ function listMedia(data) {
   return json({ ok: true, media: out });
 }
 
+// Bumped whenever the actions below change. The website reads this from doGet
+// BEFORE sending any studio action, so that if this script is still on an older
+// deployment the site refuses to talk to it instead of falling through to the
+// form handler and appending junk rows to Partnerships.
+var SCRIPT_VERSION = 2;
+
+var STUDIO_ACTIONS = {
+  addPost: addPost, updatePost: updatePost, listPosts: listPosts,
+  addMedia: addMedia, listMedia: listMedia
+};
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000); // avoid two submissions writing the same row
   try {
     var data = JSON.parse(e.postData.contents);
     // Studio + Claude actions, all secret-protected (see authorized()).
-    if (data.action === 'addPost') return addPost(data);
-    if (data.action === 'updatePost') return updatePost(data);
-    if (data.action === 'listPosts') return listPosts(data);
-    if (data.action === 'addMedia') return addMedia(data);
-    if (data.action === 'listMedia') return listMedia(data);
+    if (data.action) {
+      var fn = STUDIO_ACTIONS[data.action];
+      // An unknown action is a bug or a stale caller — never let it fall through
+      // to the form handler, which would append a meaningless row.
+      return fn ? fn(data) : json({ ok: false, error: 'unknown action: ' + data.action });
+    }
     var cfg = TABS[data.formType] || TABS.partnership; // unknown types go to Partnerships
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName(cfg.name);
@@ -231,7 +243,7 @@ function doPost(e) {
 function doGet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Posts');
-  if (!sheet || sheet.getLastRow() < 2) return json({ posts: [] });
+  if (!sheet || sheet.getLastRow() < 2) return json({ v: SCRIPT_VERSION, posts: [] });
   var values = sheet.getDataRange().getValues();
   var headers = values[0].map(function (h) { return String(h).trim().toLowerCase(); });
   var tz = ss.getSpreadsheetTimeZone();
@@ -268,7 +280,7 @@ function doGet() {
     });
   }
   rows.sort(function (a, b) { return b._ts - a._ts; }); // newest publish date first
-  return json({ posts: rows.map(function (r) { delete r._ts; return r; }) });
+  return json({ v: SCRIPT_VERSION, posts: rows.map(function (r) { delete r._ts; return r; }) });
 }
 
 function json(obj) {

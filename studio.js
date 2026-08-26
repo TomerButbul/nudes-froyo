@@ -104,7 +104,15 @@
 
   function loadPosts() {
     return api('posts').then(function (d) {
-      if (!d.ok) return;
+      if (!d.ok) {
+        // Don't fail silently — an empty list looks identical to a broken one.
+        listEl.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'list__error';
+        p.textContent = d.error || 'Could not load your posts.';
+        listEl.appendChild(p);
+        return;
+      }
       state.posts = d.posts || [];
       renderList();
     });
@@ -287,7 +295,7 @@
 
   function loadMedia() {
     return api('media').then(function (d) {
-      if (!d.ok) return;
+      if (!d.ok) { say(editorMsg, d.error || 'Could not load the media library.', 'bad'); return; }
       state.media = d.media || [];
       renderLibrary();
     });

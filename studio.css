@@ -66,6 +66,7 @@
 .pitem[aria-current]{background:var(--espresso)}
 .pitem[aria-current] .pitem__title{color:var(--cream)}
 .pitem[aria-current] .pitem__meta{color:color-mix(in srgb,var(--oat) 75%,transparent)}
+.list__error{font-size:.82rem;color:#a1442c;padding:.5rem .3rem;line-height:1.45}
 .pitem__title{font-family:var(--display);font-weight:500;font-size:.9rem;color:var(--espresso);line-height:1.25}
 .pitem__meta{font-size:.72rem;color:var(--taupe);display:flex;gap:.4rem;align-items:center}
 .dot{width:6px;height:6px;border-radius:50%;background:#4b7a4e;flex:0 0 auto}
