@@ -166,20 +166,27 @@
     var t = document.createElement('button');
     t.type = 'button'; t.className = 'pt__title'; t.textContent = p.title || p.slug;
     t.addEventListener('click', function () { openEditor(p); });
-    // The real, full path — printing just the slug read as a url and sent people
-    // to nudesyogurt.com/<slug>, which 404s. Live posts link straight there.
+    // The whole address, so it reads as somewhere you can go — a bare "/test"
+    // sent people to nudesyogurt.com/test, which 404s. Live posts are real links
+    // and look like it; the rest are plain, because their url doesn't work yet.
     var path = '/the-nude/' + p.slug;
     var sl;
     if (p.live) {
       sl = document.createElement('a');
       sl.href = path; sl.target = '_blank'; sl.rel = 'noopener';
       sl.title = 'Open this post on the site';
+      sl.textContent = 'nudesyogurt.com' + path;
+      var arrow = document.createElement('span');
+      arrow.className = 'pt__go'; arrow.textContent = '↗'; arrow.setAttribute('aria-hidden', 'true');
+      sl.appendChild(arrow);
     } else {
       sl = document.createElement('span');
-      sl.title = p.hidden ? 'Hidden — this url is not live' : 'Not live until its publish date';
+      sl.title = p.hidden
+        ? 'Hidden, so this address is not live. Use “show” to put it back.'
+        : 'Goes live on its publish date. Until then this address sends people to the journal.';
+      sl.textContent = 'nudesyogurt.com' + path;
     }
     sl.className = 'pt__slug' + (p.live ? ' pt__slug--live' : '');
-    sl.textContent = path;
     tdT.appendChild(t); tdT.appendChild(sl);
 
     var tdC = document.createElement('td');
