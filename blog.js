@@ -109,8 +109,25 @@
     location.replace(slug ? postUrl({ slug: slug }) : '/the-nude.html');
   }
 
+  // Arriving from a post that is gone (deleted, hidden, or a mistyped url):
+  // /the-nude/<slug> redirects here with ?gone=, so say what happened instead of
+  // dropping people on the index with no explanation.
+  function noticeIfGone() {
+    var params = new URLSearchParams(location.search);
+    if (!params.has('gone')) return;
+    var host = document.querySelector('[data-posts]');
+    if (!host || !host.parentNode) return;
+    var p = document.createElement('p');
+    p.className = 'gone-note';
+    p.setAttribute('role', 'status');
+    p.textContent = 'that post isn’t up any more. here’s everything else.';
+    host.parentNode.insertBefore(p, host);
+    // Tidy the url so a refresh or a share doesn't carry the notice along.
+    history.replaceState(null, '', '/the-nude.html');
+  }
+
   var idx = document.querySelector('[data-posts]');
-  if (idx) renderIndex(idx);
+  if (idx) { noticeIfGone(); renderIndex(idx); }
   var art = document.querySelector('[data-post]');
   if (art) renderArticle(art);
 })();

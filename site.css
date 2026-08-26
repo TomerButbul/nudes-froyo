@@ -213,6 +213,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .endcta p{margin:.6rem 0 1.3rem;color:rgba(220,204,187,.9)}
 .endcta .btn{background:var(--oat);color:var(--espresso)}
 .endcta .btn:hover{background:var(--cream)}
+/* shown when /the-nude/<slug> redirected here because the post is gone */
+.gone-note{max-width:680px;margin:0 0 1.6rem;padding:.85rem 1.1rem;border-radius:14px;
+  background:color-mix(in srgb,var(--oat) 55%,transparent);border:1px solid var(--line);
+  font-family:var(--display);font-weight:500;font-size:.9rem;color:var(--espresso)}
 .post-missing{max-width:680px;margin:0 auto;padding:clamp(3rem,8vw,5rem) 0;text-align:center;color:var(--taupe)}
 .post-missing a{color:var(--espresso)}
 /* ---- in-article media: ![caption](url) photos, videos, grids and embeds ---- */
