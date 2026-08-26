@@ -52,19 +52,38 @@ var TABS = {
 };
 
 var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish'];
+var MEDIA_COLUMNS = ['added', 'type', 'url', 'label', 'by'];
+
+// Every write/read below this line is gated on the same shared secret (Project
+// Settings → Script Properties → POST_SECRET). The studio page at
+// nudesyogurt.com/studio talks to these through /api/studio, which holds the
+// secret server-side — it is never in a browser.
+function authorized(data) {
+  var secret = PropertiesService.getScriptProperties().getProperty('POST_SECRET');
+  return !!secret && String(data.secret) === secret;
+}
+
+function sheetFor(name, columns) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) { sheet = ss.insertSheet(name); sheet.appendRow(columns); sheet.setFrozenRows(1); }
+  else if (sheet.getLastRow() === 0) { sheet.appendRow(columns); sheet.setFrozenRows(1); }
+  return sheet;
+}
+
+function headersOf(sheet, fallback) {
+  var h = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    .map(function (x) { return String(x).trim().toLowerCase(); });
+  return h.length < 2 ? fallback : h;
+}
 
 // Adds a blog post to the "Posts" tab. Protected by a secret (Project Settings →
 // Script Properties → POST_SECRET) so only trusted callers can publish to the site.
 // Creates the Posts tab + headers automatically if it doesn't exist yet.
 function addPost(data) {
-  var secret = PropertiesService.getScriptProperties().getProperty('POST_SECRET');
-  if (!secret || String(data.secret) !== secret) return json({ ok: false, error: 'unauthorized' });
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName('Posts');
-  if (!sheet) { sheet = ss.insertSheet('Posts'); sheet.appendRow(POST_COLUMNS); sheet.setFrozenRows(1); }
-  else if (sheet.getLastRow() === 0) { sheet.appendRow(POST_COLUMNS); sheet.setFrozenRows(1); }
-  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(function (h) { return String(h).trim().toLowerCase(); });
-  if (headers.length < 2) headers = POST_COLUMNS;
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var sheet = sheetFor('Posts', POST_COLUMNS);
+  var headers = headersOf(sheet, POST_COLUMNS);
   var row = headers.map(function (h) {
     if (h === 'publish' && data.publish) { var d = new Date(data.publish); return isNaN(d.getTime()) ? data.publish : d; }
     return data[h] != null ? data[h] : '';
@@ -73,12 +92,113 @@ function addPost(data) {
   return json({ ok: true, slug: data.slug || '' });
 }
 
+// Edits a post that already exists, matched on `slug`. Only the fields actually
+// sent are touched, so the studio can save just the body without wiping the rest.
+// This is what lets you add photos to a post that is already live.
+function updatePost(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var slug = String(data.slug || '').trim();
+  if (!slug) return json({ ok: false, error: 'missing slug' });
+  var sheet = sheetFor('Posts', POST_COLUMNS);
+  var headers = headersOf(sheet, POST_COLUMNS);
+  var slugCol = headers.indexOf('slug');
+  if (slugCol < 0) return json({ ok: false, error: 'no slug column' });
+
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    if (String(values[i][slugCol]).trim() !== slug) continue;
+    for (var c = 0; c < headers.length; c++) {
+      var key = headers[c];
+      if (!data.hasOwnProperty(key)) continue;      // field not sent -> leave the cell alone
+      var v = data[key];
+      if (key === 'publish' && v) { var d = new Date(v); if (!isNaN(d.getTime())) v = d; }
+      sheet.getRange(i + 1, c + 1).setValue(v == null ? '' : v);
+    }
+    return json({ ok: true, slug: slug, updated: true });
+  }
+  return json({ ok: false, error: 'no post with slug ' + slug });
+}
+
+// Everything in the Posts tab, drafts and scheduled posts included, for the
+// studio's editor. Secret-protected — the public /api/posts feed (doGet) still
+// hides anything with a future publish date.
+function listPosts(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Posts');
+  if (!sheet || sheet.getLastRow() < 2) return json({ ok: true, posts: [] });
+  var values = sheet.getDataRange().getValues();
+  var headers = values[0].map(function (h) { return String(h).trim().toLowerCase(); });
+  var now = Date.now(), out = [];
+  for (var i = 1; i < values.length; i++) {
+    var obj = {};
+    for (var c = 0; c < headers.length; c++) obj[headers[c]] = values[i][c];
+    if (!obj.slug && !obj.title) continue;
+    var when = (obj.publish instanceof Date) ? obj.publish : (obj.publish ? new Date(obj.publish) : null);
+    var valid = when && !isNaN(when.getTime());
+    out.push({
+      slug: String(obj.slug || '').trim(),
+      title: String(obj.title || '').trim(),
+      category: String(obj.category || '').trim(),
+      cover: String(obj.cover || '').trim(),
+      date: (obj.date instanceof Date) ? Utilities.formatDate(obj.date, ss.getSpreadsheetTimeZone(), 'yyyy-MM-dd') : String(obj.date || '').trim(),
+      read: String(obj.read || '').trim(),
+      excerpt: String(obj.excerpt || '').trim(),
+      body: String(obj.body || ''),
+      publish: valid ? Utilities.formatDate(when, ss.getSpreadsheetTimeZone(), 'yyyy-MM-dd') : '',
+      live: !valid || when.getTime() <= now
+    });
+  }
+  out.reverse(); // newest rows first, matching how people add them
+  return json({ ok: true, posts: out });
+}
+
+// The media library: every photo/video uploaded from the studio, so anyone can
+// re-use a shot from a month ago without hunting for the link.
+function addMedia(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  if (!data.url) return json({ ok: false, error: 'missing url' });
+  var sheet = sheetFor('Media', MEDIA_COLUMNS);
+  var headers = headersOf(sheet, MEDIA_COLUMNS);
+  sheet.appendRow(headers.map(function (h) {
+    if (h === 'added') return new Date();
+    return data[h] != null ? data[h] : '';
+  }));
+  return json({ ok: true, url: data.url });
+}
+
+function listMedia(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Media');
+  if (!sheet || sheet.getLastRow() < 2) return json({ ok: true, media: [] });
+  var values = sheet.getDataRange().getValues();
+  var headers = values[0].map(function (h) { return String(h).trim().toLowerCase(); });
+  var out = [];
+  for (var i = values.length - 1; i > 0 && out.length < 120; i--) { // newest first
+    var obj = {};
+    for (var c = 0; c < headers.length; c++) obj[headers[c]] = values[i][c];
+    if (!obj.url) continue;
+    out.push({
+      url: String(obj.url).trim(),
+      type: String(obj.type || 'image').trim(),
+      label: String(obj.label || '').trim()
+    });
+  }
+  return json({ ok: true, media: out });
+}
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000); // avoid two submissions writing the same row
   try {
     var data = JSON.parse(e.postData.contents);
-    if (data.action === 'addPost') return addPost(data); // blog post (secret-protected)
+    // Studio + Claude actions, all secret-protected (see authorized()).
+    if (data.action === 'addPost') return addPost(data);
+    if (data.action === 'updatePost') return updatePost(data);
+    if (data.action === 'listPosts') return listPosts(data);
+    if (data.action === 'addMedia') return addMedia(data);
+    if (data.action === 'listMedia') return listMedia(data);
     var cfg = TABS[data.formType] || TABS.partnership; // unknown types go to Partnerships
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName(cfg.name);

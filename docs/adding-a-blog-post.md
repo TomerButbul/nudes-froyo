@@ -1,10 +1,21 @@
 # Adding a post to The Nude
 
-Three ways. Pick whichever you like.
+Four ways. Pick whichever you like.
 
 ---
 
-## Method 0 — Just ask Claude  ◀ zero effort
+## Method 0 — The studio  ◀ for everyone else
+
+**[nudesyogurt.com/studio](https://nudesyogurt.com/studio)**, passcode-protected.
+Upload photos and videos from your phone, write the post, see it laid out as you
+type, schedule it. No spreadsheet, no code. It also edits posts that are already
+live, which is how you add photos to an old post.
+
+Full guide, and the one-time setup: **[docs/media-and-studio.md](media-and-studio.md)**.
+
+---
+
+## Method 1 — Just ask Claude  ◀ zero effort
 
 Tell Claude the topic ("write a post about our toppings") and it writes the post
 and pushes it straight into the `Posts` tab via the webhook (using the secret in
@@ -13,7 +24,7 @@ Script `addPost` action appends a row for authorized callers.
 
 ---
 
-## Method 1 — No code (Google Sheet)
+## Method 2 — No code (Google Sheet)
 
 Posts live in the **same Google Sheet** as your form submissions, on a tab named
 **`Posts`**. Add a row, and it shows up on The Nude automatically.
@@ -59,8 +70,22 @@ Plain text. Inside the cell, start a new line with **Ctrl+Enter** (Mac: **Cmd+En
 - `1. item` on their own lines → numbered list
 - `> a line` → pull quote
 - `**word**` → **bold**
+- `[the menu](/menu.html)` → a link
 
 The first letter of the first paragraph automatically becomes a big drop cap.
+
+### Photos and videos in the body
+Each one goes on **its own line**, blank line above and below:
+
+- `![a caption](https://…jpg)` → a photo
+- `![a caption](https://…mp4)` → a video · add `"loop"` for a silent looping clip
+- two or three `![…](…)` lines **with no blank line between them** → side by side
+- `"wide"` or `"full"` after the link → bigger than the text column
+- a YouTube / Instagram / TikTok / Vimeo link **alone on a line** → an embed
+
+To get a link to paste, upload the file in
+[the studio](https://nudesyogurt.com/studio) and tap it in the library — it copies
+the whole line. Details: **[docs/media-and-studio.md](media-and-studio.md)**.
 
 ### Cover options
 - **Color themes** (no image needed): `clean` · `culture` · `build` · `wellness` · `menu`
@@ -68,7 +93,7 @@ The first letter of the first paragraph automatically becomes a big drop cap.
 
 ---
 
-## Method 2 — Static page (hand-built)
+## Method 3 — Static page (hand-built)
 
 For a flagship post you want fully hand-crafted (and maximally SEO-friendly),
 copy `docs/article-template.html`, fill in the `{{PLACEHOLDERS}}`, save it as

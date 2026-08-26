@@ -196,7 +196,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* ---- article body: readable column + drop cap ---- */
 .article-body{padding-block:clamp(2rem,5vw,3.4rem) clamp(2rem,5vw,3rem)}
-.article-body .post{max-width:680px}
+/* centred so it lines up with .article-share / .endcta below it, and so the
+   "wide" / "full" media widths break out evenly on both sides */
+.article-body .post{max-width:680px;margin-inline:auto}
 .article-body .post > p:first-of-type::first-letter{float:left;font-family:var(--display);font-weight:600;color:var(--espresso);
   font-size:3.4em;line-height:.72;padding:.06em .12em 0 0}
 .article-share{max-width:680px;margin:clamp(2rem,4vw,2.8rem) auto 0;padding-top:1.4rem;border-top:1px solid var(--line);
@@ -213,8 +215,41 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .endcta .btn:hover{background:var(--cream)}
 .post-missing{max-width:680px;margin:0 auto;padding:clamp(3rem,8vw,5rem) 0;text-align:center;color:var(--taupe)}
 .post-missing a{color:var(--espresso)}
-/* inline article images: ![alt](url) */
-.post figure.post-fig{margin:1.8rem 0}
-.post figure.post-fig img{width:100%;height:auto;border-radius:16px;display:block}
-.post figure.post-fig figcaption{margin-top:.55rem;font-family:var(--display);font-weight:500;font-size:.82rem;
+/* ---- in-article media: ![caption](url) photos, videos, grids and embeds ---- */
+.post figure.post-fig{margin:clamp(1.6rem,4vw,2.4rem) 0}
+.post .post-media{width:100%;height:auto;display:block;border-radius:16px;
+  background:color-mix(in srgb,var(--oat) 60%,var(--paper))}
+/* no forced ratio: a vertical phone video keeps its shape instead of being
+   cropped to a landscape box. The cap stops a 9:16 clip filling the screen. */
+.post video.post-media{max-height:80svh;object-fit:contain;background:var(--espresso-800)}
+.post figure.post-fig figcaption{margin-top:.6rem;font-family:var(--display);font-weight:500;font-size:.82rem;
   letter-spacing:.02em;color:var(--taupe);text-align:center}
+
+/* two or three photos on consecutive lines sit side by side */
+.post figure.post-fig--grid{display:grid;gap:.7rem;grid-template-columns:repeat(var(--cols,2),1fr)}
+.post figure.post-fig--grid .post-media{aspect-ratio:1/1;object-fit:cover;height:100%}
+.post figure.post-fig--grid figcaption{grid-column:1/-1}
+
+/* "wide" and "full" break out of the reading column. Both centre on it, so they
+   only line up if the column itself is centred (see .article-body .post). */
+.post figure.post-fig--wide{--w:min(960px,calc(100vw - 2 * var(--gut)));
+  width:var(--w);margin-inline:calc((100% - var(--w)) / 2)}
+.post figure.post-fig--full{width:100vw;margin-inline:calc((100% - 100vw) / 2)}
+.post figure.post-fig--full .post-media{border-radius:0}
+
+/* youtube / vimeo / instagram / tiktok links become embeds */
+.post .post-embed{margin:clamp(1.6rem,4vw,2.4rem) 0;border-radius:16px;overflow:hidden;
+  background:var(--espresso);aspect-ratio:16/9}
+.post .post-embed iframe{width:100%;height:100%;display:block;border:0}
+.post .post-embed--ig,.post .post-embed--tiktok{margin-inline:auto;background:none}
+.post .post-embed--ig{max-width:400px;aspect-ratio:400/620}
+.post .post-embed--tiktok{max-width:340px;aspect-ratio:340/580}
+
+@media (max-width:760px){
+  .post figure.post-fig--grid{grid-template-columns:1fr 1fr}
+  .post figure.post-fig--grid[style*="--cols:3"] .post-media{aspect-ratio:4/5}
+  .post figure.post-fig--wide{width:100%;margin-inline:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .post video.post-media[autoplay]{animation:none}
+}

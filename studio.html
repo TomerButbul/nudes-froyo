@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/nudes-avatar.png">
+<title>studio · nudes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://api.cloudinary.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/studio.css">
+</head>
+<body class="studio-body">
+
+<!-- ============ 1. passcode ============ -->
+<section class="lock" data-lock>
+  <form class="lock__card" data-lock-form>
+    <span class="lock__logo" aria-hidden="true">
+      <svg viewBox="289.23 392.4 370.35 221.32" fill="currentColor"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
+    </span>
+    <h1 class="lock__title">studio</h1>
+    <p class="lock__sub">photos, videos and posts for the nude.</p>
+    <label class="field">
+      <span>passcode</span>
+      <input type="password" name="passcode" autocomplete="current-password" required autofocus>
+    </label>
+    <button class="btn" type="submit">open studio</button>
+    <p class="note" data-lock-msg role="status"></p>
+  </form>
+</section>
+
+<!-- ============ 2. the studio ============ -->
+<div class="studio" data-app hidden>
+
+  <header class="studio__bar">
+    <a class="studio__logo" href="/" aria-label="nudes home">
+      <svg viewBox="289.23 392.4 370.35 221.32" fill="currentColor" aria-hidden="true"><path d="M 592.859375 397.042969 L 592.007812 515.667969 C 592.007812 541.304688 578.988281 557.175781 549.671875 557.175781 C 520.386719 557.175781 507.367188 541.304688 507.367188 515.667969 L 507.304688 515.523438 L 507.304688 490.457031 C 507.304688 421.285156 465.796875 392.402344 398.25 392.402344 C 330.738281 392.402344 289.230469 421.285156 289.230469 490.457031 L 289.230469 608.023438 L 355.949219 608.023438 L 355.949219 490.457031 C 355.949219 464.816406 368.964844 448.949219 398.25 448.949219 C 427.570312 448.949219 440.585938 464.816406 440.585938 490.457031 L 440.648438 490.566406 L 440.648438 515.667969 C 440.648438 584.835938 482.15625 613.722656 549.671875 613.722656 C 617.214844 613.722656 658.722656 584.835938 658.722656 515.667969 L 659.578125 397.042969 Z"/></svg>
+    </a>
+    <nav class="tabs" data-tabs>
+      <button class="tab" data-tab="posts" aria-current="page">posts</button>
+      <button class="tab" data-tab="media">photos &amp; videos</button>
+    </nav>
+    <div class="studio__bar-end">
+      <span class="saved" data-saved role="status"></span>
+      <button class="btn btn--ghost btn--sm" data-lock-out>lock</button>
+    </div>
+  </header>
+
+  <!-- ---------- posts ---------- -->
+  <main class="pane" data-pane="posts">
+    <aside class="list">
+      <button class="btn btn--sm list__new" data-new-post>+ new post</button>
+      <div class="list__items" data-post-list></div>
+    </aside>
+
+    <form class="editor" data-editor>
+      <div class="editor__scroll">
+        <div class="row">
+          <label class="field field--grow">
+            <span>title</span>
+            <input name="title" placeholder="our five favorite toppings" required>
+          </label>
+          <label class="field">
+            <span>url id</span>
+            <input name="slug" placeholder="five-favorite-toppings" required pattern="[a-z0-9]+(-[a-z0-9]+)*">
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="field"><span>category</span><input name="category" placeholder="menu"></label>
+          <label class="field"><span>read time</span><input name="read" placeholder="3 min read"></label>
+          <label class="field">
+            <span>publish date</span>
+            <input name="publish" type="date">
+            <em class="hint" data-publish-hint>today or earlier = live now</em>
+          </label>
+        </div>
+
+        <div class="field">
+          <span>cover</span>
+          <div class="cover-pick" data-cover-pick>
+            <select name="cover_theme" data-cover-theme>
+              <option value="clean">colour: clean</option>
+              <option value="culture">colour: culture</option>
+              <option value="build">colour: build</option>
+              <option value="wellness">colour: wellness</option>
+              <option value="menu">colour: menu</option>
+              <option value="__photo">a photo…</option>
+            </select>
+            <button type="button" class="btn btn--ghost btn--sm" data-pick-cover hidden>choose photo</button>
+            <span class="cover-pick__thumb" data-cover-thumb hidden></span>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>excerpt</span>
+          <textarea name="excerpt" rows="2" placeholder="the one line that makes people click."></textarea>
+        </label>
+
+        <div class="field field--body">
+          <span>the post</span>
+          <div class="toolbar" data-toolbar>
+            <button type="button" data-ins="media" class="toolbar__media">＋ photo / video</button>
+            <button type="button" data-ins="h2">heading</button>
+            <button type="button" data-ins="bold">bold</button>
+            <button type="button" data-ins="list">list</button>
+            <button type="button" data-ins="quote">quote</button>
+            <button type="button" data-ins="link">link</button>
+          </div>
+          <textarea name="body" data-body rows="18" spellcheck="true"
+            placeholder="Write here.&#10;&#10;Leave a blank line between paragraphs. Use the buttons above to drop in a photo, a video or a heading."></textarea>
+        </div>
+      </div>
+
+      <div class="editor__foot">
+        <p class="note" data-editor-msg role="status"></p>
+        <div class="editor__actions">
+          <a class="btn btn--ghost btn--sm" data-view-live target="_blank" rel="noopener" hidden>view live ↗</a>
+          <button class="btn" type="submit" data-save>save post</button>
+        </div>
+      </div>
+    </form>
+
+    <section class="preview">
+      <div class="preview__head">preview</div>
+      <div class="preview__scroll">
+        <article class="post" data-preview></article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ---------- media ---------- -->
+  <main class="pane pane--media" data-pane="media" hidden>
+    <div class="media-head">
+      <label class="drop" data-drop>
+        <input type="file" accept="image/*,video/*" multiple hidden data-file>
+        <strong>drop photos or videos here</strong>
+        <span>or tap to choose from this device · photos up to 10&nbsp;MB · videos up to 100&nbsp;MB</span>
+      </label>
+      <div class="uploads" data-uploads></div>
+    </div>
+    <div class="library" data-library></div>
+  </main>
+</div>
+
+<!-- ============ media picker (also used for covers) ============ -->
+<div class="sheetmodal" data-picker hidden>
+  <div class="sheetmodal__panel" role="dialog" aria-modal="true" aria-label="choose a photo or video">
+    <header class="sheetmodal__head">
+      <strong data-picker-title>choose a photo or video</strong>
+      <button type="button" class="iconbtn" data-picker-close aria-label="close">✕</button>
+    </header>
+    <label class="drop drop--sm" data-drop2>
+      <input type="file" accept="image/*,video/*" multiple hidden data-file2>
+      <strong>upload a new one</strong>
+      <span>drop here or tap to choose</span>
+    </label>
+    <label class="check" data-loop-row>
+      <input type="checkbox" data-loop checked>
+      <span>videos play silently on a loop <em>(uncheck to show play controls instead)</em></span>
+    </label>
+    <div class="uploads" data-uploads2></div>
+    <div class="library library--modal" data-library2></div>
+  </div>
+</div>
+
+<script src="/studio.js"></script>
+</body>
+</html>
