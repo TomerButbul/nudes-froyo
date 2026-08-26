@@ -52,15 +52,35 @@
     </div>
   </header>
 
-  <!-- ---------- posts ---------- -->
-  <main class="pane" data-pane="posts">
-    <aside class="list">
-      <button class="btn btn--sm list__new" data-new-post>+ new post</button>
-      <div class="list__items" data-post-list></div>
-    </aside>
+  <!-- ---------- posts: the table, and the editor you get by clicking a row ---------- -->
+  <main class="pane pane--table" data-pane="posts" data-view="table">
 
-    <form class="editor" data-editor>
+    <section class="board" data-board>
+      <header class="board__bar">
+        <div class="board__counts" data-counts></div>
+        <button class="btn btn--sm" data-new-post>+ new post</button>
+      </header>
+      <div class="board__scroll">
+        <table class="ptable">
+          <thead>
+            <tr>
+              <th class="ptable__sort" data-sort="title" scope="col">post</th>
+              <th class="ptable__sort" data-sort="category" scope="col">category</th>
+              <th class="ptable__sort" data-sort="publish" aria-sort="descending" scope="col">publish date</th>
+              <th scope="col">status</th>
+              <th scope="col">views</th>
+              <th><span class="vh">edit</span></th>
+            </tr>
+          </thead>
+          <tbody data-post-rows></tbody>
+        </table>
+        <p class="board__empty" data-board-msg role="status"></p>
+      </div>
+    </section>
+
+    <form class="editor" data-editor hidden>
       <div class="editor__scroll">
+        <button type="button" class="backlink" data-back>← all posts</button>
         <div class="row">
           <label class="field field--grow">
             <span>title</span>
@@ -127,7 +147,7 @@
       </div>
     </form>
 
-    <section class="preview">
+    <section class="preview" data-previewpane hidden>
       <div class="preview__head">preview</div>
       <div class="preview__scroll">
         <article class="post" data-preview></article>

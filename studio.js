@@ -18,7 +18,8 @@
     posts: [], media: [],
     mode: 'new',        // 'new' | 'edit'
     coverUrl: '',
-    pickFor: 'body'     // 'body' | 'cover'
+    pickFor: 'body',    // 'body' | 'cover'
+    sort: { key: 'publish', dir: 'desc' }
   };
 
   var MAX_MB = { image: 10, video: 100 };
@@ -69,7 +70,7 @@
       }
       loadPosts();
       loadMedia();
-      newPost();
+      showTable();   // open on the full list of posts, not a blank editor
       return true;
     });
   }
@@ -93,7 +94,12 @@
 
   // ======================= 3. posts =======================
   var editor = $('[data-editor]');
-  var listEl = $('[data-post-list]');
+  var pane = $('[data-pane="posts"]');
+  var board = $('[data-board]');
+  var previewPane = $('[data-previewpane]');
+  var rowsEl = $('[data-post-rows]');
+  var countsEl = $('[data-counts]');
+  var boardMsg = $('[data-board-msg]');
   var bodyEl = $('[data-body]');
   var editorMsg = $('[data-editor-msg]');
   var savedEl = $('[data-saved]');
@@ -105,38 +111,139 @@
   function loadPosts() {
     return api('posts').then(function (d) {
       if (!d.ok) {
-        // Don't fail silently — an empty list looks identical to a broken one.
-        listEl.textContent = '';
-        var p = document.createElement('p');
-        p.className = 'list__error';
-        p.textContent = d.error || 'Could not load your posts.';
-        listEl.appendChild(p);
+        // Don't fail silently — an empty table looks identical to a broken one.
+        rowsEl.textContent = '';
+        boardMsg.className = 'board__empty board__empty--bad';
+        boardMsg.textContent = d.error || 'Could not load your posts.';
+        countsEl.textContent = '';
         return;
       }
       state.posts = d.posts || [];
-      renderList();
+      boardMsg.className = 'board__empty';
+      boardMsg.textContent = state.posts.length ? '' : 'No posts yet. Hit “+ new post” to write the first one.';
+      renderTable();
     });
   }
 
-  function renderList() {
-    listEl.textContent = '';
-    state.posts.forEach(function (p) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'pitem';
-      b.dataset.slug = p.slug;
-      if (state.mode === 'edit' && editor.slug.value === p.slug) b.setAttribute('aria-current', 'true');
-      var t = document.createElement('span'); t.className = 'pitem__title'; t.textContent = p.title || p.slug;
-      var m = document.createElement('span'); m.className = 'pitem__meta';
-      var dot = document.createElement('span'); dot.className = 'dot' + (p.live ? '' : ' dot--soon');
-      var lbl = document.createElement('span');
-      lbl.textContent = (p.live ? 'live' : 'scheduled') + (p.publish ? ' · ' + p.publish : '');
-      m.appendChild(dot); m.appendChild(lbl);
-      b.appendChild(t); b.appendChild(m);
-      b.addEventListener('click', function () { loadPost(p); });
-      listEl.appendChild(b);
+  // ---- the table ----
+  var VIEWS_BASE = 'https://vercel.com/tomers-projects/nudes-froyo/analytics';
+
+  function sortPosts() {
+    var k = state.sort.key, dir = state.sort.dir;
+    return state.posts.slice().sort(function (a, b) {
+      var x = a[k] == null ? '' : a[k], y = b[k] == null ? '' : b[k];
+      // publish is yyyy-mm-dd, so plain string compare sorts it correctly
+      var r = String(x).localeCompare(String(y), undefined, { numeric: true, sensitivity: 'base' });
+      return dir === 'asc' ? r : -r;
     });
   }
+
+  function renderTable() {
+    rowsEl.textContent = '';
+    var live = 0, soon = 0;
+    sortPosts().forEach(function (p) {
+      if (p.live) live++; else soon++;
+      rowsEl.appendChild(row(p));
+    });
+    countsEl.textContent = '';
+    countsEl.appendChild(count(live, 'live'));
+    if (soon) countsEl.appendChild(count(soon, 'scheduled'));
+  }
+  function count(n, label) {
+    var s = document.createElement('span');
+    var b = document.createElement('b'); b.textContent = n;
+    s.appendChild(b); s.appendChild(document.createTextNode(' ' + label));
+    return s;
+  }
+
+  function row(p) {
+    var tr = document.createElement('tr');
+    tr.dataset.slug = p.slug;
+
+    // title (click to edit) + slug underneath
+    var tdT = document.createElement('td');
+    var t = document.createElement('button');
+    t.type = 'button'; t.className = 'pt__title'; t.textContent = p.title || p.slug;
+    t.addEventListener('click', function () { openEditor(p); });
+    var sl = document.createElement('span'); sl.className = 'pt__slug'; sl.textContent = '/' + p.slug;
+    tdT.appendChild(t); tdT.appendChild(sl);
+
+    var tdC = document.createElement('td');
+    var c = document.createElement('span'); c.className = 'pt__cat'; c.textContent = p.category || '—';
+    tdC.appendChild(c);
+
+    // publish date, editable right here — the common edit, so it shouldn't need
+    // opening the whole post to make it
+    var tdD = document.createElement('td');
+    var d = document.createElement('input');
+    d.type = 'date'; d.className = 'pt__date';
+    d.value = /^\d{4}-\d{2}-\d{2}$/.test(p.publish) ? p.publish : '';
+    d.title = 'Change when this post goes live';
+    d.addEventListener('change', function () { setPublish(p, d); });
+    tdD.appendChild(d);
+
+    var tdS = document.createElement('td');
+    var tag = document.createElement('span');
+    tag.className = 'tag ' + (p.live ? 'tag--live' : 'tag--soon');
+    tag.textContent = p.live ? 'live' : 'scheduled';
+    tdS.appendChild(tag);
+
+    // views: no numbers until analytics has data, so link out to the real thing
+    var tdV = document.createElement('td');
+    var v = document.createElement('a');
+    v.className = 'pt__views pt__views--none';
+    v.textContent = '—';
+    v.title = 'Views appear once Vercel Analytics has collected data. Click to open it.';
+    v.href = VIEWS_BASE; v.target = '_blank'; v.rel = 'noopener';
+    tdV.appendChild(v);
+
+    var tdE = document.createElement('td');
+    var e = document.createElement('button');
+    e.type = 'button'; e.className = 'pt__edit'; e.textContent = 'edit';
+    e.addEventListener('click', function () { openEditor(p); });
+    tdE.appendChild(e);
+
+    [tdT, tdC, tdD, tdS, tdV, tdE].forEach(function (td) { tr.appendChild(td); });
+    return tr;
+  }
+
+  // Save just the publish date — nothing else about the post is touched.
+  function setPublish(p, input) {
+    input.dataset.saving = '1';
+    api('publish', { slug: p.slug, publish: input.value }).then(function (d) {
+      delete input.dataset.saving;
+      if (!d.ok) {
+        input.value = /^\d{4}-\d{2}-\d{2}$/.test(p.publish) ? p.publish : '';
+        return flash(d.error || 'Could not change that date.');
+      }
+      p.publish = input.value;
+      p.live = d.live;
+      flash(input.value ? (d.live ? 'now live' : 'scheduled for ' + input.value) : 'live now');
+      renderTable();
+    });
+  }
+
+  [].slice.call(document.querySelectorAll('.ptable__sort')).forEach(function (th) {
+    th.addEventListener('click', function () {
+      var k = th.dataset.sort;
+      state.sort = { key: k, dir: (state.sort.key === k && state.sort.dir === 'desc') ? 'asc' : 'desc' };
+      [].slice.call(document.querySelectorAll('.ptable th')).forEach(function (o) { o.removeAttribute('aria-sort'); });
+      th.setAttribute('aria-sort', state.sort.dir === 'asc' ? 'ascending' : 'descending');
+      renderTable();
+    });
+  });
+
+  // ---- switching between the table and the editor ----
+  function showTable() {
+    pane.dataset.view = 'table';
+    board.hidden = false; editor.hidden = true; previewPane.hidden = true;
+  }
+  function showEditor() {
+    pane.dataset.view = 'editor';
+    board.hidden = true; editor.hidden = false; previewPane.hidden = false;
+  }
+  function openEditor(p) { loadPost(p); showEditor(); }
+  $('[data-back]').addEventListener('click', function () { showTable(); loadPosts(); });
 
   function setCover(value) {
     var isPhoto = /[\/.]/.test(value) && ['clean', 'culture', 'build', 'wellness', 'menu'].indexOf(value) < 0;
@@ -169,7 +276,7 @@
     viewLive.hidden = true;
     say(editorMsg, '');
     savedEl.textContent = '';
-    renderList();
+    showEditor();
     preview();
     editor.title.focus();
   }
@@ -190,7 +297,6 @@
     viewLive.href = '/the-nude/' + encodeURIComponent(p.slug);
     say(editorMsg, '');
     savedEl.textContent = '';
-    renderList();
     preview();
   }
 

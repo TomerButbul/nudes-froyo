@@ -308,6 +308,8 @@ function renderArticle(p) {
     '</div></div>' +
     '</article></main>' +
     FOOTER +
+    // Vercel Web Analytics: served from our own domain, no cookies, no consent banner.
+    '<script defer src="/_vercel/insights/script.js"></script>' +
     '</body></html>';
 }
 

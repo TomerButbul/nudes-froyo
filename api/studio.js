@@ -155,6 +155,25 @@ module.exports = async function handler(req, res) {
         return res.status(200).json({ ok: true });
       }
 
+      // Change only when a post goes live, from the table — nothing else about
+      // the post is sent, and updatePost only writes the fields it receives.
+      case 'publish': {
+        const slug = String(body.slug || '').trim().toLowerCase();
+        const when = String(body.publish || '').trim();
+        if (!SLUG_OK.test(slug)) return res.status(400).json({ ok: false, error: 'Bad post id.' });
+        if (when && !/^\d{4}-\d{2}-\d{2}$/.test(when)) {
+          return res.status(400).json({ ok: false, error: 'That date did not look right.' });
+        }
+        await assertCurrent();
+        const d = await toSheet('updatePost', { slug: slug, publish: when });
+        if (!d || d.ok === false) {
+          return res.status(400).json({ ok: false, error: (d && d.error) || 'The sheet rejected that.' });
+        }
+        // Blank means live now; otherwise it is live once the day has arrived.
+        const live = !when || new Date(when + 'T23:59:59') <= new Date();
+        return res.status(200).json({ ok: true, live: live });
+      }
+
       // Create a new post, or edit one that already exists (including live ones).
       case 'save': {
         const c = cleanPost(body.post || {});
