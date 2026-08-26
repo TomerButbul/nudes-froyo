@@ -51,7 +51,7 @@ var TABS = {
   }
 };
 
-var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish'];
+var POST_COLUMNS = ['slug', 'title', 'category', 'cover', 'date', 'read', 'excerpt', 'body', 'publish', 'status'];
 var MEDIA_COLUMNS = ['added', 'type', 'url', 'label', 'by'];
 
 // Every write/read below this line is gated on the same shared secret (Project
@@ -77,6 +77,23 @@ function headersOf(sheet, fallback) {
   return h.length < 2 ? fallback : h;
 }
 
+// Adds a header to a tab that predates it, so an existing Posts sheet gains the
+// `status` column on its own instead of needing anyone to edit the spreadsheet.
+function ensureColumn(sheet, name) {
+  var headers = headersOf(sheet, POST_COLUMNS);
+  if (headers.indexOf(name) >= 0) return headers;
+  sheet.getRange(1, headers.length + 1).setValue(name);
+  sheet.setFrozenRows(1);
+  return headers.concat([name]);
+}
+
+// A post is hidden if it has been marked draft/archived. Blank or "live" shows.
+// Kept as one function so doGet and listPosts can never disagree about it.
+function isHiddenStatus(v) {
+  var s = String(v == null ? '' : v).trim().toLowerCase();
+  return !!s && s !== 'live' && s !== 'published' && s !== 'yes' && s !== 'true';
+}
+
 // Adds a blog post to the "Posts" tab. Protected by a secret (Project Settings →
 // Script Properties → POST_SECRET) so only trusted callers can publish to the site.
 // Creates the Posts tab + headers automatically if it doesn't exist yet.
@@ -100,7 +117,8 @@ function updatePost(data) {
   var slug = String(data.slug || '').trim();
   if (!slug) return json({ ok: false, error: 'missing slug' });
   var sheet = sheetFor('Posts', POST_COLUMNS);
-  var headers = headersOf(sheet, POST_COLUMNS);
+  // hiding a post writes `status`, which older sheets don't have yet
+  var headers = data.hasOwnProperty('status') ? ensureColumn(sheet, 'status') : headersOf(sheet, POST_COLUMNS);
   var slugCol = headers.indexOf('slug');
   if (slugCol < 0) return json({ ok: false, error: 'no slug column' });
 
@@ -119,9 +137,34 @@ function updatePost(data) {
   return json({ ok: false, error: 'no post with slug ' + slug });
 }
 
+// Removes a post from the Posts tab — but copies the whole row to a "Deleted"
+// tab first. A mis-click in the studio should be undoable by anyone, without
+// having to dig through the spreadsheet's version history.
+function deletePost(data) {
+  if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
+  var slug = String(data.slug || '').trim();
+  if (!slug) return json({ ok: false, error: 'missing slug' });
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Posts');
+  if (!sheet) return json({ ok: false, error: 'no Posts tab' });
+  var headers = headersOf(sheet, POST_COLUMNS);
+  var slugCol = headers.indexOf('slug');
+  if (slugCol < 0) return json({ ok: false, error: 'no slug column' });
+
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    if (String(values[i][slugCol]).trim() !== slug) continue;
+    var bin = sheetFor('Deleted', ['deleted'].concat(headers));
+    bin.appendRow([new Date()].concat(values[i]));
+    sheet.deleteRow(i + 1);
+    return json({ ok: true, slug: slug, deleted: true });
+  }
+  return json({ ok: false, error: 'no post with slug ' + slug });
+}
+
 // Everything in the Posts tab, drafts and scheduled posts included, for the
 // studio's editor. Secret-protected — the public /api/posts feed (doGet) still
-// hides anything with a future publish date.
+// hides drafts and anything with a future publish date.
 function listPosts(data) {
   if (!authorized(data)) return json({ ok: false, error: 'unauthorized' });
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -136,6 +179,7 @@ function listPosts(data) {
     if (!obj.slug && !obj.title) continue;
     var when = (obj.publish instanceof Date) ? obj.publish : (obj.publish ? new Date(obj.publish) : null);
     var valid = when && !isNaN(when.getTime());
+    var hidden = isHiddenStatus(obj.status);
     out.push({
       slug: String(obj.slug || '').trim(),
       title: String(obj.title || '').trim(),
@@ -146,7 +190,9 @@ function listPosts(data) {
       excerpt: String(obj.excerpt || '').trim(),
       body: String(obj.body || ''),
       publish: valid ? Utilities.formatDate(when, ss.getSpreadsheetTimeZone(), 'yyyy-MM-dd') : '',
-      live: !valid || when.getTime() <= now
+      hidden: hidden,
+      // draft beats the calendar: a hidden post stays hidden whatever its date
+      live: !hidden && (!valid || when.getTime() <= now)
     });
   }
   out.reverse(); // newest rows first, matching how people add them
@@ -192,10 +238,10 @@ function listMedia(data) {
 // BEFORE sending any studio action, so that if this script is still on an older
 // deployment the site refuses to talk to it instead of falling through to the
 // form handler and appending junk rows to Partnerships.
-var SCRIPT_VERSION = 2;
+var SCRIPT_VERSION = 3;
 
 var STUDIO_ACTIONS = {
-  addPost: addPost, updatePost: updatePost, listPosts: listPosts,
+  addPost: addPost, updatePost: updatePost, deletePost: deletePost, listPosts: listPosts,
   addMedia: addMedia, listMedia: listMedia
 };
 
@@ -253,6 +299,7 @@ function doGet() {
     var obj = {};
     for (var c = 0; c < headers.length; c++) obj[headers[c]] = values[i][c];
     if (!obj.slug && !obj.title) continue;
+    if (isHiddenStatus(obj.status)) continue;   // marked draft in the studio -> off the site
 
     // scheduling by the publish date
     var raw = obj.publish;

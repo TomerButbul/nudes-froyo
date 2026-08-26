@@ -140,14 +140,15 @@
 
   function renderTable() {
     rowsEl.textContent = '';
-    var live = 0, soon = 0;
+    var live = 0, soon = 0, off = 0;
     sortPosts().forEach(function (p) {
-      if (p.live) live++; else soon++;
+      if (p.hidden) off++; else if (p.live) live++; else soon++;
       rowsEl.appendChild(row(p));
     });
     countsEl.textContent = '';
     countsEl.appendChild(count(live, 'live'));
     if (soon) countsEl.appendChild(count(soon, 'scheduled'));
+    if (off) countsEl.appendChild(count(off, 'hidden'));
   }
   function count(n, label) {
     var s = document.createElement('span');
@@ -184,8 +185,9 @@
 
     var tdS = document.createElement('td');
     var tag = document.createElement('span');
-    tag.className = 'tag ' + (p.live ? 'tag--live' : 'tag--soon');
-    tag.textContent = p.live ? 'live' : 'scheduled';
+    tag.className = 'tag ' + (p.hidden ? 'tag--off' : (p.live ? 'tag--live' : 'tag--soon'));
+    tag.textContent = p.hidden ? 'hidden' : (p.live ? 'live' : 'scheduled');
+    if (p.hidden) tag.title = 'Hidden from the site, whatever its publish date says';
     tdS.appendChild(tag);
 
     // views: no numbers until analytics has data, so link out to the real thing
@@ -198,13 +200,56 @@
     tdV.appendChild(v);
 
     var tdE = document.createElement('td');
+    var acts = document.createElement('div'); acts.className = 'pt__acts';
+
     var e = document.createElement('button');
     e.type = 'button'; e.className = 'pt__edit'; e.textContent = 'edit';
     e.addEventListener('click', function () { openEditor(p); });
-    tdE.appendChild(e);
+
+    var h = document.createElement('button');
+    h.type = 'button'; h.className = 'pt__act';
+    h.textContent = p.hidden ? 'show' : 'hide';
+    h.title = p.hidden
+      ? 'Put this back on the site'
+      : 'Take this off the site. It stays here and can be put back any time.';
+    h.addEventListener('click', function () { setHidden(p, !p.hidden, h); });
+
+    var x = document.createElement('button');
+    x.type = 'button'; x.className = 'pt__act pt__act--bad'; x.textContent = 'delete';
+    x.title = 'Remove this post. A copy is kept in the sheet’s "Deleted" tab.';
+    x.addEventListener('click', function () { removePost(p); });
+
+    acts.appendChild(e); acts.appendChild(h); acts.appendChild(x);
+    tdE.appendChild(acts);
 
     [tdT, tdC, tdD, tdS, tdV, tdE].forEach(function (td) { tr.appendChild(td); });
     return tr;
+  }
+
+  // Hiding is the reversible one: the row stays put, the site just stops showing it.
+  function setHidden(p, hide, btn) {
+    btn.disabled = true;
+    api('status', { slug: p.slug, hidden: hide }).then(function (d) {
+      btn.disabled = false;
+      if (!d.ok) return flash(d.error || 'Could not change that.');
+      p.hidden = d.hidden;
+      if (p.hidden) p.live = false;
+      flash(p.hidden ? 'hidden — it is off the site now' : 'back on the site');
+      loadPosts();
+    });
+  }
+
+  // Deleting is the one that needs asking first.
+  function removePost(p) {
+    var name = p.title || p.slug;
+    if (!window.confirm('Delete “' + name + '”?\n\nIt comes off the site straight away. ' +
+        'A copy is kept in the "Deleted" tab of the sheet, so this can be undone — ' +
+        'but not from in here.\n\nTo just take it off the site instead, use "hide".')) return;
+    api('delete', { slug: p.slug }).then(function (d) {
+      if (!d.ok) return flash(d.error || 'Could not delete that.');
+      flash('deleted — a copy is in the sheet’s "Deleted" tab');
+      loadPosts();
+    });
   }
 
   // Save just the publish date — nothing else about the post is touched.

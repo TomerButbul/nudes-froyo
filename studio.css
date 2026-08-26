@@ -101,6 +101,10 @@
 .tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 .tag--live{color:#3f6b42;background:color-mix(in srgb,#4b7a4e 16%,transparent)}
 .tag--soon{color:#8a6a4f;background:color-mix(in srgb,var(--taupe) 26%,transparent)}
+.tag--off{color:#7a6e66;background:color-mix(in srgb,#8a8078 18%,transparent)}
+/* a hidden post reads as switched off, not just differently labelled */
+tr:has(.tag--off) .pt__title,tr:has(.tag--off) .pt__cat{opacity:.6}
+tr:has(.tag--off) .pt__date{opacity:.6}
 
 .pt__views{font-variant-numeric:tabular-nums;font-size:.88rem;color:var(--espresso);text-decoration:none;
   border-bottom:1px solid transparent}
@@ -110,6 +114,13 @@
   color:var(--espresso);background:color-mix(in srgb,var(--oat) 50%,transparent);border:0;border-radius:var(--pill);
   padding:.34em .9em;cursor:pointer;white-space:nowrap;transition:background .2s}
 .pt__edit:hover{background:var(--oat)}
+.pt__acts{display:flex;gap:.3rem;align-items:center;justify-content:flex-end}
+.pt__act{font-family:var(--display);font-weight:500;font-size:.74rem;text-transform:lowercase;
+  color:var(--taupe);background:none;border:0;border-radius:var(--pill);padding:.34em .6em;cursor:pointer;
+  white-space:nowrap;transition:.18s}
+.pt__act:hover{color:var(--espresso);background:color-mix(in srgb,var(--oat) 45%,transparent)}
+.pt__act:disabled{opacity:.4;cursor:default}
+.pt__act--bad:hover{color:#a1442c;background:color-mix(in srgb,#a1442c 12%,transparent)}
 
 .backlink{align-self:flex-start;font-family:var(--display);font-weight:500;font-size:.82rem;
   background:none;border:0;color:var(--taupe);cursor:pointer;padding:0;margin-bottom:.2rem}

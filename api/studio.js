@@ -38,7 +38,7 @@ function sameSecret(a, b) {
 // fall through to its form handler, quietly appending junk rows to Partnerships.
 // So: read the version marker from doGet (read-only, safe on any version) and
 // refuse to POST anything at all until the deployment is current.
-const NEEDS_VERSION = 2;
+const NEEDS_VERSION = 3;
 let versionCache = { v: 0, at: 0 };
 
 async function sheetVersion() {
@@ -172,6 +172,33 @@ module.exports = async function handler(req, res) {
         // Blank means live now; otherwise it is live once the day has arrived.
         const live = !when || new Date(when + 'T23:59:59') <= new Date();
         return res.status(200).json({ ok: true, live: live });
+      }
+
+      // Take a post off the site without losing it, or put it back. A draft stays
+      // hidden whatever its publish date says.
+      case 'status': {
+        const slug = String(body.slug || '').trim().toLowerCase();
+        if (!SLUG_OK.test(slug)) return res.status(400).json({ ok: false, error: 'Bad post id.' });
+        const hide = !!body.hidden;
+        await assertCurrent();
+        const d = await toSheet('updatePost', { slug: slug, status: hide ? 'draft' : 'live' });
+        if (!d || d.ok === false) {
+          return res.status(400).json({ ok: false, error: (d && d.error) || 'The sheet rejected that.' });
+        }
+        return res.status(200).json({ ok: true, hidden: hide });
+      }
+
+      // Delete. The Apps Script copies the row to a "Deleted" tab before removing
+      // it, so this is recoverable.
+      case 'delete': {
+        const slug = String(body.slug || '').trim().toLowerCase();
+        if (!SLUG_OK.test(slug)) return res.status(400).json({ ok: false, error: 'Bad post id.' });
+        await assertCurrent();
+        const d = await toSheet('deletePost', { slug: slug });
+        if (!d || d.ok === false) {
+          return res.status(400).json({ ok: false, error: (d && d.error) || 'The sheet rejected that.' });
+        }
+        return res.status(200).json({ ok: true, slug: slug });
       }
 
       // Create a new post, or edit one that already exists (including live ones).
