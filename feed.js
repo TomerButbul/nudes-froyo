@@ -1,5 +1,6 @@
 // nudes — live Instagram feed, our own cards.
-// Fetches the Behold JSON feed (auto-updating, CORS-enabled) and renders each
+// Fetches the Behold JSON feed through our cached /api/feed proxy (keeps us under
+// Behold's free monthly limit) and renders each
 // post into an on-brand tall reel tile:
 //   • poster = the reel's native 9:16 thumbnail (matches the tile — no crop),
 //     falling back to Behold's permanent square crop only if it fails to load;
@@ -130,7 +131,7 @@
     return a;
   }
 
-  fetch('https://feeds.behold.so/' + id, { cache: 'no-cache' })
+  fetch('/api/feed')
     .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function (data) {
       var posts = (data && data.posts) || [];
