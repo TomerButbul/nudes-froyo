@@ -1,7 +1,7 @@
 // nudes — live Instagram feed, our own cards.
 // Fetches the Behold JSON feed through our cached /api/feed proxy (keeps us under
-// Behold's free monthly limit) and renders each
-// post into an on-brand tall reel tile:
+// Behold's free monthly limit) and renders each post into an on-brand tall reel
+// tile (the 3 newest videos, then a "see the feed" tile):
 //   • poster = the reel's native 9:16 thumbnail (matches the tile — no crop),
 //     falling back to Behold's permanent square crop only if it fails to load;
 //   • on desktop hover, a muted looping <video> lazy-loads and plays;
@@ -136,8 +136,10 @@
     .then(function (data) {
       var posts = (data && data.posts) || [];
       if (!posts.length) return; // keep the static fallback
+      // only the 3 newest videos (Behold lists newest first); newest posts if there are no videos
+      var videos = posts.filter(function (p) { return p.mediaType === 'VIDEO' || p.isReel; });
       var frag = document.createDocumentFragment();
-      posts.slice(0, 12).forEach(function (p) { var t = tile(p); if (t) frag.appendChild(t); });
+      (videos.length ? videos : posts).slice(0, 3).forEach(function (p) { var t = tile(p); if (t) frag.appendChild(t); });
       frag.appendChild(ctaTile());
       track.textContent = '';        // clear fallback tiles
       track.appendChild(frag);
